@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { trustPoints } from "../data/site";
+import { breadcrumbSchema } from "../lib/schema";
+
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "About", url: "/about/" },
+];
+const title = "About Huskins Cleaning | Family-Owned in Omaha, NE";
+const description =
+  "Meet Huskins Cleaning — a family-owned, BBB A+ accredited cleaning company serving Omaha, NE since 2020. Honest people, spotless results, and a team you can trust.";
+
+const values = [
+  {
+    icon: "shield",
+    title: "Trust above all",
+    text: "We're in your home and your business. Every team member is background-checked, and we're fully insured — because your peace of mind is the whole job.",
+  },
+  {
+    icon: "heart",
+    title: "Honest, always",
+    text: "Fair pricing, no surprise fees, and straight answers. If a service isn't right for you, we'll tell you. That's how we've earned Omaha's trust.",
+  },
+  {
+    icon: "sparkles",
+    title: "Details that matter",
+    text: "Anyone can wipe a counter. We sweat the baseboards, the corners and the things you notice — following a checklist so nothing slips.",
+  },
+  {
+    icon: "users",
+    title: "Real relationships",
+    text: "You get the same friendly crew who learns your home and your preferences. Most of our new clients come from a neighbor's referral.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonical="/about/" schema={[breadcrumbSchema(crumbs)]}>
+  <PageHero
+    eyebrow="Our Story"
+    title="Family-owned, Omaha-proud, obsessed with clean"
+    text="Huskins Cleaning started with a simple belief: people deserve an honest cleaning company that actually shows up and does the job right. Years later, that's still exactly who we are."
+    crumbs={crumbs}
+  />
+
+  <!-- Story -->
+  <section class="section">
+    <div class="container about-grid">
+      <div class="about-copy flow">
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="h2">Built on hard work and a good name</h2>
+        <p>
+          We're the Huskins family, and cleaning is our craft. What began as a
+          local, hands-on operation here in Omaha has grown into a full-service
+          cleaning company trusted by homeowners, landlords, offices and
+          contractors across the metro — but our approach hasn't changed.
+        </p>
+        <p>
+          We treat every home and workplace like it's our own. That means
+          showing up on time, respecting your space, and leaving it noticeably
+          better than we found it. It's not complicated — it's just done right.
+        </p>
+        <p>
+          Being <strong>BBB-accredited with an A+ rating since 2020</strong> means
+          a lot to us. So does hearing a customer say we "restored their faith"
+          in finding honest, affordable help. That trust is something we protect
+          with every single visit.
+        </p>
+        <div class="btn-group mt-2">
+          <a href="/contact/" class="btn btn-primary">Work With Us</a>
+          <a href="/reviews/" class="btn btn-ghost">Read Reviews <Icon name="arrow" size={18} /></a>
+        </div>
+      </div>
+
+      <aside class="about-stats">
+        {trustPoints.map((t) => (
+          <div class="about-stat">
+            <span class="about-stat-num">{t.stat}</span>
+            <span class="about-stat-label">{t.label}</span>
+          </div>
+        ))}
+        <div class="about-badge">
+          <Icon name="award" size={22} />
+          <div>
+            <strong>BBB Accredited Business</strong>
+            <span>A+ Rating · Since 2020</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section values-section">
+    <div class="container">
+      <div class="section-head is-center">
+        <span class="eyebrow">What We Stand For</span>
+        <h2 class="h2">The values behind every clean</h2>
+        <p class="lead">These aren't slogans on a wall — they're how we run every job, every day.</p>
+      </div>
+      <div class="grid grid-4 mt-6">
+        {values.map((v) => (
+          <div class="card value-card">
+            <span class="icon-badge"><Icon name={v.icon} /></span>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Promise -->
+  <section class="section">
+    <div class="container">
+      <div class="promise card">
+        <div class="promise-mark"><Icon name="thumbs-up" size={34} /></div>
+        <div>
+          <h2 class="h3">Our promise to you</h2>
+          <p class="mt-1">
+            If any part of your cleaning isn't up to standard, let us know within
+            24 hours and we'll return to make it right — no arguments, no extra
+            charge. Your satisfaction is guaranteed, because your trust is worth
+            far more to us than any single job.
+          </p>
+          <p class="promise-sign">— The Huskins Family</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: clamp(1.6rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .about-copy p { color: var(--body); }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    position: sticky;
+    top: 7rem;
+  }
+  .about-stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .about-stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--brand-700);
+  }
+  .about-stat-label { font-size: 0.8rem; color: var(--muted); }
+  .about-badge {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--brand-ink);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 1.1rem 1.3rem;
+  }
+  .about-badge :global(svg) { color: var(--accent); flex: none; }
+  .about-badge strong { display: block; font-family: var(--font-display); }
+  .about-badge span { font-size: 0.82rem; color: #a9d6cb; }
+
+  .values-section { background: var(--surface-2); }
+  .value-card h3 { margin: 0.8rem 0 0.4rem; font-size: 1.1rem; }
+  .value-card p { font-size: 0.92rem; color: var(--body); }
+
+  .promise {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+    background: linear-gradient(135deg, var(--brand-50), var(--surface));
+    border-color: var(--brand-200);
+  }
+  .promise-mark {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--brand-100);
+    color: var(--brand-700);
+    flex: none;
+  }
+  .promise-sign {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--brand-800);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-stats { position: static; }
+  }
+  @media (max-width: 520px) {
+    .promise { flex-direction: column; gap: 1rem; }
+  }
+</style>

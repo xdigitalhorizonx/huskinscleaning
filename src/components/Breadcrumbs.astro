@@ -1,0 +1,41 @@
+---
+import Icon from "./Icon.astro";
+interface Props {
+  crumbs: { name: string; url: string }[];
+}
+const { crumbs } = Astro.props;
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((c, i) => (
+      <li>
+        {i < crumbs.length - 1 ? (
+          <>
+            <a href={c.url}>{c.name}</a>
+            <Icon name="chevron-down" class="bc-sep" size={14} />
+          </>
+        ) : (
+          <span aria-current="page">{c.name}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs li { display: inline-flex; align-items: center; gap: 0.3rem; }
+  .breadcrumbs a { color: var(--brand-200); font-weight: 500; }
+  .breadcrumbs a:hover { color: #fff; }
+  .breadcrumbs span[aria-current] { color: #fff; font-weight: 600; }
+  .breadcrumbs :global(.bc-sep) { color: var(--brand-300); transform: rotate(-90deg); opacity: 0.6; }
+</style>

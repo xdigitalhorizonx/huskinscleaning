@@ -1,0 +1,83 @@
+---
+import Icon from "./Icon.astro";
+import { faqs as allFaqs } from "../data/site";
+import type { Faq } from "../data/site";
+interface Props {
+  items?: Faq[];
+  heading?: string;
+  intro?: string;
+}
+const {
+  items = allFaqs,
+  heading = "Questions Omaha homeowners ask us",
+  intro = "Everything you need to know before booking. Still curious? Just call — we're happy to help.",
+} = Astro.props;
+---
+
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">{heading}</h2>
+      <p class="lead">{intro}</p>
+    </div>
+    <div class="faq-list">
+      {items.map((f, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary>
+            <span>{f.question}</span>
+            <Icon name="chevron-down" class="faq-chevron" size={20} />
+          </summary>
+          <div class="faq-answer"><p>{f.answer}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-wrap {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .faq-list { display: grid; gap: 0.8rem; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0 1.3rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .faq-item[open] {
+    border-color: var(--brand-200);
+    box-shadow: var(--shadow-sm);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item :global(.faq-chevron) {
+    color: var(--brand-600);
+    flex: none;
+    transition: transform 0.25s var(--ease);
+  }
+  .faq-item[open] :global(.faq-chevron) { transform: rotate(180deg); }
+  .faq-answer { padding: 0 0 1.2rem; color: var(--body); }
+  .faq-answer p { max-width: 60ch; }
+
+  @media (max-width: 820px) {
+    .faq-wrap { grid-template-columns: 1fr; }
+  }
+</style>
