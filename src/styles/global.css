@@ -6,18 +6,18 @@
 
 /* ----- Design tokens ----------------------------------------------------- */
 :root {
-  /* Brand — teal scale (trust, water, clean) */
-  --brand-50: #ecfbf6;
-  --brand-100: #cff5ea;
-  --brand-200: #a2ecd8;
-  --brand-300: #66dcc0;
-  --brand-400: #2ec4a5;
-  --brand: #0fa88e;          /* primary */
-  --brand-600: #0c8674;
-  --brand-700: #0d6b5e;
-  --brand-800: #0f544b;
-  --brand-900: #0c3f39;
-  --brand-ink: #072d29;      /* darkest — hero backgrounds */
+  /* Brand — ocean navy & azure scale (trust, fresh water, clean) */
+  --brand-50: #eef6fd;
+  --brand-100: #d5e8fa;
+  --brand-200: #aecff2;
+  --brand-300: #7cb2e8;
+  --brand-400: #2e9be6;      /* azure — bright highlights */
+  --brand: #1b5fa8;          /* primary */
+  --brand-600: #17518f;
+  --brand-700: #144677;
+  --brand-800: #103a63;
+  --brand-900: #0d2c4b;
+  --brand-ink: #0c2340;      /* darkest — hero backgrounds */
 
   /* Accent — warm amber (optimism, action) */
   --accent: #ffb43a;
@@ -26,14 +26,14 @@
   --accent-ink: #3d2600;
 
   /* Neutrals */
-  --ink: #0b2321;            /* headings */
-  --body: #3a4b49;           /* body text */
-  --muted: #63756f;          /* secondary text */
-  --canvas: #f4faf8;         /* page background */
+  --ink: #0c2340;            /* headings — midnight navy */
+  --body: #334051;           /* body text */
+  --muted: #5c6b7d;          /* secondary text */
+  --canvas: #f3f8fd;         /* page background */
   --surface: #ffffff;        /* cards */
-  --surface-2: #eef6f3;      /* tinted panels */
-  --line: #dde9e5;           /* borders */
-  --line-strong: #c6d8d2;
+  --surface-2: #eef4fb;      /* tinted panels */
+  --line: #dbe6f4;           /* borders */
+  --line-strong: #c2d5ea;
 
   /* Semantic */
   --star: #f5a623;
@@ -59,10 +59,10 @@
   --radius-pill: 999px;
 
   /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(11, 35, 33, 0.06), 0 1px 3px rgba(11, 35, 33, 0.05);
-  --shadow-md: 0 10px 30px -12px rgba(11, 35, 33, 0.18);
-  --shadow-lg: 0 30px 60px -22px rgba(11, 35, 33, 0.28);
-  --shadow-brand: 0 18px 40px -16px rgba(15, 168, 142, 0.5);
+  --shadow-sm: 0 1px 2px rgba(12, 35, 64, 0.06), 0 1px 3px rgba(12, 35, 64, 0.05);
+  --shadow-md: 0 10px 30px -12px rgba(12, 35, 64, 0.18);
+  --shadow-lg: 0 30px 60px -22px rgba(12, 35, 64, 0.28);
+  --shadow-brand: 0 18px 40px -16px rgba(27, 95, 168, 0.5);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -345,7 +345,7 @@ ul, ol {
 }
 .badge.is-light {
   background: rgba(255, 255, 255, 0.12);
-  color: #eafaf5;
+  color: #e8f2fd;
   border-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(6px);
 }
@@ -419,10 +419,10 @@ ul, ol {
   height: 1.4rem;
   border-radius: 50%;
   background: var(--brand-100)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230d6b5e' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23144677' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
     center / 0.85rem no-repeat;
 }
-.checklist.on-dark li { color: #d9f2eb; }
+.checklist.on-dark li { color: #d6e6f7; }
 .checklist.on-dark li::before {
   background-color: rgba(255, 255, 255, 0.12);
 }
@@ -430,15 +430,15 @@ ul, ol {
 /* ----- Dark sections ----------------------------------------------------- */
 .section-dark {
   background:
-    radial-gradient(900px 500px at 15% 0%, rgba(15, 168, 142, 0.28), transparent 60%),
+    radial-gradient(900px 500px at 15% 0%, rgba(46, 155, 230, 0.30), transparent 60%),
     radial-gradient(700px 500px at 100% 100%, rgba(255, 180, 58, 0.14), transparent 55%),
     var(--brand-ink);
-  color: #d9f2eb;
+  color: #d6e6f7;
 }
 .section-dark h1,
 .section-dark h2,
 .section-dark h3 { color: #fff; }
-.section-dark .lead { color: #a9d6cb; }
+.section-dark .lead { color: #a6c3e2; }
 
 /* ----- Star rating ------------------------------------------------------- */
 .stars {
