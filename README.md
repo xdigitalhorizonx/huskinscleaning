@@ -49,8 +49,9 @@ competitors. The recurring problems:
 
 5. **Dated, low-trust presentation.** Not the polished, credible look today's
    customers expect before letting someone into their home.
-   → **Fixed:** a modern, cohesive "fresh water + trust" theme (deep teal +
-   warm amber), custom iconography, testimonials, trust bars and guarantees.
+   → **Fixed:** a modern, cohesive "fresh water + trust" theme (coastal ocean
+   blue + warm amber), full-bleed real photography, custom iconography,
+   testimonials, trust bars and guarantees.
 
 ### Competitive landscape (Omaha)
 
@@ -94,7 +95,10 @@ differentiators.
   fluid type scale, component classes. No CSS framework dependency.
 - **@astrojs/sitemap** — sitemap generation.
 - **Fontsource** — self-hosted *Plus Jakarta Sans* (display) + *Inter* (body).
-- **sharp** — build-time generation of the OG image and app icons.
+- **sharp** — build-time generation of the OG image and app icons, plus WebP
+  optimization of the site photography (`scripts/optimize-photos.mjs`).
+- **Photography** — licensed Adobe Stock, optimized to WebP in `public/images/`
+  (see `public/images/CREDITS.txt` for source IDs).
 
 ## Project structure
 
@@ -106,8 +110,10 @@ src/
   components/           # Header, Footer, Icon, ServiceCard, QuoteForm, CTA, FAQ, etc.
   pages/                # index, about, contact, reviews, service-areas, services/[slug]
   styles/global.css     # design system
-public/                 # robots.txt, favicon, og-image, app icons, manifest
-scripts/                # generate-og.mjs, generate-icons.mjs
+public/
+  images/               # optimized WebP photography (+ CREDITS.txt)
+  ...                   # robots.txt, favicon, og-image, app icons, manifest
+scripts/                # generate-og.mjs, generate-icons.mjs, optimize-photos.mjs
 ```
 
 ## Local development
@@ -124,6 +130,8 @@ Regenerate brand images after editing the scripts:
 ```bash
 node scripts/generate-og.mjs
 node scripts/generate-icons.mjs
+# Re-optimize photography from a folder of licensed source JPEGs:
+node scripts/optimize-photos.mjs /path/to/source-jpegs
 ```
 
 ## Deployment

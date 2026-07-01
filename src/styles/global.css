@@ -1,39 +1,43 @@
 /* ==========================================================================
    Huskins Cleaning — Design System
-   A bespoke, "fresh water + trust" theme built to convert:
-   deep teal for credibility, warm amber for action, generous whitespace.
+   "Fresh water + honest trust": coastal ocean blue for credibility, warm amber
+   for action, real photography, generous whitespace. Built to convert.
    ========================================================================== */
 
 /* ----- Design tokens ----------------------------------------------------- */
 :root {
-  /* Brand — teal scale (trust, water, clean) */
-  --brand-50: #ecfbf6;
-  --brand-100: #cff5ea;
-  --brand-200: #a2ecd8;
-  --brand-300: #66dcc0;
-  --brand-400: #2ec4a5;
-  --brand: #0fa88e;          /* primary */
-  --brand-600: #0c8674;
-  --brand-700: #0d6b5e;
-  --brand-800: #0f544b;
-  --brand-900: #0c3f39;
-  --brand-ink: #072d29;      /* darkest — hero backgrounds */
+  /* Brand — coastal blue scale (water, clean, trust) */
+  --brand-50: #eef6fe;
+  --brand-100: #d7e8fd;
+  --brand-200: #b4d2fb;
+  --brand-300: #83b4f6;
+  --brand-400: #4f90ee;
+  --brand: #1069d4;          /* primary */
+  --brand-600: #0d57b4;
+  --brand-700: #0d4791;
+  --brand-800: #0f3b74;
+  --brand-900: #112f5a;
+  --brand-ink: #0a1f3d;      /* darkest — hero backgrounds */
 
   /* Accent — warm amber (optimism, action) */
   --accent: #ffb43a;
   --accent-600: #f59e0b;
   --accent-700: #d97a06;
-  --accent-ink: #3d2600;
+  --accent-ink: #3a2600;
 
-  /* Neutrals */
-  --ink: #0b2321;            /* headings */
-  --body: #3a4b49;           /* body text */
-  --muted: #63756f;          /* secondary text */
-  --canvas: #f4faf8;         /* page background */
+  /* Neutrals — cool slate */
+  --ink: #0d1c30;            /* headings */
+  --body: #3c4b60;           /* body text */
+  --muted: #64748b;          /* secondary text */
+  --canvas: #f5f9fd;         /* page background */
   --surface: #ffffff;        /* cards */
-  --surface-2: #eef6f3;      /* tinted panels */
-  --line: #dde9e5;           /* borders */
-  --line-strong: #c6d8d2;
+  --surface-2: #eaf2fb;      /* tinted panels */
+  --line: #dbe6f2;           /* borders */
+  --line-strong: #c1d3e8;
+
+  /* On-dark text tints (over navy hero backgrounds) */
+  --on-dark: #d7e6fb;
+  --on-dark-muted: #a3bcdb;
 
   /* Semantic */
   --star: #f5a623;
@@ -59,10 +63,10 @@
   --radius-pill: 999px;
 
   /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(11, 35, 33, 0.06), 0 1px 3px rgba(11, 35, 33, 0.05);
-  --shadow-md: 0 10px 30px -12px rgba(11, 35, 33, 0.18);
-  --shadow-lg: 0 30px 60px -22px rgba(11, 35, 33, 0.28);
-  --shadow-brand: 0 18px 40px -16px rgba(15, 168, 142, 0.5);
+  --shadow-sm: 0 1px 2px rgba(13, 28, 48, 0.06), 0 1px 3px rgba(13, 28, 48, 0.05);
+  --shadow-md: 0 10px 30px -12px rgba(13, 28, 48, 0.20);
+  --shadow-lg: 0 30px 60px -22px rgba(13, 28, 48, 0.34);
+  --shadow-brand: 0 18px 40px -16px rgba(16, 105, 212, 0.5);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -298,14 +302,15 @@ ul, ol {
 }
 
 .btn-outline-light {
-  --btn-bg: transparent;
+  --btn-bg: rgba(255, 255, 255, 0.06);
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
 }
 .btn-outline-light:hover {
-  --btn-bg: rgba(255, 255, 255, 0.1);
+  --btn-bg: rgba(255, 255, 255, 0.16);
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .btn-lg { padding: 1.1rem 2rem; font-size: var(--step-1); }
@@ -345,8 +350,8 @@ ul, ol {
 }
 .badge.is-light {
   background: rgba(255, 255, 255, 0.12);
-  color: #eafaf5;
-  border-color: rgba(255, 255, 255, 0.2);
+  color: #eaf2fd;
+  border-color: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(6px);
 }
 
@@ -367,17 +372,41 @@ ul, ol {
   border-color: var(--brand-200);
 }
 
-/* ----- Grid utilities ---------------------------------------------------- */
-.grid { display: grid; gap: clamp(1rem, 2.5vw, 1.6rem); }
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-@media (max-width: 980px) {
-  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+/* ----- Media / imagery --------------------------------------------------- */
+/* Fixed-ratio image frame; <img> inside fills via cover. */
+.media {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
 }
-@media (max-width: 620px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.media.is-4x3 { aspect-ratio: 4 / 3; }
+.media.is-3x2 { aspect-ratio: 3 / 2; }
+.media.is-16x9 { aspect-ratio: 16 / 9; }
+.media.is-square { aspect-ratio: 1 / 1; }
+
+/* Subtle zoom on hover for interactive cards */
+.zoomable img { transition: transform 0.6s var(--ease); }
+.zoomable:hover img { transform: scale(1.05); }
+
+/* Floating accent frame decoration behind an image */
+.framed { position: relative; }
+.framed::before {
+  content: "";
+  position: absolute;
+  inset: auto -0.9rem -0.9rem auto;
+  width: 55%;
+  height: 55%;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, var(--brand-100), var(--accent) 220%);
+  z-index: -1;
 }
 
 /* ----- Icon medallion ---------------------------------------------------- */
@@ -419,26 +448,26 @@ ul, ol {
   height: 1.4rem;
   border-radius: 50%;
   background: var(--brand-100)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230d6b5e' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230d4791' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
     center / 0.85rem no-repeat;
 }
-.checklist.on-dark li { color: #d9f2eb; }
+.checklist.on-dark li { color: var(--on-dark); }
 .checklist.on-dark li::before {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.14);
 }
 
 /* ----- Dark sections ----------------------------------------------------- */
 .section-dark {
   background:
-    radial-gradient(900px 500px at 15% 0%, rgba(15, 168, 142, 0.28), transparent 60%),
+    radial-gradient(900px 500px at 15% 0%, rgba(37, 120, 235, 0.32), transparent 60%),
     radial-gradient(700px 500px at 100% 100%, rgba(255, 180, 58, 0.14), transparent 55%),
     var(--brand-ink);
-  color: #d9f2eb;
+  color: var(--on-dark);
 }
 .section-dark h1,
 .section-dark h2,
 .section-dark h3 { color: #fff; }
-.section-dark .lead { color: #a9d6cb; }
+.section-dark .lead { color: var(--on-dark-muted); }
 
 /* ----- Star rating ------------------------------------------------------- */
 .stars {

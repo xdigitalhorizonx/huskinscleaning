@@ -1,0 +1,15 @@
+Photography — licensed via Adobe Stock (standard license)
+
+hero-home.webp .......... Adobe Stock #1246229897
+kitchen.webp ............ Adobe Stock #476590317
+exterior.webp ........... Adobe Stock #259038351
+team.webp ............... Adobe Stock #707364504
+house-cleaning.webp ..... Adobe Stock #395390486
+deep-cleaning.webp ...... Adobe Stock #450207858
+move-in-move-out.webp ... Adobe Stock #210800165
+commercial.webp ......... Adobe Stock #332276939
+post-construction.webp .. Adobe Stock #400588469
+pressure-washing.webp ... Adobe Stock #356436413
+
+Regenerate optimized WebP from source JPEGs with:
+  node scripts/optimize-photos.mjs <dir-of-source-jpegs>

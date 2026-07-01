@@ -111,6 +111,10 @@ export type Service = {
   bestFor: string[];
   /** Simple emoji/glyph used as the card icon key (see Icon component). */
   icon: string;
+  /** Path to the service's photo in /public/images. */
+  image: string;
+  /** Alt text for the service photo. */
+  imageAlt: string;
   /** Local keyword phrases this page targets. */
   keywords: string[];
 };
@@ -140,6 +144,9 @@ export const services: Service[] = [
       "Homeowners who want the same crew each time",
     ],
     icon: "home",
+    image: "/images/house-cleaning.webp",
+    imageAlt:
+      "Professional Huskins cleaner in gloves wiping down a kitchen counter in an Omaha home",
     keywords: [
       "house cleaning Omaha",
       "maid service Omaha NE",
@@ -171,6 +178,8 @@ export const services: Service[] = [
       "Before hosting guests or a special event",
     ],
     icon: "sparkle",
+    image: "/images/deep-cleaning.webp",
+    imageAlt: "Spotless, freshly deep-cleaned modern bathroom with gleaming fixtures",
     keywords: [
       "deep cleaning Omaha",
       "deep cleaning services Omaha NE",
@@ -201,6 +210,8 @@ export const services: Service[] = [
       "Landlords, realtors and property managers",
     ],
     icon: "box",
+    image: "/images/move-in-move-out.webp",
+    imageAlt: "Bright, empty, freshly cleaned room ready for move-in day",
     keywords: [
       "move out cleaning Omaha",
       "move in cleaning Omaha NE",
@@ -231,6 +242,8 @@ export const services: Service[] = [
       "Property managers needing a reliable janitorial partner",
     ],
     icon: "building",
+    image: "/images/commercial.webp",
+    imageAlt: "Clean, modern Omaha office interior with tidy desks and workstations",
     keywords: [
       "commercial cleaning Omaha",
       "office cleaning Omaha NE",
@@ -261,6 +274,8 @@ export const services: Service[] = [
       "New commercial build-outs",
     ],
     icon: "hardhat",
+    image: "/images/post-construction.webp",
+    imageAlt: "Newly finished kitchen build transitioning from construction framing, cleaned and move-in ready",
     keywords: [
       "post construction cleaning Omaha",
       "construction cleanup Omaha NE",
@@ -291,6 +306,8 @@ export const services: Service[] = [
       "Homeowners and commercial properties alike",
     ],
     icon: "spray",
+    image: "/images/pressure-washing.webp",
+    imageAlt: "Pressure washer blasting years of grime off a concrete driveway, leaving a clean stripe",
     keywords: [
       "pressure washing Omaha",
       "power washing Omaha NE",

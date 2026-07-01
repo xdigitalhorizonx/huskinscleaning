@@ -13,7 +13,7 @@ const pub = resolve(__dirname, "../public");
 const icon = (size) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#12b89b"/><stop offset="1" stop-color="#0a544a"/>
+      <stop stop-color="#3b8ef0"/><stop offset="1" stop-color="#0d4791"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" fill="url(#g)"/>

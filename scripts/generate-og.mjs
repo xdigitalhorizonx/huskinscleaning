@@ -12,28 +12,28 @@ const out = resolve(__dirname, "../public/og-image.png");
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0a3a34"/>
-      <stop offset="1" stop-color="#062420"/>
+      <stop stop-color="#0e2a52"/>
+      <stop offset="1" stop-color="#0a1f3d"/>
     </linearGradient>
     <radialGradient id="glow" cx="0.18" cy="0.1" r="0.8">
-      <stop stop-color="#0fa88e" stop-opacity="0.45"/>
-      <stop offset="1" stop-color="#0fa88e" stop-opacity="0"/>
+      <stop stop-color="#2f7deb" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#2f7deb" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow2" cx="1" cy="1" r="0.7">
       <stop stop-color="#ffb43a" stop-opacity="0.20"/>
       <stop offset="1" stop-color="#ffb43a" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="mark" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#12b89b"/>
-      <stop offset="1" stop-color="#0c6b5e"/>
+      <stop stop-color="#3b8ef0"/>
+      <stop offset="1" stop-color="#0d4791"/>
     </linearGradient>
     <style>
       .h  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffffff; }
       .hl { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffce7a; }
-      .s  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 400; fill: #aed8ce; }
-      .b  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #062420; }
+      .s  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 400; fill: #b9cfec; }
+      .b  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #0a1f3d; }
       .w  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffffff; }
-      .sub{ font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #cdeae3; }
+      .sub{ font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #cfe0f5; }
     </style>
   </defs>
 

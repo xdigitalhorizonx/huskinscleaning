@@ -44,6 +44,8 @@ const values = [
     title="Family-owned, Omaha-proud, obsessed with clean"
     text="Huskins Cleaning started with a simple belief: people deserve an honest cleaning company that actually shows up and does the job right. Years later, that's still exactly who we are."
     crumbs={crumbs}
+    image="/images/kitchen.webp"
+    imageAlt="A bright, spotless kitchen cleaned by the Huskins team in Omaha"
   />
 
   <!-- Story -->
@@ -75,13 +77,19 @@ const values = [
         </div>
       </div>
 
-      <aside class="about-stats">
-        {trustPoints.map((t) => (
-          <div class="about-stat">
-            <span class="about-stat-num">{t.stat}</span>
-            <span class="about-stat-label">{t.label}</span>
-          </div>
-        ))}
+      <aside class="about-media">
+        <div class="media is-4x3 framed">
+          <span class="media is-4x3">
+            <img
+              src="/images/team.webp"
+              alt="A friendly Huskins cleaner smiling with cleaning supplies in an Omaha home"
+              width="1500"
+              height="1150"
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
+        </div>
         <div class="about-badge">
           <Icon name="award" size={22} />
           <div>
@@ -90,6 +98,15 @@ const values = [
           </div>
         </div>
       </aside>
+    </div>
+
+    <div class="container about-stats-row">
+      {trustPoints.map((t) => (
+        <div class="about-stat">
+          <span class="about-stat-num">{t.stat}</span>
+          <span class="about-stat-label">{t.label}</span>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -138,17 +155,17 @@ const values = [
 <style>
   .about-grid {
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(1.6rem, 5vw, 4rem);
-    align-items: start;
+    align-items: center;
   }
   .about-copy p { color: var(--body); }
-  .about-stats {
+  .about-media { display: grid; gap: 1rem; }
+  .about-stats-row {
+    margin-top: clamp(2rem, 5vw, 3.5rem);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.9rem;
-    position: sticky;
-    top: 7rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
   }
   .about-stat {
     background: var(--surface);
@@ -166,7 +183,6 @@ const values = [
   }
   .about-stat-label { font-size: 0.8rem; color: var(--muted); }
   .about-badge {
-    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -177,7 +193,7 @@ const values = [
   }
   .about-badge :global(svg) { color: var(--accent); flex: none; }
   .about-badge strong { display: block; font-family: var(--font-display); }
-  .about-badge span { font-size: 0.82rem; color: #a9d6cb; }
+  .about-badge span { font-size: 0.82rem; color: var(--on-dark-muted); }
 
   .values-section { background: var(--surface-2); }
   .value-card h3 { margin: 0.8rem 0 0.4rem; font-size: 1.1rem; }
@@ -209,7 +225,10 @@ const values = [
 
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; }
-    .about-stats { position: static; }
+    .about-media { order: -1; }
+  }
+  @media (max-width: 620px) {
+    .about-stats-row { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 520px) {
     .promise { flex-direction: column; gap: 1rem; }

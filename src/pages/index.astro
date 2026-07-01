@@ -68,20 +68,32 @@ const steps = [
 
 <BaseLayout title={title} description={description} schema={[faqSchema()]}>
   <!-- ===== HERO ===== -->
-  <section class="hero section-dark">
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img
+        src="/images/hero-home.webp"
+        alt=""
+        width="2200"
+        height="1300"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="hero-scrim"></div>
+    </div>
+
     <div class="container hero-inner">
       <div class="hero-copy">
         <span class="badge is-light">
           <Icon name="award" size={15} /> BBB A+ · Family-Owned in Omaha
         </span>
         <h1 class="hero-title">
-          Omaha's trusted cleaning team for a home that always feels
+          The Omaha cleaning team that makes home feel
           <span class="hero-accent">brand&nbsp;new</span>
         </h1>
         <p class="lead hero-lead">
-          From weekly house cleaning to deep cleans, move-outs, offices and
-          pressure washing — Huskins delivers spotless results with the same
-          honest, insured crew every visit.
+          Recurring house cleaning, deep cleans, move-outs, offices and pressure
+          washing — done right by the same insured, background-checked crew every
+          visit. Spotless results, honest pricing, zero runaround.
         </p>
         <div class="btn-group">
           <a href="/contact/" class="btn btn-accent btn-lg">Get a Free Quote</a>
@@ -89,40 +101,29 @@ const steps = [
             <Icon name="phone" size={20} /> {site.phone.display}
           </a>
         </div>
-        <div class="hero-proof">
-          <div class="hero-proof-rating">
-            <Stars />
-            <span><strong>{site.rating.value}</strong>/5 from {site.rating.count}+ Omaha customers</span>
-          </div>
-          <ul class="hero-chips">
-            <li><Icon name="check" size={16} /> No contracts</li>
-            <li><Icon name="check" size={16} /> Free quotes</li>
-            <li><Icon name="check" size={16} /> Satisfaction guaranteed</li>
-          </ul>
-        </div>
+        <ul class="hero-chips">
+          <li><Icon name="check" size={16} /> No contracts</li>
+          <li><Icon name="check" size={16} /> Free quotes</li>
+          <li><Icon name="check" size={16} /> Satisfaction guaranteed</li>
+        </ul>
       </div>
 
-      <!-- Decorative guarantee card -->
-      <aside class="hero-card" aria-hidden="true">
-        <div class="hc-top">
-          <span class="hc-avatar"><Icon name="sparkles" size={26} /></span>
+      <!-- Floating social-proof card -->
+      <aside class="hero-card">
+        <div class="hc-rating">
+          <span class="hc-score">{site.rating.value}</span>
           <div>
-            <strong>Huskins Cleaning</strong>
-            <span class="hc-sub">Booking preview</span>
+            <Stars />
+            <span class="hc-count">{site.rating.count}+ Omaha reviews</span>
           </div>
-          <span class="hc-badge">Insured</span>
         </div>
-        <div class="hc-row"><Icon name="home" size={18} /><span>Deep Clean · 3 bed / 2 bath</span></div>
-        <div class="hc-row"><Icon name="calendar" size={18} /><span>This Saturday · 9:00 AM</span></div>
-        <div class="hc-row"><Icon name="users" size={18} /><span>Your regular crew: Team A</span></div>
-        <div class="hc-checklist">
-          <span><Icon name="check-circle" size={16} /> Kitchen & baths sanitized</span>
-          <span><Icon name="check-circle" size={16} /> Floors, dusting, detail work</span>
-          <span><Icon name="check-circle" size={16} /> Satisfaction guaranteed</span>
-        </div>
+        <blockquote class="hc-quote">
+          "It's hard to find affordable and honest people, but the Huskins team
+          really restored my faith. Prompt, courteous and thorough."
+        </blockquote>
         <div class="hc-foot">
-          <span>Estimate</span>
-          <strong>Free &amp; fast</strong>
+          <span class="badge"><Icon name="award" size={15} /> BBB A+ Accredited</span>
+          <span class="badge"><Icon name="shield" size={15} /> Insured</span>
         </div>
       </aside>
     </div>
@@ -144,6 +145,43 @@ const steps = [
       </div>
       <div class="grid grid-3 mt-6">
         {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS / DIFFERENCE ===== -->
+  <section class="section results-section">
+    <div class="container results-grid">
+      <div class="results-media framed">
+        <span class="media is-4x3">
+          <img
+            src="/images/kitchen.webp"
+            alt="A sparkling clean, sunlit modern kitchen after a Huskins visit"
+            width="1700"
+            height="1150"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </div>
+      <div class="results-copy">
+        <span class="eyebrow">The Huskins Difference</span>
+        <h2 class="h2">Come home to spotless — without lifting a finger</h2>
+        <p class="lead mt-1">
+          We treat your home like it's our own: methodical, detail-obsessed, and
+          consistent every visit. From the baseboards to the shine on your
+          faucets, you'll notice the difference the second you walk in.
+        </p>
+        <ul class="checklist mt-3 results-list">
+          <li>A written checklist so nothing gets missed</li>
+          <li>Background-checked, insured, uniformed team</li>
+          <li>Professional-grade (and eco-friendly on request) supplies</li>
+          <li>Same crew, learning your home and preferences</li>
+        </ul>
+        <div class="btn-group mt-3">
+          <a href="/services/" class="btn btn-primary">Explore Services</a>
+          <a href="/reviews/" class="btn btn-ghost">Read Reviews <Icon name="arrow" size={18} /></a>
+        </div>
       </div>
     </div>
   </section>
@@ -205,6 +243,18 @@ const steps = [
   <!-- ===== SERVICE AREAS ===== -->
   <section class="section areas-section">
     <div class="container areas-grid">
+      <div class="areas-media">
+        <span class="media is-4x3">
+          <img
+            src="/images/exterior.webp"
+            alt="A well-kept suburban Omaha-area home Huskins Cleaning serves"
+            width="1800"
+            height="1100"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </div>
       <div class="areas-copy">
         <span class="eyebrow">Local Coverage</span>
         <h2 class="h2">Proudly cleaning the entire Omaha metro</h2>
@@ -212,13 +262,13 @@ const steps = [
           Born and based in Omaha, we serve homes and businesses across the
           city and its surrounding communities. If you're nearby, we've got you.
         </p>
-        <a href="/service-areas/" class="btn btn-ghost mt-2">See all service areas <Icon name="arrow" size={18} /></a>
+        <ul class="areas-list">
+          {serviceAreas.map((a) => (
+            <li><Icon name="pin" size={16} /> {a.name}</li>
+          ))}
+        </ul>
+        <a href="/service-areas/" class="btn btn-ghost mt-3">See all service areas <Icon name="arrow" size={18} /></a>
       </div>
-      <ul class="areas-list">
-        {serviceAreas.map((a) => (
-          <li><Icon name="pin" size={16} /> {a.name}</li>
-        ))}
-      </ul>
     </div>
   </section>
 
@@ -231,17 +281,45 @@ const steps = [
   /* ===== Hero ===== */
   .hero {
     position: relative;
-    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(4rem, 9vw, 7rem);
+    display: flex;
+    align-items: center;
+    min-height: min(88vh, 760px);
+    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4.5rem, 9vw, 7rem);
     overflow: hidden;
+    background: var(--brand-ink);
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(96deg,
+        rgba(10, 31, 61, 0.96) 0%,
+        rgba(10, 31, 61, 0.88) 34%,
+        rgba(10, 31, 61, 0.55) 62%,
+        rgba(10, 31, 61, 0.25) 100%),
+      linear-gradient(0deg, rgba(10, 31, 61, 0.45), transparent 40%);
   }
   .hero-inner {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: center;
     position: relative;
     z-index: 2;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    width: 100%;
   }
+  .hero-copy .badge { margin-bottom: 0.3rem; }
   .hero-title {
     font-family: var(--font-display);
     font-weight: 800;
@@ -249,127 +327,73 @@ const steps = [
     line-height: 1.04;
     letter-spacing: -0.03em;
     color: #fff;
-    margin: 1.2rem 0;
-    max-width: 15ch;
+    margin: 1.1rem 0;
+    max-width: 16ch;
   }
   .hero-accent {
-    position: relative;
     color: var(--accent);
     white-space: nowrap;
   }
-  .hero-lead { max-width: 46ch; }
+  .hero-lead { max-width: 48ch; color: #d7e6fb; }
   .hero .btn-group { margin-top: 1.8rem; }
 
-  .hero-proof {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem 1.8rem;
-  }
-  .hero-proof-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: #cfeae2;
-    font-size: 0.92rem;
-  }
-  .hero-proof-rating strong { color: #fff; font-size: 1.1rem; }
   .hero-chips {
+    margin-top: 1.6rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.1rem;
+    gap: 0.5rem 1.4rem;
     list-style: none;
-    margin: 0;
     padding: 0;
   }
   .hero-chips li {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    color: #cfeae2;
-    font-size: 0.9rem;
+    color: #cfe0f5;
+    font-size: 0.92rem;
     font-weight: 500;
   }
   .hero-chips :global(svg) { color: var(--brand-300); }
 
-  /* Hero card */
+  /* Hero social-proof card */
   .hero-card {
+    justify-self: end;
+    width: min(370px, 100%);
     background: rgba(255, 255, 255, 0.97);
     border-radius: var(--radius-lg);
-    padding: 1.4rem;
+    padding: 1.5rem;
     box-shadow: var(--shadow-lg);
     display: grid;
-    gap: 0.7rem;
+    gap: 1rem;
     color: var(--body);
-    transform: rotate(1.2deg);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transform: rotate(-1deg);
   }
-  .hc-top {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 0.7rem;
-    padding-bottom: 0.9rem;
-    border-bottom: 1px solid var(--line);
+  .hc-rating { display: flex; align-items: center; gap: 0.8rem; }
+  .hc-score {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--brand-700);
   }
-  .hc-avatar {
-    display: grid;
-    place-items: center;
-    width: 2.8rem;
-    height: 2.8rem;
-    border-radius: 12px;
-    background: linear-gradient(145deg, var(--brand-400), var(--brand-700));
-    color: #fff;
+  .hc-count { font-size: 0.82rem; color: var(--muted); display: block; margin-top: 0.15rem; }
+  .hc-quote {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding-left: 0.9rem;
   }
-  .hc-top strong { display: block; color: var(--ink); font-family: var(--font-display); }
-  .hc-sub { font-size: 0.8rem; color: var(--muted); }
-  .hc-badge {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--brand-800);
-    background: var(--brand-100);
-    padding: 0.25rem 0.6rem;
-    border-radius: var(--radius-pill);
-  }
-  .hc-row {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    font-size: 0.92rem;
-    color: var(--body);
-  }
-  .hc-row :global(svg) { color: var(--brand-600); flex: none; }
-  .hc-checklist {
-    display: grid;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
-    padding: 0.9rem;
-    background: var(--surface-2);
-    border-radius: 12px;
-  }
-  .hc-checklist span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--brand-800);
-    font-weight: 500;
-  }
-  .hc-foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.3rem;
-  }
-  .hc-foot span { color: var(--muted); font-size: 0.85rem; }
-  .hc-foot strong { color: var(--brand-700); font-family: var(--font-display); font-size: 1.1rem; }
+  .hc-foot { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
   .hero-wave {
     position: absolute;
     left: 0;
     right: 0;
     bottom: -1px;
+    z-index: 1;
     height: 60px;
     background: var(--canvas);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 60V28c240 26 480 26 720 6S1200 4 1440 26v34z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
@@ -377,11 +401,28 @@ const steps = [
   }
 
   @media (max-width: 900px) {
+    .hero { min-height: 0; }
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-card { max-width: 420px; transform: none; }
+    .hero-media img { object-position: 70% 50%; }
+    .hero-card { justify-self: start; transform: none; margin-top: 0.5rem; }
+  }
+
+  /* ===== Results / difference ===== */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: clamp(1.8rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .results-copy .lead { max-width: 52ch; }
+  .results-list li { font-size: 0.98rem; color: var(--body); }
+  @media (max-width: 900px) {
+    .results-grid { grid-template-columns: 1fr; }
+    .results-media { order: -1; }
   }
 
   /* ===== Why us ===== */
+  .why-section { background: var(--surface-2); }
   .why-grid {
     display: grid;
     grid-template-columns: 0.85fr 1.15fr;
@@ -419,13 +460,13 @@ const steps = [
     letter-spacing: -0.03em;
   }
   .step h3 { color: #fff; margin: 0.5rem 0 0.5rem; font-size: 1.2rem; }
-  .step p { color: #a9d6cb; font-size: 0.95rem; }
+  .step p { color: var(--on-dark-muted); font-size: 0.95rem; }
 
   /* ===== Areas ===== */
-  .areas-section { background: var(--surface-2); }
+  .areas-section { background: var(--surface); border-top: 1px solid var(--line); }
   .areas-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.9fr 1.1fr;
     gap: clamp(1.5rem, 5vw, 4rem);
     align-items: center;
   }
@@ -435,24 +476,25 @@ const steps = [
     grid-template-columns: repeat(2, 1fr);
     gap: 0.7rem;
     list-style: none;
-    margin: 0;
+    margin: 1.4rem 0 0;
     padding: 0;
   }
   .areas-list li {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--surface);
+    background: var(--surface-2);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 0.9rem;
     font-weight: 600;
     color: var(--ink);
     font-family: var(--font-display);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
   .areas-list :global(svg) { color: var(--brand-600); flex: none; }
   @media (max-width: 820px) {
     .areas-grid { grid-template-columns: 1fr; }
+    .areas-media { order: -1; }
   }
 </style>
