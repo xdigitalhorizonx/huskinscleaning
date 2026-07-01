@@ -1,0 +1,146 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import { site, serviceAreas } from "../data/site";
+import { breadcrumbSchema } from "../lib/schema";
+
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Contact", url: "/contact/" },
+];
+const title = "Contact Huskins Cleaning | Free Quote in Omaha, NE";
+const description =
+  "Get a free cleaning quote from Huskins in Omaha, NE. Call (402) 249-0449 or request a quote online. Open 7 days a week, 7am–9pm. Fast, friendly, no obligation.";
+---
+
+<BaseLayout title={title} description={description} canonical="/contact/" schema={[breadcrumbSchema(crumbs)]}>
+  <PageHero
+    eyebrow="Get In Touch"
+    title="Let's get your free quote started"
+    text="Tell us what you need and we'll get right back to you — usually the same day. No pressure, no obligation, just honest pricing from a team you can trust."
+    crumbs={crumbs}
+    showCta={false}
+    image="/images/team.webp"
+    imageAlt="A friendly Huskins cleaner ready to help in an Omaha home"
+  />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Contact Details</span>
+        <h2 class="h3">Talk to a real, local person</h2>
+        <p class="muted mt-1">
+          Prefer the phone? We'd love to hear from you. Reach us any day of the
+          week and we'll help you find the right service and time.
+        </p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="ci-icon"><Icon name="phone" size={20} /></span>
+            <div>
+              <span class="ci-label">Call or text</span>
+              <a href={site.phone.href} class="ci-value">{site.phone.display}</a>
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon"><Icon name="mail" size={20} /></span>
+            <div>
+              <span class="ci-label">Email</span>
+              <a href={`mailto:${site.email}`} class="ci-value">{site.email}</a>
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon"><Icon name="clock" size={20} /></span>
+            <div>
+              <span class="ci-label">Hours</span>
+              <span class="ci-value">{site.hours.label}</span>
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon"><Icon name="pin" size={20} /></span>
+            <div>
+              <span class="ci-label">Service area</span>
+              <span class="ci-value">{site.address.locality}, {site.address.region} {site.address.postalCode} &amp; the metro</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-areas">
+          <strong>We serve:</strong>
+          <span>{serviceAreas.map((a) => a.name).join(" · ")}</span>
+        </div>
+
+        <div class="contact-map">
+          <iframe
+            title="Huskins Cleaning service area — Omaha, NE"
+            src="https://maps.google.com/maps?q=Omaha%2C%20NE%2068112&z=11&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <QuoteForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(1.6rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+  .contact-info .muted { max-width: 42ch; }
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .contact-list li { display: flex; align-items: center; gap: 0.9rem; }
+  .ci-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 12px;
+    background: var(--brand-50);
+    color: var(--brand-700);
+    border: 1px solid var(--brand-100);
+    flex: none;
+  }
+  .ci-label { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .ci-value { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--ink); }
+  a.ci-value:hover { color: var(--brand); }
+
+  .contact-areas {
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+    color: var(--body);
+    line-height: 1.6;
+  }
+  .contact-areas strong { color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+  .contact-map {
+    margin-top: 1.4rem;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .contact-map iframe { width: 100%; height: 280px; border: 0; display: block; filter: grayscale(0.15); }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-form { order: -1; }
+  }
+</style>

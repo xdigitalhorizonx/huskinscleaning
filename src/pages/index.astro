@@ -1,0 +1,492 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import Stars from "../components/Stars.astro";
+import TrustBar from "../components/TrustBar.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { site, services, serviceAreas } from "../data/site";
+import { faqSchema } from "../lib/schema";
+
+const title = "House Cleaning Services in Omaha, NE | Huskins Cleaning";
+const description =
+  "Trusted, family-owned house & commercial cleaning in Omaha, NE. Deep cleaning, move-in/out, office cleaning & pressure washing. BBB A+ rated. Book a free quote today.";
+
+const whyUs = [
+  {
+    icon: "users",
+    title: "The same trusted crew",
+    text: "Not a rotating cast of strangers. You'll get to know the background-checked team that shows up at your door — visit after visit.",
+  },
+  {
+    icon: "shield",
+    title: "Insured & BBB A+ rated",
+    text: "Huskins Services LLC has been BBB-accredited since 2020 with a spotless A+ rating. Fully insured, so you're always protected.",
+  },
+  {
+    icon: "heart",
+    title: "Honest, local, family-owned",
+    text: "We're your Omaha neighbors — not a national franchise. Fair, transparent pricing and none of the runaround.",
+  },
+  {
+    icon: "calendar",
+    title: "On your schedule, 7 days",
+    text: "Open 7 AM to 9 PM every day of the week. Weekly, bi-weekly, monthly or one-time — we work around your life.",
+  },
+  {
+    icon: "sparkles",
+    title: "Every detail, every time",
+    text: "We follow a written checklist so nothing gets skipped. Consistency you can count on, guaranteed.",
+  },
+  {
+    icon: "thumbs-up",
+    title: "100% satisfaction guarantee",
+    text: "If something isn't right, tell us within 24 hours and we'll come back and fix it — no hassle, no charge.",
+  },
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Get your free quote",
+    text: "Call or fill out our quick form. Tell us about your space and what you need — we'll send honest pricing fast.",
+  },
+  {
+    n: "02",
+    title: "Pick a time that works",
+    text: "Choose a one-time clean or a recurring plan. We schedule around you, 7 days a week, morning to night.",
+  },
+  {
+    n: "03",
+    title: "Relax — we've got it",
+    text: "Our insured crew arrives on time, fully equipped, and leaves your place spotless. Satisfaction guaranteed.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={[faqSchema()]}>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img
+        id="hero-photo"
+        src="/images/hero-b.webp"
+        data-hero-a="/images/hero-a.webp"
+        data-hero-b="/images/hero-b.webp"
+        alt=""
+        width="3200"
+        height="1900"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="hero-scrim"></div>
+    </div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="badge is-light">
+          <Icon name="award" size={15} /> BBB A+ · Family-Owned in Omaha
+        </span>
+        <h1 class="hero-title">
+          The Omaha cleaning team that makes home feel
+          <span class="hero-accent">brand&nbsp;new</span>
+        </h1>
+        <p class="lead hero-lead">
+          Recurring house cleaning, deep cleans, move-outs, offices and pressure
+          washing — done right by the same insured, background-checked crew every
+          visit. Spotless results, honest pricing, zero runaround.
+        </p>
+        <div class="btn-group">
+          <a href="/contact/" class="btn btn-accent btn-lg">Get a Free Quote</a>
+          <a href={site.phone.href} class="btn btn-outline-light btn-lg">
+            <Icon name="phone" size={20} /> {site.phone.display}
+          </a>
+        </div>
+        <div class="hero-proof">
+          <span class="hero-rating">
+            <Stars />
+            <strong>{site.rating.value}</strong>
+            <span class="hero-rating-sub">from {site.rating.count}+ Omaha reviews</span>
+          </span>
+          <ul class="hero-chips">
+            <li><Icon name="check" size={16} /> No contracts</li>
+            <li><Icon name="check" size={16} /> Free quotes</li>
+            <li><Icon name="check" size={16} /> Satisfaction guaranteed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave" aria-hidden="true"></div>
+  </section>
+
+  <TrustBar />
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head is-center">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="h2">One trusted team for every kind of clean</h2>
+        <p class="lead">
+          Homes, offices, new builds and everything in between. Explore our
+          most-requested services across the Omaha metro.
+        </p>
+      </div>
+      <div class="grid grid-6 mt-6">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS / DIFFERENCE ===== -->
+  <section class="section results-section">
+    <div class="container results-grid">
+      <div class="results-media framed">
+        <span class="media is-4x3">
+          <img
+            src="/images/kitchen.webp"
+            alt="A sparkling clean, sunlit modern kitchen after a Huskins visit"
+            width="1700"
+            height="1150"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </div>
+      <div class="results-copy">
+        <span class="eyebrow">The Huskins Difference</span>
+        <h2 class="h2">Come home to spotless — without lifting a finger</h2>
+        <p class="lead mt-1">
+          We treat your home like it's our own: methodical, detail-obsessed, and
+          consistent every visit. From the baseboards to the shine on your
+          faucets, you'll notice the difference the second you walk in.
+        </p>
+        <ul class="checklist mt-3 results-list">
+          <li>A written checklist so nothing gets missed</li>
+          <li>Background-checked, insured, uniformed team</li>
+          <li>Professional-grade (and eco-friendly on request) supplies</li>
+          <li>Same crew, learning your home and preferences</li>
+        </ul>
+        <div class="btn-group mt-3">
+          <a href="/services/" class="btn btn-primary">Explore Services</a>
+          <a href="/reviews/" class="btn btn-ghost">Read Reviews <Icon name="arrow" size={18} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY US ===== -->
+  <section class="section why-section">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-head">
+          <span class="eyebrow">Why Huskins</span>
+          <h2 class="h2">The cleaning company Omaha actually recommends</h2>
+          <p class="lead">
+            Big franchises send whoever's available. We're different — a local,
+            family-run team that treats your home like our own and shows up the
+            same way every time.
+          </p>
+          <a href="/about/" class="btn btn-ghost mt-2">Meet the team <Icon name="arrow" size={18} /></a>
+        </div>
+        <div class="why-list">
+          {whyUs.map((w) => (
+            <div class="why-item">
+              <span class="icon-badge"><Icon name={w.icon} /></span>
+              <div>
+                <h3>{w.title}</h3>
+                <p>{w.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="section process-section section-dark">
+    <div class="container">
+      <div class="section-head is-center">
+        <span class="eyebrow is-light">Simple &amp; Stress-Free</span>
+        <h2 class="h2">Booking a clean takes about 5 minutes</h2>
+        <p class="lead">Three easy steps between you and a spotless space.</p>
+      </div>
+      <div class="grid grid-3 mt-6 steps">
+        {steps.map((s) => (
+          <div class="step">
+            <span class="step-n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-4">
+        <a href="/contact/" class="btn btn-accent btn-lg">Start with a Free Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials compact />
+
+  <!-- ===== SERVICE AREAS ===== -->
+  <section class="section areas-section">
+    <div class="container areas-grid">
+      <div class="areas-media">
+        <span class="media is-4x3">
+          <img
+            src="/images/exterior.webp"
+            alt="A well-kept suburban Omaha-area home Huskins Cleaning serves"
+            width="1800"
+            height="1100"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </div>
+      <div class="areas-copy">
+        <span class="eyebrow">Local Coverage</span>
+        <h2 class="h2">Proudly cleaning the entire Omaha metro</h2>
+        <p class="lead">
+          Born and based in Omaha, we serve homes and businesses across the
+          city and its surrounding communities. If you're nearby, we've got you.
+        </p>
+        <ul class="areas-list">
+          {serviceAreas.map((a) => (
+            <li><Icon name="pin" size={16} /> {a.name}</li>
+          ))}
+        </ul>
+        <a href="/service-areas/" class="btn btn-ghost mt-3">See all service areas <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <Faq />
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: min(88vh, 760px);
+    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4.5rem, 9vw, 7rem);
+    overflow: hidden;
+    background: var(--brand-ink);
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(96deg,
+        rgba(10, 31, 61, 0.96) 0%,
+        rgba(10, 31, 61, 0.88) 34%,
+        rgba(10, 31, 61, 0.55) 62%,
+        rgba(10, 31, 61, 0.25) 100%),
+      linear-gradient(0deg, rgba(10, 31, 61, 0.45), transparent 40%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .hero-copy { max-width: 640px; }
+  .hero-copy .badge { margin-bottom: 0.3rem; }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--step-5);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 1.1rem 0;
+    max-width: 16ch;
+  }
+  .hero-accent {
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .hero-lead { max-width: 48ch; color: #d7e6fb; }
+  .hero .btn-group { margin-top: 1.8rem; }
+
+  .hero-proof {
+    margin-top: 1.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .hero-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cfe0f5;
+    font-size: 0.95rem;
+  }
+  .hero-rating strong { color: #fff; font-size: 1.05rem; }
+  .hero-rating-sub { color: var(--on-dark-muted); }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .hero-chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #cfe0f5;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .hero-chips :global(svg) { color: var(--brand-300); }
+
+  .hero-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    z-index: 1;
+    height: 60px;
+    background: var(--canvas);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 60V28c240 26 480 26 720 6S1200 4 1440 26v34z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 60V28c240 26 480 26 720 6S1200 4 1440 26v34z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+  }
+
+  @media (max-width: 900px) {
+    .hero { min-height: 0; }
+    .hero-media img { object-position: 70% 50%; }
+  }
+
+  /* ===== Results / difference ===== */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: clamp(1.8rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .results-copy .lead { max-width: 52ch; }
+  .results-list li { font-size: 0.98rem; color: var(--body); }
+  @media (max-width: 900px) {
+    .results-grid { grid-template-columns: 1fr; }
+    .results-media { order: -1; }
+  }
+
+  /* ===== Why us ===== */
+  .why-section { background: var(--surface-2); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .why-head { position: sticky; top: 7rem; }
+  .why-head .lead { margin-top: 1rem; }
+  .why-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 1.4rem; }
+  .why-item { display: flex; gap: 0.9rem; }
+  .why-item h3 { font-size: 1.08rem; margin-bottom: 0.3rem; }
+  .why-item p { font-size: 0.92rem; color: var(--body); }
+  @media (max-width: 900px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .why-head { position: static; }
+  }
+  @media (max-width: 560px) {
+    .why-list { grid-template-columns: 1fr; }
+  }
+
+  /* ===== Process ===== */
+  .steps { counter-reset: step; }
+  .step {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem 1.5rem;
+    position: relative;
+  }
+  .step-n {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--brand-300);
+    letter-spacing: -0.03em;
+  }
+  .step h3 { color: #fff; margin: 0.5rem 0 0.5rem; font-size: 1.2rem; }
+  .step p { color: var(--on-dark-muted); font-size: 0.95rem; }
+
+  /* ===== Areas ===== */
+  .areas-section { background: var(--surface); border-top: 1px solid var(--line); }
+  .areas-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .areas-copy .lead { margin-top: 1rem; }
+  .areas-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+  }
+  .areas-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+  }
+  .areas-list :global(svg) { color: var(--brand-600); flex: none; }
+  @media (max-width: 820px) {
+    .areas-grid { grid-template-columns: 1fr; }
+    .areas-media { order: -1; }
+  }
+</style>
+
+<script>
+  // Easter egg: ← ← → → ↑ ↓ B A toggles the hero photo between A and B.
+  const img = document.getElementById("hero-photo");
+  if (img instanceof HTMLImageElement) {
+    const A = img.dataset.heroA || "";
+    const B = img.dataset.heroB || "";
+    if (A) new Image().src = A; // preload the alternate so the swap is instant
+    const seq = ["arrowleft", "arrowleft", "arrowright", "arrowright", "arrowup", "arrowdown", "b", "a"];
+    let pos = 0;
+    let showingB = true;
+    window.addEventListener("keydown", (e) => {
+      const k = (e.key || "").toLowerCase();
+      if (k === seq[pos]) pos++;
+      else pos = k === seq[0] ? 1 : 0;
+      if (pos === seq.length) {
+        pos = 0;
+        showingB = !showingB;
+        img.src = showingB ? B : A;
+        img.style.objectPosition = showingB ? "60% 50%" : "62% 42%";
+      }
+    });
+  }
+</script>
