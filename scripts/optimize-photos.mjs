@@ -20,7 +20,8 @@ const ATTENTION = sharp.strategy.attention;
 
 /** [source file, output name, width, height, quality, crop-focus] */
 const jobs = [
-  ["hero.jpg",             "hero-home",        3200, 1900, 86, "entropy"],
+  ["hero-a.jpg",           "hero-a",           3200, 1900, 86, ATTENTION],
+  ["hero-b.jpg",           "hero-b",           3200, 1900, 86, "entropy"],
   ["kitchen.jpg",          "kitchen",          1700, 1150, 72, "entropy"],
   ["exterior.jpg",         "exterior",         1800, 1100, 72, "entropy"],
   ["cleaner_team.jpg",     "team",             1500, 1150, 78, ATTENTION],

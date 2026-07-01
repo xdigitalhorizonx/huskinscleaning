@@ -71,10 +71,13 @@ const steps = [
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
       <img
-        src="/images/hero-home.webp"
+        id="hero-photo"
+        src="/images/hero-b.webp"
+        data-hero-a="/images/hero-a.webp"
+        data-hero-b="/images/hero-b.webp"
         alt=""
-        width="2200"
-        height="1300"
+        width="3200"
+        height="1900"
         fetchpriority="high"
         decoding="async"
       />
@@ -463,3 +466,27 @@ const steps = [
     .areas-media { order: -1; }
   }
 </style>
+
+<script>
+  // Easter egg: ← ← → → ↑ ↓ B A toggles the hero photo between A and B.
+  const img = document.getElementById("hero-photo");
+  if (img instanceof HTMLImageElement) {
+    const A = img.dataset.heroA || "";
+    const B = img.dataset.heroB || "";
+    if (A) new Image().src = A; // preload the alternate so the swap is instant
+    const seq = ["arrowleft", "arrowleft", "arrowright", "arrowright", "arrowup", "arrowdown", "b", "a"];
+    let pos = 0;
+    let showingB = true;
+    window.addEventListener("keydown", (e) => {
+      const k = (e.key || "").toLowerCase();
+      if (k === seq[pos]) pos++;
+      else pos = k === seq[0] ? 1 : 0;
+      if (pos === seq.length) {
+        pos = 0;
+        showingB = !showingB;
+        img.src = showingB ? B : A;
+        img.style.objectPosition = showingB ? "60% 50%" : "62% 42%";
+      }
+    });
+  }
+</script>
