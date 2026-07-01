@@ -20,7 +20,7 @@ const ATTENTION = sharp.strategy.attention;
 
 /** [source file, output name, width, height, quality, crop-focus] */
 const jobs = [
-  ["hero.jpg",             "hero-home",        2200, 1300, 70, "entropy"],
+  ["hero.jpg",             "hero-home",        3200, 1900, 86, "entropy"],
   ["kitchen.jpg",          "kitchen",          1700, 1150, 72, "entropy"],
   ["exterior.jpg",         "exterior",         1800, 1100, 72, "entropy"],
   ["cleaner_team.jpg",     "team",             1500, 1150, 78, ATTENTION],
@@ -43,6 +43,7 @@ for (const [src, name, w, h, q, position] of jobs) {
   await sharp(input)
     .rotate()
     .resize({ width: w, height: h, fit: "cover", position })
+    .sharpen({ sigma: 0.6 })
     .webp({ quality: q, effort: 6 })
     .toFile(out);
   const meta = await sharp(out).metadata();
