@@ -1,0 +1,154 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { site, services, serviceAreas } from "../data/site";
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <Logo variant="light" />
+        <p class="foot-blurb">
+          Family-owned, BBB-accredited cleaning for homes and businesses across
+          the Omaha metro. Spotless results from a team you can actually trust.
+        </p>
+        <div class="foot-badges">
+          <span class="badge is-light"><Icon name="shield" size={15} /> Insured</span>
+          <span class="badge is-light"><Icon name="award" size={15} /> BBB {site.bbb.rating}</span>
+          <span class="badge is-light"><Icon name="check-circle" size={15} /> Satisfaction Guaranteed</span>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h3 class="foot-h">Services</h3>
+        <ul>
+          {services.map((s) => (
+            <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h3 class="foot-h">Company</h3>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/service-areas/">Service Areas</a></li>
+          <li><a href="/reviews/">Reviews</a></li>
+          <li><a href="/contact/">Contact & Quote</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col foot-contact">
+        <h3 class="foot-h">Get in Touch</h3>
+        <ul>
+          <li>
+            <Icon name="phone" size={17} />
+            <a href={site.phone.href}>{site.phone.display}</a>
+          </li>
+          <li>
+            <Icon name="mail" size={17} />
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <Icon name="pin" size={17} />
+            <span>Serving {site.address.locality}, {site.address.region} & the metro</span>
+          </li>
+          <li>
+            <Icon name="clock" size={17} />
+            <span>{site.hours.label}</span>
+          </li>
+        </ul>
+        <a href="/contact/" class="btn btn-accent mt-2">Request a Free Quote</a>
+      </div>
+    </div>
+
+    <div class="foot-areas">
+      <span class="foot-areas-label">Proudly serving:</span>
+      {serviceAreas.map((a, i) => (
+        <>
+          <a href="/service-areas/">{a.name}</a>{i < serviceAreas.length - 1 ? <span class="dot">•</span> : null}
+        </>
+      ))}
+    </div>
+
+    <div class="foot-bottom">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <p class="foot-legal">
+        {site.brand} · Omaha, NE {site.address.postalCode} ·
+        <a href={site.phone.href}>{site.phone.display}</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background:
+      radial-gradient(800px 400px at 90% 0%, rgba(46, 155, 230, 0.16), transparent 60%),
+      var(--brand-ink);
+    color: #a6c3e2;
+    padding-block: clamp(3rem, 6vw, 4.5rem) 1.6rem;
+    margin-top: auto;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+  .foot-blurb { margin-top: 1rem; max-width: 30ch; color: #a6c3e2; }
+  .foot-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+
+  .foot-h {
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .foot-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .foot-col a { color: #a6c3e2; }
+  .foot-col a:hover { color: #fff; }
+
+  .foot-contact ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #a6c3e2;
+  }
+  .foot-contact :global(svg) { color: var(--brand-300); flex: none; }
+
+  .foot-areas {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    line-height: 2;
+  }
+  .foot-areas-label { color: #fff; font-weight: 600; margin-right: 0.5rem; }
+  .foot-areas a { color: #a6c3e2; }
+  .foot-areas a:hover { color: #fff; }
+  .foot-areas .dot { margin: 0 0.5rem; opacity: 0.4; }
+
+  .foot-bottom {
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+  }
+  .foot-legal a { color: var(--brand-300); }
+
+  @media (max-width: 860px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .foot-grid { grid-template-columns: 1fr; }
+    .foot-bottom { flex-direction: column; }
+  }
+</style>

@@ -1,0 +1,191 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { services, site } from "../../data/site";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "../../lib/schema";
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Services", url: "/services/" },
+  { name: service.title, url: `/services/${service.slug}/` },
+];
+
+const schema = [
+  serviceSchema(service.slug),
+  breadcrumbSchema(crumbs),
+  faqSchema(),
+].filter(Boolean) as object[];
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonical={`/services/${service.slug}/`}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Omaha Cleaning Services"
+    title={service.heading}
+    text={service.intro}
+    crumbs={crumbs}
+  />
+
+  <!-- Includes + sidebar -->
+  <section class="section">
+    <div class="container svc-grid">
+      <div class="svc-main">
+        <span class="eyebrow">What's Included</span>
+        <h2 class="h2">Exactly what you can expect</h2>
+        <p class="lead mt-1">
+          {service.tagline} Here's what our {service.title.toLowerCase()} covers on
+          a typical visit — and we'll happily tailor it to your space.
+        </p>
+        <ul class="checklist svc-checklist mt-3">
+          {service.includes.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <div class="svc-bestfor">
+          <h3 class="h3">Perfect for</h3>
+          <div class="bestfor-grid mt-2">
+            {service.bestFor.map((b) => (
+              <div class="bestfor-item">
+                <Icon name="check-circle" size={20} />
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <aside class="svc-aside">
+        <div class="card svc-quote-card">
+          <span class="icon-badge is-accent"><Icon name="sparkles" /></span>
+          <h3>Free {service.title} Quote</h3>
+          <p class="muted">Honest pricing, no pressure. Most quotes go out the same day.</p>
+          <a href="/contact/" class="btn btn-accent btn-block mt-2">Get My Free Quote</a>
+          <a href={site.phone.href} class="btn btn-ghost btn-block mt-1">
+            <Icon name="phone" size={18} /> {site.phone.display}
+          </a>
+          <ul class="svc-assure">
+            <li><Icon name="shield" size={16} /> Insured & BBB A+ rated</li>
+            <li><Icon name="users" size={16} /> Same trusted crew</li>
+            <li><Icon name="clock" size={16} /> 7 days a week, 7am–9pm</li>
+            <li><Icon name="thumbs-up" size={16} /> Satisfaction guaranteed</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Reassurance strip -->
+  <section class="section-tight svc-strip">
+    <div class="container svc-strip-grid">
+      <div><Icon name="award" size={26} /><strong>BBB A+ Accredited</strong><span>Trusted since 2020</span></div>
+      <div><Icon name="pin" size={26} /><strong>Locally Owned</strong><span>Right here in Omaha</span></div>
+      <div><Icon name="calendar" size={26} /><strong>Flexible Scheduling</strong><span>One-time or recurring</span></div>
+      <div><Icon name="heart" size={26} /><strong>Neighbor-Approved</strong><span>{site.rating.value}★ average rating</span></div>
+    </div>
+  </section>
+
+  <!-- Related services -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Explore More</span>
+        <h2 class="h2">Other services Omaha loves us for</h2>
+      </div>
+      <div class="grid grid-3 mt-4">
+        {related.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    heading={`${service.title} questions, answered`}
+    intro="A few of the things Omaha clients ask most. Have another question? Just reach out."
+  />
+
+  <CtaBand
+    heading={`Book your ${service.title.toLowerCase()} in Omaha today`}
+    text="Friendly local team, honest pricing, guaranteed results. Get your free quote in minutes."
+  />
+</BaseLayout>
+
+<style>
+  .svc-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.9fr;
+    gap: clamp(1.6rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+  .svc-main .lead { max-width: 60ch; }
+  .svc-checklist li { font-size: 1rem; }
+  .svc-bestfor { margin-top: 2.5rem; }
+  .bestfor-grid { display: grid; gap: 0.8rem; }
+  .bestfor-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--surface-2);
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+  }
+  .bestfor-item :global(svg) { color: var(--brand-600); flex: none; }
+
+  .svc-aside { position: sticky; top: 7rem; }
+  .svc-quote-card { text-align: left; }
+  .svc-quote-card .icon-badge { margin-bottom: 0.9rem; }
+  .svc-quote-card h3 { font-size: 1.3rem; color: var(--ink); }
+  .svc-quote-card > p { margin-top: 0.4rem; }
+  .svc-assure {
+    list-style: none;
+    padding: 1.1rem 0 0;
+    margin: 1.1rem 0 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 0.6rem;
+  }
+  .svc-assure li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--body); }
+  .svc-assure :global(svg) { color: var(--brand-600); flex: none; }
+
+  .svc-strip { background: var(--brand-ink); color: #d6e6f7; }
+  .svc-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem;
+  }
+  .svc-strip-grid > div {
+    display: grid;
+    justify-items: start;
+    gap: 0.15rem;
+  }
+  .svc-strip-grid :global(svg) { color: var(--brand-300); margin-bottom: 0.4rem; }
+  .svc-strip-grid strong { color: #fff; font-family: var(--font-display); font-size: 1.05rem; }
+  .svc-strip-grid span { font-size: 0.85rem; color: #a6c3e2; }
+
+  @media (max-width: 900px) {
+    .svc-grid { grid-template-columns: 1fr; }
+    .svc-aside { position: static; }
+  }
+  @media (max-width: 720px) {
+    .svc-strip-grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1rem; }
+  }
+</style>

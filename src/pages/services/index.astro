@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { services } from "../../data/site";
+import { breadcrumbSchema } from "../../lib/schema";
+
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Services", url: "/services/" },
+];
+const title = "Cleaning Services in Omaha, NE | Huskins Cleaning";
+const description =
+  "Explore Huskins' cleaning services in Omaha, NE: house cleaning, deep cleaning, move-in/out, commercial & office cleaning, post-construction cleanup and pressure washing.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="/services/"
+  schema={[breadcrumbSchema(crumbs)]}
+>
+  <PageHero
+    eyebrow="Our Services"
+    title="Professional cleaning services across Omaha"
+    text="From a quick weekly tidy to a full post-construction reset, Huskins has a service for every home and business in the Omaha metro — all delivered by the same trusted, insured team."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <Faq />
+  <CtaBand />
+</BaseLayout>

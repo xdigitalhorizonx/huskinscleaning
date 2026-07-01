@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { site, services } from "../data/site";
+---
+
+<BaseLayout
+  title="Page Not Found | Huskins Cleaning Omaha"
+  description="Sorry, we couldn't find that page. Explore Huskins Cleaning's services in Omaha, NE or get a free quote."
+  noindex={true}
+>
+  <section class="section notfound section-dark">
+    <div class="container text-center">
+      <span class="nf-mark"><Icon name="sparkles" size={40} /></span>
+      <h1 class="h-display">Well, this spot's a little too clean</h1>
+      <p class="lead mx-auto" style="max-width:46ch">
+        We couldn't find the page you were looking for. Let's get you back to
+        something useful.
+      </p>
+      <div class="btn-group" style="justify-content:center">
+        <a href="/" class="btn btn-accent btn-lg">Back to Home</a>
+        <a href={site.phone.href} class="btn btn-outline-light btn-lg">
+          <Icon name="phone" size={20} /> {site.phone.display}
+        </a>
+      </div>
+      <div class="nf-links">
+        {services.map((s) => (
+          <a href={`/services/${s.slug}/`}>{s.title}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound { padding-block: clamp(4rem, 12vw, 8rem); }
+  .nf-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .notfound .btn-group { margin-top: 2rem; }
+  .nf-links {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+  }
+  .nf-links a {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #d6e6f7;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .nf-links a:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+</style>

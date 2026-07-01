@@ -1,0 +1,70 @@
+---
+/** Huskins Cleaning wordmark + sparkle-drop mark. Inherits color via props. */
+interface Props {
+  variant?: "dark" | "light";
+  class?: string;
+}
+const { variant = "dark", class: className = "" } = Astro.props;
+const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
+const subColor = variant === "light" ? "rgba(255,255,255,.7)" : "var(--muted)";
+---
+
+<a href="/" class={`logo ${className}`} aria-label="Huskins Cleaning — home">
+  <span class="logo-mark" aria-hidden="true">
+    <svg viewBox="0 0 40 40" width="40" height="40" fill="none">
+      <rect width="40" height="40" rx="12" fill="url(#lg)" />
+      <path
+        d="M20 9c2.6 4 5 6.4 5 10a5 5 0 0 1-10 0c0-3.6 2.4-6 5-10Z"
+        fill="#fff"
+        opacity="0.96"
+      />
+      <path
+        d="M27 22.5l.8 2.4 2.4.8-2.4.8-.8 2.4-.8-2.4-2.4-.8 2.4-.8z"
+        fill="#ffd48a"
+      />
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="40" y2="40">
+          <stop stop-color="#2e9be6" />
+          <stop offset="1" stop-color="#1b4e8c" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </span>
+  <span class="logo-text">
+    <span class="logo-word" style={`color:${wordColor}`}>Huskins</span>
+    <span class="logo-sub" style={`color:${subColor}`}>Cleaning · Omaha</span>
+  </span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+  }
+  .logo-mark {
+    display: block;
+    box-shadow: 0 8px 18px -8px rgba(27, 78, 140, 0.6);
+    border-radius: 12px;
+    line-height: 0;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+  .logo-word {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+  }
+  .logo-sub {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+</style>
