@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 // Canonical production origin. Update if the domain changes.
-export const SITE_URL = "https://forwardobservations.com";
+export const SITE_URL = "https://digitalhorizon.dev";
 
 // https://astro.build/config
 export default defineConfig({

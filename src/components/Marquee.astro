@@ -1,10 +1,10 @@
 ---
 import { ticker as defaultTicker } from "../data/site";
 interface Props {
-  items?: { en: string; jp: string }[];
+  items?: string[];
   speed?: string;
 }
-const { items = defaultTicker, speed = "34s" } = Astro.props;
+const { items = defaultTicker, speed = "36s" } = Astro.props;
 // duplicate for a seamless -50% loop
 const loop = [...items, ...items];
 ---
@@ -13,8 +13,7 @@ const loop = [...items, ...items];
   <div class="marquee-track">
     {loop.map((t) => (
       <span class="marquee-item">
-        <span class="jp">{t.jp}</span>
-        {t.en}
+        {t}
         <span class="marquee-sep">◆</span>
       </span>
     ))}

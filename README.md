@@ -1,81 +1,69 @@
-# Forward Observations Group — Website
+# Digital Horizon — Website
 
-A flashy, anime-throwback rebrand of the website for **Forward Observations Group
-(FOG)** — a veteran media collective. The design is an original homage to late-80s
-/ 90s mecha & cyberpunk anime (Evangelion-style NERV HUDs, Akira's neon Neo-Tokyo):
-void black, NERV amber, Akira red, cyan signage, scanlines, glitch text, targeting
-reticles, katakana accents, and a synthwave grid.
+Marketing website for **Digital Horizon** — web design, SEO, and digital
+marketing for **Northern Nevada** service and trade businesses (Reno, Sparks,
+Carson City, Lake Tahoe, and beyond).
 
-Built as a fast, static site with [Astro](https://astro.build) and a bespoke,
-hand-authored design system. Every "flashy" effect is pure CSS/SVG — no copyrighted
-artwork, no heavy JS, and fully self-contained.
+Built as a fast, SEO-first static site with [Astro](https://astro.build) and a
+bespoke, hand-authored design system. Content mirrors digitalhorizon.dev; the
+visual system is a dark, high-tech "digital sunrise" theme — every effect is
+CSS/SVG, self-contained, and near-zero JavaScript.
 
 ---
 
 ## Design language
 
-- **Palette** — void black `#05060a`, Akira red `#ff2340` (energy / danger),
-  NERV amber `#ff9d00` (HUD framing), cyan `#22e0ff` (signage), Eva purple, and
-  terminal lime, plus hazard yellow/black stripes.
-- **Type** — *Chakra Petch* (display / HUD), *Share Tech Mono* (terminal
-  readouts), *Orbitron* (numerals), *Noto Sans JP* (katakana / kanji accents),
-  and *Inter* (body).
-- **Motifs** — an animated radar/observation console, a live UTC HUD clock, a
-  katakana marquee ticker, targeting-reticle panels, glitch headlines, and the
-  brand's NVG-skull reimagined as an original hexagonal mecha emblem.
+- **Palette** — void night sky `#05060a`, sunrise coral `#ff5a3c` (CTAs), horizon
+  amber `#ff9d00`, sky cyan `#22e0ff`, plus dusk violet and terminal lime.
+- **Type** — Chakra Petch (display/UI), Share Tech Mono (labels/readouts),
+  Orbitron (numerals), Inter (body).
+- **Motifs** — a rising-sun horizon logo, a live analytics/KPI console in the
+  hero, a Search Console visibility panel, scanlines, subtle glitch headlines,
+  and a marquee ticker.
 
-The whole system lives in `src/styles/global.css` (design tokens + utilities) and
-a set of small Astro components.
+The whole system lives in `src/styles/global.css` and a set of small Astro
+components.
 
----
+## Pages (15 routes)
 
-## Content & themes
+- **Home** — hero + live analytics console, stats, the three services, the
+  project-to-partnership process, a Search Console visibility panel,
+  testimonials, industries served, and journal preview.
+- **Services** — Web Design, SEO, and Digital Marketing in depth + process + FAQ.
+- **About** — who we are, studio profile, values, and industries.
+- **Locations** — service areas across Northern Nevada.
+- **Blog** — index + 8 article pages (`/blog/[slug]`).
+- **Contact** — a project-inquiry form (name, company, email, phone, service,
+  budget, message) via `mailto:`, plus NAP and channels.
+- **404** — "over the horizon."
 
-The copy is an original creative rebrand that leans into FOG's real, distinctive
-themes — the *forward observer* (eyes ahead of the line, report it honestly), the
-front-line documentary work, and the "they-keep-pulling-our-channel" deplatforming
-saga — without restating disputed or unverified claims. Field locations are kept
-deliberately classified/atmospheric.
+## SEO & performance
 
-**Pages (11 routes):**
-
-- **Home** — showpiece hero + radar console, stats, manifesto, shows, latest
-  transmissions, dispatches, supply preview, CTA.
-- **Broadcast** — the four channels + full transmission log.
-- **Dispatches** — index + per-article template (`/dispatches/[slug]`).
-- **Supply** — merch catalog with live-drop banner and supply doctrine.
-- **The Unit (About)** — dossier, pull quote, rules of engagement, the "signal
-  war" channel timeline, FAQ.
-- **Contact** — a secure-terminal comms form (mailto) + all frequencies.
-- **404** — "Signal Lost."
-
----
+- Per-page titles, meta descriptions, canonical URLs, OG/Twitter cards.
+- schema.org JSON-LD: `ProfessionalService`/`LocalBusiness` (with NAP, geo, and
+  `areaServed`), `WebSite`, `BreadcrumbList`, `Article`, and `FAQPage`.
+- Auto-generated `sitemap-index.xml` + `robots.txt`.
+- Accessible markup (skip link, semantic landmarks, focus states) and full
+  `prefers-reduced-motion` support.
 
 ## Tech stack
 
 - **Astro 5** — static output, component-based, near-zero client JS.
 - **Hand-authored CSS design system** (`src/styles/global.css`).
 - **@astrojs/sitemap** — sitemap generation.
-- **Fontsource** — self-hosted Chakra Petch, Share Tech Mono, Orbitron, Noto Sans
-  JP, and Inter.
+- **Fontsource** — self-hosted Chakra Petch, Share Tech Mono, Orbitron, Inter.
 - **sharp** — build-time generation of the OG image and app icons.
-
-SEO is preserved from the original scaffold: per-page titles / meta / canonical /
-OG + Twitter cards, `Organization` + `WebSite` + `BreadcrumbList` + `Article` +
-`FAQPage` JSON-LD, an auto-generated `sitemap-index.xml`, and `robots.txt`.
-Accessibility: skip link, semantic landmarks, focus states, and full
-`prefers-reduced-motion` support (all animations collapse when requested).
 
 ## Project structure
 
 ```
 src/
-  data/site.ts            # single source of truth: brand, shows, episodes, dispatches, products
-  lib/schema.ts           # schema.org JSON-LD builders
+  data/site.ts            # single source of truth: NAP, services, process, posts, locations, FAQs
+  lib/schema.ts           # schema.org JSON-LD builders (LocalBusiness, Article, ...)
   layouts/BaseLayout.astro # <head> SEO, fonts, header/footer wrapper
-  components/             # Header, Footer, Logo, Marquee, ShowCard, DispatchCard, ProductCard, ...
-  pages/                  # index, broadcast, dispatches/[slug], supply, about, contact, 404
-  styles/global.css       # the gonzo-cyber design system
+  components/             # Header, Footer, Logo, ServiceCard, PostCard, Marquee, ...
+  pages/                  # index, services, about, locations, blog/[slug], contact, 404
+  styles/global.css       # the design system
 public/                   # robots.txt, favicon, og-image, app icons, manifest
 scripts/                  # generate-og.mjs, generate-icons.mjs
 ```
@@ -96,21 +84,13 @@ node scripts/generate-icons.mjs
 node scripts/generate-og.mjs
 ```
 
-## Deployment
-
-The output in `dist/` is fully static and hosts anywhere (Vercel, Netlify,
-Cloudflare Pages, S3, etc.).
-
----
-
 ## Notes for go-live
 
-- **Social links & podcast URL** live in `src/data/site.ts` (`site.social`) — swap
-  in the official handles before launch.
-- **Contact form** composes a `mailto:` to `comms@forwardobservations.com`. Point
-  it at a real inbox, or wire it to a Formspree/Web3Forms endpoint in
-  `src/pages/contact.astro`.
-- **Shows, episodes, dispatches, and products** in `src/data/site.ts` are an
-  editorial rebrand concept — replace with the real catalog when ready. The
-  footer notes that transmissions are dramatized.
-- **Domain** is set to `https://forwardobservations.com` in `astro.config.mjs`.
+- Business data (NAP, services, locations, posts, FAQs) lives in
+  `src/data/site.ts`. Social links and the office address are set from the live
+  site — confirm before launch.
+- The contact form composes a `mailto:` to `hello@digitalhorizon.dev`. Wire it to
+  a Formspree/Web3Forms endpoint in `src/pages/contact.astro` for richer delivery.
+- Blog article bodies are on-topic drafts expanding the real titles/excerpts from
+  digitalhorizon.dev — replace with the full published copy when ready.
+- Domain is set to `https://digitalhorizon.dev` in `astro.config.mjs`.

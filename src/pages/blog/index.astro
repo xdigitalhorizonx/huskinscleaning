@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PostCard from "../../components/PostCard.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { site, posts } from "../../data/site";
+import { breadcrumbSchema } from "../../lib/schema";
+
+const title = `Blog — SEO, Web & Software Field Notes | ${site.brand}`;
+const description =
+  "The Digital Horizon Journal: working notes on SEO, web performance, and the software we build for Northern Nevada service businesses.";
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog/" },
+];
+const schema = [breadcrumbSchema(crumbs)];
+const [featured, ...rest] = posts;
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    eyebrow="Field notes" variant="cyan"
+    title="The Digital Horizon Journal"
+    lead="Working notes on SEO, web performance, and the software we build for Northern Nevada service businesses."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-feature">
+        <PostCard post={featured} featured />
+      </div>
+      <div class="grid grid-3 mt-6">
+        {rest.map((p) => <PostCard post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Want this working for your business?"
+    text="We write the field notes and we build the systems. Book a free discovery call and let's talk about your site, your rankings, and your next 90 days."
+  />
+</BaseLayout>
+
+<style>
+  .blog-feature { max-width: 940px; }
+</style>

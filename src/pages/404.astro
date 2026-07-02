@@ -5,27 +5,27 @@ import { nav } from "../data/site";
 ---
 
 <BaseLayout
-  title="Signal Lost — 404 | Forward Observations Group"
-  description="This channel is gone. Reacquire the signal from one of the frequencies below."
+  title="Page Not Found — 404 | Digital Horizon"
+  description="That page is off the map. Head back to the horizon and pick a direction below."
   noindex={true}
 >
   <section class="section notfound scanlines">
     <div class="grid-floor"></div>
     <div class="container text-center nf-inner">
       <p class="nf-code display glitch" data-text="404">404</p>
-      <span class="tag is-red nf-tag"><span class="status-dot"></span> SIGNAL LOST // 信号消失</span>
-      <h1 class="h1 display mt-3">This channel is gone.</h1>
+      <span class="tag is-red nf-tag"><span class="status-dot"></span> OFF THE MAP</span>
+      <h1 class="h1 display mt-3">This page is over the horizon.</h1>
       <p class="lead mx-auto mt-2" style="max-width:48ch">
-        Deplatformed, moved, or never existed. Happens more than you'd think.
-        Reacquire the signal from one of the frequencies below.
+        The page you're after moved or never existed. Let's get you back to
+        something useful — pick a direction below.
       </p>
       <div class="btn-group nf-cta">
-        <a href="/" class="btn btn-primary btn-lg"><Icon name="crosshair" size={18} /> Return to HQ</a>
-        <a href="/broadcast/" class="btn btn-ghost btn-lg"><Icon name="play" size={18} /> Watch Live</a>
+        <a href="/" class="btn btn-primary btn-lg"><Icon name="compass" size={18} /> Back to Home</a>
+        <a href="/contact/" class="btn btn-ghost btn-lg"><Icon name="rocket" size={18} /> Start a Project</a>
       </div>
       <nav class="nf-links mono" aria-label="Site sections">
         {nav.map((item) => (
-          <a href={item.href}>{item.label} <span class="jp">{item.jp}</span></a>
+          <a href={item.href}>{item.label}</a>
         ))}
       </nav>
     </div>
@@ -34,33 +34,23 @@ import { nav } from "../data/site";
 
 <style>
   .notfound {
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     padding-block: clamp(4rem, 12vw, 8rem);
-    background: radial-gradient(700px 400px at 50% 0%, rgba(255, 35, 64, 0.14), transparent 60%), var(--void);
+    background: radial-gradient(700px 400px at 50% 0%, rgba(255, 90, 60, 0.14), transparent 60%), var(--void);
   }
   .nf-inner { position: relative; z-index: 3; }
   .nf-code {
     font-family: var(--font-num);
     font-size: clamp(5rem, 20vw, 12rem);
-    line-height: 1;
-    color: var(--ink);
-    letter-spacing: 0.05em;
+    line-height: 1; color: var(--ink); letter-spacing: 0.05em;
   }
   .nf-tag { margin-top: 1rem; }
   .nf-cta { justify-content: center; margin-top: 2rem; }
-  .nf-links {
-    margin-top: 2.6rem;
-    display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
-  }
+  .nf-links { margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
   .nf-links a {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--body);
-    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.5rem 1rem; border: 1px solid var(--line); background: var(--surface);
+    color: var(--body); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
   }
   .nf-links a:hover { border-color: var(--red); color: #fff; }
-  .nf-links .jp { color: var(--amber); }
 </style>

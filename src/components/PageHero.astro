@@ -3,13 +3,12 @@ import Marquee from "./Marquee.astro";
 import Breadcrumbs from "./Breadcrumbs.astro";
 interface Props {
   eyebrow: string;
-  jp?: string;
   title: string;
   lead?: string;
   variant?: "amber" | "red" | "cyan";
   crumbs?: { name: string; url: string }[];
 }
-const { eyebrow, jp, title, lead, variant = "red", crumbs } = Astro.props;
+const { eyebrow, title, lead, variant = "red", crumbs } = Astro.props;
 ---
 
 <section class="page-hero scanlines">
@@ -17,7 +16,7 @@ const { eyebrow, jp, title, lead, variant = "red", crumbs } = Astro.props;
   <div class="container page-hero-inner">
     {crumbs && <Breadcrumbs crumbs={crumbs} />}
     <span class:list={["eyebrow", { "is-red": variant === "red", "is-cyan": variant === "cyan" }]}>
-      {eyebrow}{jp && <span class="jp hero-jp">{jp}</span>}
+      {eyebrow}
     </span>
     <h1 class="h1 display glitch" data-text={title}>{title}</h1>
     {lead && <p class="lead mt-2">{lead}</p>}
@@ -31,7 +30,7 @@ const { eyebrow, jp, title, lead, variant = "red", crumbs } = Astro.props;
     overflow: hidden;
     border-bottom: 1px solid var(--line);
     background:
-      radial-gradient(700px 340px at 20% 0%, rgba(255, 35, 64, 0.12), transparent 60%),
+      radial-gradient(700px 340px at 20% 0%, rgba(255, 90, 60, 0.12), transparent 60%),
       var(--void);
   }
   .page-hero-inner {
@@ -41,5 +40,4 @@ const { eyebrow, jp, title, lead, variant = "red", crumbs } = Astro.props;
   }
   .page-hero h1 { margin-top: 0.9rem; max-width: 22ch; }
   .page-hero .lead { max-width: 58ch; }
-  .hero-jp { margin-left: 0.6rem; opacity: 0.85; letter-spacing: 0.1em; }
 </style>

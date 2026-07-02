@@ -1,77 +1,61 @@
 ---
 /**
- * Hidden easter eggs — an homage within the homage.
- *  · Konami code (↑ ↑ ↓ ↓ ← → ← → B A) → NERV-style "VAULT UNLOCKED" takeover.
- *  · Type "AKIRA" anywhere → Neo-Tokyo red glitch flash ("TETSUO!!").
- *  · A styled console banner drops a cryptic hint for the curious.
- * All are hidden by default, keyboard-dismissable (Esc), ignore typing in
- * form fields, and honor prefers-reduced-motion (no strobe / photosensitivity).
+ * Hidden easter egg — a wink for the curious.
+ *  · Konami code (↑ ↑ ↓ ↓ ← → ← → B A) → a "HORIZON UNLOCKED" reveal with a
+ *    priority-audit perk.
+ *  · A styled console banner drops a cryptic hint for developers who peek.
+ * Hidden by default, keyboard-dismissable (Esc), ignores typing in form
+ * fields, and honors prefers-reduced-motion.
  */
 ---
 
-<!-- Konami reveal: NERV emergency / VAULT UNLOCKED -->
-<div id="ee-alert" class="ee-alert" hidden role="dialog" aria-modal="true" aria-label="Classified transmission unlocked">
+<div id="ee-alert" class="ee-alert" hidden role="dialog" aria-modal="true" aria-label="Secret perk unlocked">
   <div class="ee-backdrop"></div>
   <div class="ee-panel scanlines" role="document">
-    <div class="ee-hazard"></div>
+    <div class="ee-sunbar"></div>
     <div class="ee-head mono">
-      <span class="ee-warn">警告 // PRIORITY TRANSMISSION</span>
+      <span class="ee-warn">◆ PRIORITY ACCESS</span>
       <button type="button" class="ee-x mono" aria-label="Close">[ ESC ]</button>
     </div>
-    <p class="ee-eyebrow mono">SIGNAL BREACH DETECTED · CLEARANCE OVERRIDE ACCEPTED</p>
-    <h2 class="ee-title display glitch" data-text="VAULT UNLOCKED">VAULT UNLOCKED</h2>
-    <pre class="ee-art mono" aria-hidden="true">      ___
-   .-'   '-.      ▲ AT FIELD BREACHED
-  /  o   o  \     ▲ PATTERN: OBSERVER
- |    ▼▼▼    |    ▲ SYNC RATE: 100%
-  \  \___/  /
-   '-.___.-'
+    <p class="ee-eyebrow mono">SECRET CHANNEL UNLOCKED</p>
+    <h2 class="ee-title display glitch" data-text="HORIZON UNLOCKED">HORIZON UNLOCKED</h2>
+    <pre class="ee-art mono" aria-hidden="true">        \   |   /
+      .-''''''''-.       HORIZON: ACQUIRED
+  ~~~-(  sunrise  )-~~~  STATUS: RANKING
+      '-........-'
 </pre>
     <p class="ee-body">
-      You went <b class="text-red">up-up-down-down</b> when everyone else just scrolled.
-      That's the whole job — look where nobody's looking. Consider yourself
-      cleared for the forward observation post.
+      You found the old <b class="text-amber">konami code</b>. Turns out people who
+      look a little closer tend to rank a little higher, too. So here's a perk:
+      mention this and your free discovery call comes with a no-strings website
+      <b class="text-ink"> + SEO audit</b> on the house.
     </p>
     <div class="ee-code mono">
-      <span class="dim">OBSERVER CLEARANCE CODE //</span>
-      <span class="ee-code-val">前線-EVA-01</span>
+      <span class="dim">PRIORITY CODE //</span>
+      <span class="ee-code-val">HORIZON-AUDIT</span>
     </div>
-    <p class="ee-foot mono">前線観測 · EYES FORWARD OF THE LINE · <span class="ee-link" data-vault>ENTER THE VAULT →</span></p>
+    <p class="ee-foot mono">ONE HORIZON · <span class="ee-link" data-go>CLAIM IT — START A PROJECT →</span></p>
   </div>
-</div>
-
-<!-- AKIRA flash -->
-<div id="ee-akira" class="ee-akira" hidden aria-hidden="true">
-  <span class="ee-akira-jp jp">鉄雄</span>
-  <span class="ee-akira-en display">TETSUO!!</span>
 </div>
 
 <style>
   .ee-alert {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: grid;
-    place-items: center;
-    padding: 1.2rem;
+    position: fixed; inset: 0; z-index: 9999;
+    display: grid; place-items: center; padding: 1.2rem;
   }
   .ee-alert[hidden] { display: none; }
-  .ee-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(2, 3, 6, 0.86);
-    backdrop-filter: blur(6px);
-  }
+  .ee-backdrop { position: absolute; inset: 0; background: rgba(2, 3, 6, 0.86); backdrop-filter: blur(6px); }
   .ee-panel {
     position: relative;
     width: min(560px, 100%);
     background:
-      radial-gradient(120% 80% at 50% 0%, rgba(255, 35, 64, 0.14), transparent 60%),
+      radial-gradient(120% 80% at 50% 0%, rgba(255, 90, 60, 0.14), transparent 60%),
       var(--surface);
     border: 1px solid var(--red);
-    box-shadow: 0 0 60px -10px rgba(255, 35, 64, 0.6);
+    box-shadow: 0 0 60px -10px rgba(255, 90, 60, 0.6);
     padding: 0 clamp(1.3rem, 4vw, 2rem) clamp(1.3rem, 4vw, 2rem);
     overflow: hidden;
-    animation: ee-in 0.35s var(--ease) both, ee-pulse 1.4s ease-in-out 0.35s infinite;
+    animation: ee-in 0.35s var(--ease) both;
   }
   .ee-panel::before, .ee-panel::after {
     content: ""; position: absolute; width: 16px; height: 16px;
@@ -80,28 +64,21 @@
   .ee-panel::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
   .ee-panel::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
   @keyframes ee-in { from { opacity: 0; transform: translateY(14px) scale(0.98); } }
-  @keyframes ee-pulse { 50% { box-shadow: 0 0 90px -6px rgba(255, 35, 64, 0.85); } }
 
-  .ee-hazard {
-    height: 6px; margin: 0 -2rem 1.2rem;
-    background: repeating-linear-gradient(-45deg, var(--hazard) 0 14px, #0a0a0a 14px 28px);
+  .ee-sunbar {
+    height: 5px; margin: 0 -2rem 1.2rem;
+    background: linear-gradient(90deg, var(--amber), var(--red), var(--violet));
   }
-  .ee-head {
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 0.7rem; letter-spacing: 0.14em;
-  }
-  .ee-warn { color: var(--red-bright); }
+  .ee-head { display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; letter-spacing: 0.14em; }
+  .ee-warn { color: var(--amber-bright); }
   .ee-x {
     background: none; border: 1px solid var(--line-strong); color: var(--muted);
     padding: 0.3rem 0.5rem; cursor: pointer; letter-spacing: 0.1em;
   }
   .ee-x:hover { color: #fff; border-color: var(--red); }
-  .ee-eyebrow { margin-top: 1rem; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--amber); text-transform: uppercase; }
+  .ee-eyebrow { margin-top: 1rem; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--cyan); text-transform: uppercase; }
   .ee-title { font-size: clamp(2.2rem, 8vw, 3.4rem); margin-top: 0.4rem; text-transform: uppercase; }
-  .ee-art {
-    margin-top: 1rem; font-size: 0.72rem; line-height: 1.35;
-    color: var(--lime); white-space: pre; overflow-x: auto;
-  }
+  .ee-art { margin-top: 1rem; font-size: 0.72rem; line-height: 1.35; color: var(--lime); white-space: pre; overflow-x: auto; }
   .ee-body { margin-top: 1rem; color: var(--body); font-size: 0.95rem; }
   .ee-code {
     margin-top: 1.2rem; padding: 0.8rem 1rem;
@@ -114,40 +91,8 @@
   .ee-link { color: var(--red-bright); cursor: pointer; }
   .ee-link:hover { text-decoration: underline; }
 
-  /* AKIRA flash */
-  .ee-akira {
-    position: fixed; inset: 0; z-index: 9998;
-    display: grid; place-items: center;
-    pointer-events: none;
-    background: radial-gradient(60% 60% at 50% 50%, rgba(255, 35, 64, 0.5), rgba(2, 3, 6, 0.75));
-    animation: ee-akira-fade 1.6s ease-out forwards;
-  }
-  .ee-akira[hidden] { display: none; }
-  .ee-akira-jp {
-    position: absolute;
-    font-size: clamp(8rem, 40vw, 26rem);
-    color: rgba(255, 35, 64, 0.9);
-    text-shadow: 0 0 60px rgba(255, 35, 64, 0.9);
-    animation: ee-akira-zoom 1.6s ease-out forwards;
-  }
-  .ee-akira-en {
-    position: relative;
-    font-size: clamp(2rem, 9vw, 5rem);
-    color: #fff;
-    letter-spacing: 0.1em;
-    text-shadow: 3px 0 var(--cyan), -3px 0 var(--red);
-    animation: ee-akira-glitch 0.18s steps(2) 0s 6;
-  }
-  @keyframes ee-akira-fade { 0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
-  @keyframes ee-akira-zoom { from { transform: scale(0.6); opacity: 0; } 30% { opacity: 0.9; } to { transform: scale(1.15); opacity: 0; } }
-  @keyframes ee-akira-glitch { 0% { transform: translate(0, 0); } 25% { transform: translate(-3px, 2px); } 50% { transform: translate(3px, -2px); } 75% { transform: translate(-2px, -1px); } }
-
-  /* Photosensitivity / motion safety: no strobe, no pulse, gentle static reveal */
   @media (prefers-reduced-motion: reduce) {
     .ee-panel, .ee-title::before, .ee-title::after { animation: none !important; }
-    .ee-akira { animation: ee-akira-static 1.6s linear forwards; background: rgba(2, 3, 6, 0.85); }
-    .ee-akira-jp, .ee-akira-en { animation: none; text-shadow: 0 0 30px rgba(255,35,64,0.6); }
-    @keyframes ee-akira-static { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
   }
 </style>
 
@@ -155,77 +100,52 @@
   (() => {
     const doc = document;
     const alertEl = doc.getElementById("ee-alert");
-    const akiraEl = doc.getElementById("ee-akira");
-    if (!alertEl || !akiraEl) return;
+    if (!alertEl) return;
 
     const closeBtn = alertEl.querySelector(".ee-x") as HTMLButtonElement | null;
-    const vaultLink = alertEl.querySelector("[data-vault]") as HTMLElement | null;
+    const goLink = alertEl.querySelector("[data-go]") as HTMLElement | null;
     let lastFocus: HTMLElement | null = null;
 
     const konami = ["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];
     let ki = 0;
-    let buffer = "";
-    let akiraTimer: number | undefined;
 
     const isTyping = (t: EventTarget | null) => {
       const el = t as HTMLElement | null;
       return !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT" || el.isContentEditable);
     };
 
-    const openAlert = () => {
+    const open = () => {
       lastFocus = doc.activeElement as HTMLElement | null;
       alertEl.removeAttribute("hidden");
       doc.documentElement.style.overflow = "hidden";
       closeBtn?.focus();
     };
-    const closeAlert = () => {
+    const close = () => {
       alertEl.setAttribute("hidden", "");
       doc.documentElement.style.overflow = "";
       lastFocus?.focus?.();
     };
 
-    const flashAkira = () => {
-      akiraEl.removeAttribute("hidden");
-      // restart the animation
-      void (akiraEl as HTMLElement).offsetWidth;
-      window.clearTimeout(akiraTimer);
-      akiraTimer = window.setTimeout(() => akiraEl.setAttribute("hidden", ""), 1650);
-    };
-
-    closeBtn?.addEventListener("click", closeAlert);
-    alertEl.querySelector(".ee-backdrop")?.addEventListener("click", closeAlert);
-    vaultLink?.addEventListener("click", () => { closeAlert(); window.location.href = "/broadcast/"; });
+    closeBtn?.addEventListener("click", close);
+    alertEl.querySelector(".ee-backdrop")?.addEventListener("click", close);
+    goLink?.addEventListener("click", () => { close(); window.location.href = "/contact/"; });
 
     doc.addEventListener("keydown", (e) => {
-      // Esc always closes the alert if open
-      if (e.key === "Escape" && !alertEl.hasAttribute("hidden")) { closeAlert(); return; }
+      if (e.key === "Escape" && !alertEl.hasAttribute("hidden")) { close(); return; }
       if (isTyping(e.target)) return;
-
       const key = e.key.toLowerCase();
-
-      // Konami
       if (key === konami[ki]) {
         ki++;
-        if (ki === konami.length) { ki = 0; openAlert(); }
+        if (ki === konami.length) { ki = 0; open(); }
       } else {
         ki = key === konami[0] ? 1 : 0;
       }
-
-      // AKIRA (rolling buffer of letters)
-      if (/^[a-z]$/.test(key)) {
-        buffer = (buffer + key).slice(-5);
-        if (buffer === "akira") { buffer = ""; flashAkira(); }
-      }
     });
 
-    // Console hint for the curious
     try {
-      const s1 = "color:#ff2340;font:700 20px monospace";
-      const s2 = "color:#22e0ff;font:12px monospace";
-      const s3 = "color:#ff9d00;font:12px monospace";
-      console.log("%c⬡ FORWARD//OBSERVATIONS", s1);
-      console.log("%c// The signal doesn't die. Some transmissions only open for those who know the old codes.", s2);
-      console.log("%c// ↑ ↑ ↓ ↓ ← → ← → B A   ·   or just type a certain 1988 city's favorite name.", s3);
+      console.log("%c◆ DIGITAL HORIZON", "color:#ff5a3c;font:700 20px monospace");
+      console.log("%c// Fast site, clean schema, no dark patterns. Built by people who read the source.", "color:#22e0ff;font:12px monospace");
+      console.log("%c// Some visitors look closer than others.  ↑ ↑ ↓ ↓ ← → ← → B A", "color:#ff9d00;font:12px monospace");
     } catch (_) { /* no console */ }
   })();
 </script>

@@ -9,18 +9,18 @@ interface Props {
 }
 const {
   items = allFaqs,
-  heading = "Intel // FAQ",
-  intro = "Answers to the questions the comment section keeps asking. Still curious? Open a channel.",
+  heading = "Questions we get a lot",
+  intro = "Straight answers on pricing, timelines, and how we work — no jargon. Still curious? Start a conversation.",
 } = Astro.props;
 ---
 
 <section class="section" id="faq">
   <div class="container faq-wrap">
     <div class="section-head">
-      <span class="eyebrow is-cyan">FAQ <span class="jp">質問</span></span>
+      <span class="eyebrow is-cyan">FAQ</span>
       <h2 class="h2 display mt-1">{heading}</h2>
       <p class="lead mt-2">{intro}</p>
-      <div class="rule-label mt-4">CLASSIFICATION // OPEN SOURCE</div>
+      <div class="rule-label mt-4">NO JARGON · STRAIGHT ANSWERS</div>
     </div>
     <div class="faq-list">
       {items.map((f, i) => (

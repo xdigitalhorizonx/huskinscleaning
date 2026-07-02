@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Marquee from "../../components/Marquee.astro";
+import Icon from "../../components/Icon.astro";
+import { site, posts } from "../../data/site";
+import { breadcrumbSchema, articleSchema } from "../../lib/schema";
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post: p } = Astro.props;
+const idx = posts.findIndex((x) => x.slug === p.slug);
+const next = posts[(idx + 1) % posts.length];
+
+const title = `${p.title} | ${site.brand}`;
+const url = `/blog/${p.slug}/`;
+const date = new Date(p.date + "T00:00:00Z").toLocaleDateString("en-US", {
+  year: "numeric", month: "long", day: "numeric", timeZone: "UTC",
+});
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog/" },
+  { name: p.title, url },
+];
+const schema = [
+  breadcrumbSchema(crumbs),
+  articleSchema({ title: p.title, description: p.excerpt, url, datePublished: p.date }),
+];
+---
+
+<BaseLayout title={title} description={p.excerpt} canonical={url} schema={schema}>
+  <article>
+    <header class="article-hero scanlines">
+      <div class="grid-floor"></div>
+      <div class="container container-narrow article-hero-inner">
+        <Breadcrumbs crumbs={crumbs} />
+        <div class="art-tags mono">
+          <span class="tag is-cyan">{p.category}</span>
+          <span class="art-meta">{date} · {p.readTime}</span>
+        </div>
+        <h1 class="h1 display art-title">{p.title}</h1>
+        <p class="art-excerpt lead">{p.excerpt}</p>
+      </div>
+      <Marquee />
+    </header>
+
+    <div class="section">
+      <div class="container container-narrow prose">
+        {p.body.map((para) => <p class="art-p">{para}</p>)}
+        <div class="art-cta panel is-cyan">
+          <div>
+            <h3 class="h3">Want this handled for you?</h3>
+            <p class="muted mt-1">We build the websites, run the SEO, and write the content for Northern Nevada service businesses.</p>
+          </div>
+          <a href="/contact/" class="btn btn-primary"><Icon name="rocket" size={16} /> Start a Project</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-tight art-foot scanlines">
+      <div class="container art-foot-inner">
+        <a href="/blog/" class="link-arrow"><Icon name="arrow" size={16} class="flip" /> All Articles</a>
+        <a href={`/blog/${next.slug}/`} class="next-card panel panel-hover is-cyan">
+          <span class="next-label mono">NEXT ARTICLE //</span>
+          <span class="next-title">{next.title}</span>
+          <span class="next-arrow"><Icon name="arrow" size={20} /></span>
+        </a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-hero {
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: radial-gradient(700px 340px at 25% 0%, rgba(34, 224, 255, 0.1), transparent 60%), var(--void);
+  }
+  .article-hero-inner { position: relative; z-index: 3; padding-block: clamp(2.4rem, 6vw, 4rem) clamp(1.6rem, 4vw, 2.5rem); }
+  .art-tags { display: flex; align-items: center; gap: 0.9rem; }
+  .art-meta { font-size: 0.66rem; letter-spacing: 0.14em; color: var(--dim); text-transform: uppercase; }
+  .art-title { margin-top: 1rem; max-width: 24ch; }
+  .art-excerpt { margin-top: 1.2rem; max-width: 60ch; color: var(--muted); }
+
+  .prose { color: var(--body); }
+  .art-p { margin-top: 1.4rem; font-size: 1.08rem; line-height: 1.8; }
+  .art-p:first-child {
+    font-family: var(--font-display); font-size: 1.3rem; font-weight: 500;
+    line-height: 1.5; color: var(--ink); margin-top: 0;
+  }
+  .art-cta {
+    margin-top: 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .art-foot { border-top: 1px solid var(--line); background: var(--void-2); }
+  .art-foot-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+  }
+  :global(.link-arrow .flip) { transform: rotate(180deg); }
+  .next-card {
+    display: flex; align-items: center; gap: 1rem;
+    min-width: min(420px, 100%); text-decoration: none;
+  }
+  .next-label { color: var(--cyan); font-size: 0.68rem; letter-spacing: 0.14em; }
+  .next-title { font-family: var(--font-display); font-weight: 600; color: var(--ink); flex: 1; }
+  .next-arrow { color: var(--cyan); }
+</style>

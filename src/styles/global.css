@@ -1,9 +1,8 @@
 /* ==========================================================================
-   FORWARD OBSERVATIONS GROUP — "GONZO-CYBER" DESIGN SYSTEM
-   An homage to late-80s/90s mecha & cyberpunk anime (Evangelion NERV HUDs,
-   Akira's neon Neo-Tokyo). Void black, NERV amber, Akira red, cyan signage,
-   scanlines, glitch, and targeting-reticle panels. All effects are CSS/SVG —
-   no copyrighted artwork, fast, and fully self-contained.
+   DIGITAL HORIZON — DESIGN SYSTEM
+   A dark, high-tech "digital sunrise" system: void night sky, sunrise coral,
+   horizon amber, cyan signage, scanlines, glitch, and HUD/console panels.
+   All effects are CSS/SVG — fast, and fully self-contained.
    ========================================================================== */
 
 /* ----- Design tokens ----------------------------------------------------- */
@@ -17,16 +16,16 @@
   --line: rgba(148, 163, 184, 0.16);
   --line-strong: rgba(148, 163, 184, 0.3);
 
-  /* Signal colors */
-  --red: #ff2340;            /* Akira red — primary energy / danger */
-  --red-bright: #ff4d63;
-  --red-deep: #b3001f;
-  --amber: #ff9d00;          /* NERV amber — HUD framing */
+  /* Signal colors — a digital sunrise over a night horizon */
+  --red: #ff5a3c;            /* sunrise coral — primary energy / CTAs */
+  --red-bright: #ff7a5e;
+  --red-deep: #c93a1e;
+  --amber: #ff9d00;          /* horizon amber — HUD framing */
   --amber-bright: #ffb733;
-  --cyan: #22e0ff;           /* neon signage */
+  --cyan: #22e0ff;           /* sky cyan — neon signage */
   --cyan-bright: #7af0ff;
-  --violet: #a06bff;         /* Eva purple */
-  --lime: #4dff9e;           /* terminal / LCL green */
+  --violet: #a06bff;         /* dusk violet */
+  --lime: #4dff9e;           /* terminal green */
   --hazard: #ffd400;         /* warning yellow */
 
   /* Text */
@@ -60,7 +59,7 @@
   --radius-lg: 6px;
 
   /* Glow shadows */
-  --glow-red: 0 0 22px rgba(255, 35, 64, 0.55), 0 0 4px rgba(255, 35, 64, 0.9);
+  --glow-red: 0 0 22px rgba(255, 90, 60, 0.55), 0 0 4px rgba(255, 90, 60, 0.9);
   --glow-amber: 0 0 20px rgba(255, 157, 0, 0.5), 0 0 3px rgba(255, 157, 0, 0.8);
   --glow-cyan: 0 0 22px rgba(34, 224, 255, 0.5), 0 0 4px rgba(34, 224, 255, 0.85);
 
@@ -96,7 +95,7 @@ body::before {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(1100px 700px at 12% -5%, rgba(255, 35, 64, 0.1), transparent 60%),
+    radial-gradient(1100px 700px at 12% -5%, rgba(255, 90, 60, 0.1), transparent 60%),
     radial-gradient(1000px 800px at 105% 8%, rgba(34, 224, 255, 0.07), transparent 55%),
     radial-gradient(900px 900px at 50% 120%, rgba(160, 107, 255, 0.08), transparent 60%),
     var(--void);
@@ -341,7 +340,7 @@ p { text-wrap: pretty; }
   border: 1px solid var(--line);
   background: rgba(148, 163, 184, 0.04);
 }
-.tag.is-red { color: var(--red-bright); border-color: rgba(255, 35, 64, 0.4); background: rgba(255, 35, 64, 0.07); }
+.tag.is-red { color: var(--red-bright); border-color: rgba(255, 90, 60, 0.4); background: rgba(255, 90, 60, 0.07); }
 .tag.is-amber { color: var(--amber-bright); border-color: rgba(255, 157, 0, 0.4); background: rgba(255, 157, 0, 0.07); }
 .tag.is-cyan { color: var(--cyan); border-color: rgba(34, 224, 255, 0.4); background: rgba(34, 224, 255, 0.07); }
 .tag.is-lime { color: var(--lime); border-color: rgba(77, 255, 158, 0.4); background: rgba(77, 255, 158, 0.07); }
@@ -392,7 +391,7 @@ p { text-wrap: pretty; }
   transform: translateY(-4px);
   border-color: var(--line-strong);
   background:
-    linear-gradient(180deg, rgba(255, 35, 64, 0.05), transparent 45%),
+    linear-gradient(180deg, rgba(255, 90, 60, 0.05), transparent 45%),
     var(--surface-2);
 }
 
@@ -461,7 +460,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: -50% -50% -2% -50%;
   background-image:
-    linear-gradient(rgba(255, 35, 64, 0.5) 1px, transparent 1px),
+    linear-gradient(rgba(255, 90, 60, 0.5) 1px, transparent 1px),
     linear-gradient(90deg, rgba(34, 224, 255, 0.35) 1px, transparent 1px);
   background-size: 46px 46px;
   transform: rotateX(72deg);

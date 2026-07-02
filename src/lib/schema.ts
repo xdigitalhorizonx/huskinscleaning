@@ -1,32 +1,55 @@
 /**
- * schema.org JSON-LD builders for Forward Observations Group.
- * Emits an Organization + WebSite graph site-wide, plus per-page helpers
- * for breadcrumbs and articles (dispatches).
+ * schema.org JSON-LD builders for Digital Horizon.
+ * Emits a LocalBusiness (ProfessionalService) + WebSite graph site-wide, plus
+ * per-page helpers for breadcrumbs, services, and blog articles.
  */
-import { site } from "../data/site";
+import { site, services, locations, faqs } from "../data/site";
 
 const ORG_ID = `${site.url}/#organization`;
 
-/** Core Organization entity, referenced by other nodes. */
+/** Core LocalBusiness entity, referenced by other nodes. */
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["ProfessionalService", "LocalBusiness"],
     "@id": ORG_ID,
     name: site.brand,
-    alternateName: site.short,
     description: site.description,
     url: site.url,
     email: site.email,
+    telephone: site.phone.e164,
     slogan: site.tagline,
+    priceRange: "$$",
     logo: `${site.url}/icon-512.png`,
     image: `${site.url}/og-image.png`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.geo.latitude,
+      longitude: site.geo.longitude,
+    },
+    areaServed: locations.map((l) => ({ "@type": "City", name: l.name })),
+    hasMap: site.maps,
+    makesOffer: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        url: `${site.url}/services/#${s.slug}`,
+      },
+    })),
     sameAs: [
-      site.social.youtube,
-      site.social.instagram,
-      site.social.spotify,
       site.social.x,
-      site.social.tiktok,
+      site.social.facebook,
+      site.social.instagram,
+      site.social.nextdoor,
     ],
   };
 }
@@ -58,7 +81,7 @@ export function breadcrumbSchema(crumbs: { name: string; url: string }[]) {
   };
 }
 
-/** Article schema for a dispatch. */
+/** Article schema for a blog post. */
 export function articleSchema(a: {
   title: string;
   description: string;
@@ -78,7 +101,7 @@ export function articleSchema(a: {
 }
 
 /** FAQPage schema — powers the FAQ rich result. */
-export function faqSchema(items: { question: string; answer: string }[]) {
+export function faqSchema(items = faqs) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

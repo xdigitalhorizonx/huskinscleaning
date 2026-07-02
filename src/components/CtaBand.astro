@@ -6,8 +6,8 @@ interface Props {
   text?: string;
 }
 const {
-  heading = "Get on the net before they cut it again.",
-  text = "New transmissions, field dispatches, and limited supply drops — straight to your channel. No tower lasts forever; mirror what matters.",
+  heading = "Ready to find your horizon?",
+  text = "Free 30-minute discovery call. We'll talk about what you're trying to grow, what's getting in the way, and whether we're the right team to help — no pitch deck.",
 } = Astro.props;
 ---
 
@@ -16,14 +16,14 @@ const {
   <div class="container">
     <div class="cta-panel panel is-red">
       <div class="cta-copy">
-        <span class="eyebrow is-red">Handoff <span class="jp">受信</span></span>
+        <span class="eyebrow is-red">Let's talk</span>
         <h2 class="h2 display mt-1">{heading}</h2>
         <p class="lead mt-2">{text}</p>
       </div>
       <div class="cta-actions">
-        <a href="/broadcast/" class="btn btn-primary btn-lg"><Icon name="play" size={18} /> Watch Live</a>
-        <a href={site.social.spotify} target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><Icon name="headphones" size={18} /> Subscribe</a>
-        <p class="cta-note mono"><span class="status-dot"></span> {site.callsign} · {site.tagline.toUpperCase()}</p>
+        <a href="/contact/" class="btn btn-primary btn-lg"><Icon name="rocket" size={18} /> Start a Project</a>
+        <a href={site.phone.href} class="btn btn-ghost btn-lg"><Icon name="phone" size={18} /> Call {site.phone.display}</a>
+        <p class="cta-note mono"><span class="status-dot"></span> {site.tagline.toUpperCase()}</p>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ const {
     position: relative;
     z-index: 3;
     background:
-      linear-gradient(180deg, rgba(255, 35, 64, 0.06), transparent 50%),
+      linear-gradient(180deg, rgba(255, 90, 60, 0.06), transparent 50%),
       var(--surface);
   }
   .cta-copy .lead { max-width: 46ch; }

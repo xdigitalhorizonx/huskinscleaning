@@ -5,76 +5,68 @@ import SectionHead from "../components/SectionHead.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Icon from "../components/Icon.astro";
-import { site, values, faqs } from "../data/site";
+import { site, values, industries, faqs } from "../data/site";
 import { breadcrumbSchema, faqSchema } from "../lib/schema";
 
-const title = `The Unit — About Forward Observations Group`;
+const title = `About — ${site.brand} | Northern Nevada Web & Marketing`;
 const description =
-  "Forward Observations Group is a veteran media collective built on one discipline: see it first, then tell the truth about it. Meet the unit behind the signal.";
+  "Digital Horizon is a Carson City team building websites, SEO, and marketing systems for Northern Nevada service and trade businesses — local knowledge, fixed scope, real results.";
 const crumbs = [
   { name: "Home", url: "/" },
-  { name: "The Unit", url: "/about/" },
+  { name: "About", url: "/about/" },
 ];
 const schema = [breadcrumbSchema(crumbs), faqSchema(faqs)];
-
-const signalLog = [
-  { v: "1.0", state: "TERMINATED", tone: "dead" },
-  { v: "2.0", state: "TERMINATED", tone: "dead" },
-  { v: "3.0", state: "STRIKED", tone: "dead" },
-  { v: "3.6", state: "LIVE", tone: "live" },
-  { v: "VAULT", state: "PERMANENT", tone: "vault" },
-];
 ---
 
 <BaseLayout title={title} description={description} schema={schema}>
   <PageHero
-    eyebrow="The Unit" jp="部隊" variant="amber"
-    title="The Unit"
-    lead="A veteran media collective built on one discipline — see it first, then tell the truth about it."
+    eyebrow="About" variant="amber"
+    title="Systems, not brochures."
+    lead="Digital Horizon is a Carson City team that builds websites, SEO, and marketing that actually bring Northern Nevada businesses more of the work they want."
     crumbs={crumbs}
   />
 
-  <!-- Story + dossier -->
+  <!-- Story + studio card -->
   <section class="section">
     <div class="container story">
       <div class="story-copy">
         <SectionHead
-          eyebrow="Who's Behind the Lens" jp="観測手" variant="red"
-          title="Operators, journalists, artists, and assorted degenerates."
+          eyebrow="Who we are" variant="red"
+          title="Local, plain-spoken, and allergic to fluff."
         />
         <div class="flow mt-3">
           <p class="lead">
-            The oldest job on any battlefield is watching. Long before the tools and
-            the noise, someone had to go forward of the line, find high ground, and
-            report — honestly — exactly what they saw. Everything downstream depends
-            on that one clean observation.
+            A pretty website nobody finds and nobody books from is a very expensive
+            brochure. We build the opposite: sites that load fast, rank on Google,
+            and turn visitors into booked work — backed by SEO and marketing that
+            compound month over month.
           </p>
           <p>
-            {site.brand} carries that job into the present. We point cameras where the
-            map goes grey, run long-form radio that doesn't flinch, and keep the record
-            when the platforms decide we never existed. It's gonzo, it's granular, and
-            it's stubbornly first-person — because the observation was always the point.
+            We're based in Carson City and we build for the businesses that keep
+            Northern Nevada running — the plumbers, roofers, landscapers, shops, and
+            offices from Reno to Tahoe. Local knowledge is a real advantage: we know
+            the seasons, the competition, and the search terms your customers
+            actually type.
           </p>
           <p>
-            We're not a newsroom and we're not a brand consultancy. We're a unit: a
-            loose, loyal formation of people who'd rather show you the grey zone than
-            explain it to you from a desk.
+            We're not an agency that disappears after launch or hides the ball behind
+            jargon. We start with one well-scoped project, we show you the data, and
+            we earn the monthly partnership by making the numbers move.
           </p>
         </div>
       </div>
 
-      <aside class="dossier panel is-cyan mono">
-        <div class="dossier-head">
-          <span><span class="status-dot"></span> UNIT DOSSIER</span>
-          <span class="text-amber jp">機密</span>
+      <aside class="studio panel is-cyan mono">
+        <div class="studio-head">
+          <span><span class="status-dot"></span> STUDIO PROFILE</span>
         </div>
         <dl>
-          <div><dt>CALLSIGN</dt><dd class="text-cyan">{site.callsign}</dd></div>
-          <div><dt>ROLE</dt><dd>FORWARD OBSERVER</dd></div>
-          <div><dt>DOCTRINE</dt><dd>OBSERVE · REPORT · ADVANCE</dd></div>
-          <div><dt>CHANNELS</dt><dd>MULTIPLE / MIRRORED</dd></div>
-          <div><dt>STATUS</dt><dd class="text-lime">● TRANSMITTING</dd></div>
-          <div><dt>MOTTO</dt><dd class="jp text-amber">{site.mottoJp}</dd></div>
+          <div><dt>BASED IN</dt><dd class="text-cyan">Carson City, NV</dd></div>
+          <div><dt>SERVES</dt><dd>Northern Nevada</dd></div>
+          <div><dt>DISCIPLINES</dt><dd>WEB · SEO · MARKETING</dd></div>
+          <div><dt>ENGAGEMENT</dt><dd>FIXED SCOPE → PARTNERSHIP</dd></div>
+          <div><dt>STATUS</dt><dd class="text-lime">● NOW BOOKING</dd></div>
+          <div><dt>MOTTO</dt><dd class="text-amber">ONE HORIZON</dd></div>
         </dl>
       </aside>
     </div>
@@ -85,9 +77,9 @@ const signalLog = [
     <div class="grid-floor"></div>
     <div class="container container-narrow text-center">
       <p class="pull-quote display">
-        “The most tactical skill on the battlefield is <span class="text-red">honesty</span>.”
+        “We don't sell channels — we build a <span class="text-amber">system.</span>”
       </p>
-      <p class="pull-attr mono mt-2">— FIELD DOCTRINE // {site.mottoJp}</p>
+      <p class="pull-attr mono mt-2">— HOW DIGITAL HORIZON WORKS</p>
     </div>
   </section>
 
@@ -95,14 +87,13 @@ const signalLog = [
   <section class="section">
     <div class="container">
       <SectionHead
-        eyebrow="Rules of Engagement" jp="交戦規則" variant="amber"
-        title="Four rules we don't break" center
+        eyebrow="What you can count on" variant="amber"
+        title="Four things we don't compromise on" center
       />
       <div class="grid grid-4 mt-6">
         {values.map((v) => (
           <div class="panel value-card">
             <span class="v-icon"><Icon name={v.icon} size={22} /></span>
-            <span class="v-jp jp">{v.jp}</span>
             <h3 class="h3">{v.title}</h3>
             <p class="muted">{v.text}</p>
           </div>
@@ -111,29 +102,16 @@ const signalLog = [
     </div>
   </section>
 
-  <!-- The signal war -->
-  <section class="section signalwar-section scanlines">
-    <div class="container signalwar">
+  <!-- Industries -->
+  <section class="section industries-section scanlines">
+    <div class="container">
       <SectionHead
-        eyebrow="The Signal War" jp="信号戦" variant="red"
-        title="They keep pulling the tower. We keep rebuilding it."
-        lead="Deplatformed, demonetized, nuked from orbit — then back online by morning. Getting erased stopped being a crisis and started being a design constraint."
+        eyebrow="Who we build for" variant="cyan"
+        title="Built for the businesses that keep Northern Nevada running" center
       />
-      <div class="signal-log mt-6">
-        {signalLog.map((s, i) => (
-          <>
-            <div class:list={["signal-node", s.tone]}>
-              <span class="sn-v mono">CH {s.v}</span>
-              <span class="sn-state mono">{s.state}</span>
-            </div>
-            {i < signalLog.length - 1 && <span class="signal-link" aria-hidden="true"></span>}
-          </>
-        ))}
+      <div class="industry-cloud mt-6">
+        {industries.map((i) => <span class="industry-chip">{i}</span>)}
       </div>
-      <p class="mt-4 muted signalwar-note">
-        The Vault exists because we assume, every single day, that the main channel is
-        already gone. Mirror the record. Don't trust the tower.
-      </p>
     </div>
   </section>
 
@@ -144,40 +122,35 @@ const signalLog = [
 
 <style>
   .story {
-    display: grid;
-    grid-template-columns: 1.4fr 0.9fr;
-    gap: clamp(1.5rem, 5vw, 3.5rem);
-    align-items: start;
+    display: grid; grid-template-columns: 1.4fr 0.9fr;
+    gap: clamp(1.5rem, 5vw, 3.5rem); align-items: start;
   }
   @media (max-width: 900px) { .story { grid-template-columns: 1fr; } }
 
-  .dossier { font-size: 0.78rem; }
-  .dossier-head {
-    display: flex; align-items: center; justify-content: space-between;
+  .studio { font-size: 0.78rem; }
+  .studio-head {
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
     padding-bottom: 0.8rem; margin-bottom: 0.8rem; border-bottom: 1px solid var(--line);
   }
-  .dossier dl { display: grid; gap: 0.7rem; margin: 0; }
-  .dossier dl > div {
+  .studio dl { display: grid; gap: 0.7rem; margin: 0; }
+  .studio dl > div {
     display: grid; grid-template-columns: 8rem 1fr; gap: 0.6rem;
     padding-bottom: 0.6rem; border-bottom: 1px dashed var(--line);
   }
-  .dossier dt { color: var(--dim); letter-spacing: 0.1em; }
-  .dossier dd { margin: 0; color: var(--ink); }
+  .studio dt { color: var(--dim); letter-spacing: 0.1em; }
+  .studio dd { margin: 0; color: var(--ink); }
   .text-lime { color: var(--lime); }
   .text-cyan { color: var(--cyan); }
 
   .quote-band {
     position: relative; overflow: hidden;
     border-block: 1px solid var(--line);
-    background: radial-gradient(600px 300px at 50% 0%, rgba(255, 35, 64, 0.1), transparent 60%), var(--void-2);
+    background: radial-gradient(600px 300px at 50% 0%, rgba(255, 90, 60, 0.1), transparent 60%), var(--void-2);
   }
   .quote-band > .container { position: relative; z-index: 3; }
   .pull-quote {
     font-size: clamp(1.6rem, 1rem + 3vw, 3rem);
-    line-height: 1.2;
-    color: var(--ink);
-    text-wrap: balance;
+    line-height: 1.2; color: var(--ink); text-wrap: balance;
   }
   .pull-attr { color: var(--muted); letter-spacing: 0.16em; font-size: 0.72rem; }
 
@@ -189,28 +162,14 @@ const signalLog = [
     background: rgba(255, 157, 0, 0.06);
     margin-bottom: 0.3rem;
   }
-  .v-jp { color: var(--amber); font-size: 0.8rem; letter-spacing: 0.14em; }
   .value-card .muted { font-size: 0.92rem; }
 
-  .signalwar-section { border-top: 1px solid var(--line); background: var(--void-2); }
-  .signal-log {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+  .industries-section { background: var(--void-2); border-top: 1px solid var(--line); }
+  .industry-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+  .industry-chip {
+    padding: 0.5rem 0.9rem; border: 1px solid var(--line); background: var(--surface);
+    color: var(--body); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease);
   }
-  .signal-node {
-    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-    padding: 0.9rem 1.1rem; border: 1px solid var(--line); background: var(--surface);
-    min-width: 6rem;
-  }
-  .sn-v { font-size: 0.9rem; color: var(--ink); }
-  .sn-state { font-size: 0.62rem; letter-spacing: 0.12em; }
-  .signal-node.dead { opacity: 0.55; }
-  .signal-node.dead .sn-state { color: var(--dim); }
-  .signal-node.dead .sn-v { text-decoration: line-through; text-decoration-color: var(--red); }
-  .signal-node.live { border-color: var(--lime); box-shadow: 0 0 18px -6px var(--lime); }
-  .signal-node.live .sn-state { color: var(--lime); }
-  .signal-node.vault { border-color: var(--cyan); }
-  .signal-node.vault .sn-state { color: var(--cyan); }
-  .signal-link { width: 1.4rem; height: 1px; background: var(--line-strong); }
-  .signalwar-note { max-width: 60ch; }
-  @media (max-width: 620px) { .signal-link { display: none; } }
+  .industry-chip:hover { border-color: var(--cyan); color: #fff; transform: translateY(-2px); }
 </style>

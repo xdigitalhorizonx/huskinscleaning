@@ -1,371 +1,380 @@
 /**
  * Central brand data — the single source of truth for the whole site.
  *
- * FORWARD OBSERVATIONS GROUP — a veteran-run media collective and apparel
- * brand, re-imagined here through a late-80s/90s mecha & cyberpunk anime lens.
- * All copy is an original creative rebrand; it evokes the brand's real themes
- * (forward-observer recon, front-line documentary work, and the "they-keep-
- * pulling-our-signal" deplatforming saga) without restating disputed or
- * unverified claims about real people or events.
+ * DIGITAL HORIZON — Web design, SEO & digital marketing for Northern Nevada
+ * service and trade businesses. Content mirrors digitalhorizon.dev; the layout
+ * and visual system are reused from the prior build.
  */
 
 export const site = {
-  brand: "Forward Observations Group",
-  short: "FOG",
-  callsign: "FORWARD//OBSERVATIONS",
-  tagline: "Eyes forward of the line.",
-  /** Japanese motto used decoratively — "front-line observation". */
-  mottoJp: "前線観測",
+  brand: "Digital Horizon",
+  short: "DH",
+  tagline: "Three disciplines. One horizon.",
+  pitch: "Web design that brings Northern Nevada customers in.",
   description:
-    "Forward Observations Group is a veteran media collective broadcasting from the edge of the signal — field dispatches, long-form radio, and supply for the observant.",
-  domain: "forwardobservations.com",
-  url: "https://forwardobservations.com",
-  email: "comms@forwardobservations.com",
+    "Digital Horizon builds high-converting websites for Northern Nevada service and trade businesses, paired with local SEO and digital marketing that brings in qualified leads from Reno, Sparks, Carson City, and Lake Tahoe.",
+  domain: "digitalhorizon.dev",
+  url: "https://digitalhorizon.dev",
+  email: "hello@digitalhorizon.dev",
+
+  phone: {
+    display: "(775) 237-8898",
+    href: "tel:+17752378898",
+    e164: "+17752378898",
+  },
+
+  address: {
+    street: "2085 E William St, Suite 10",
+    locality: "Carson City",
+    region: "NV",
+    regionName: "Nevada",
+    postalCode: "89701",
+    country: "US",
+  },
+  /** Approx. geo center for Carson City, NV — for LocalBusiness schema. */
+  geo: { latitude: 39.1638, longitude: -119.7674 },
+  maps: "https://maps.app.goo.gl/4XdSwQAXf7Xeo6vb9",
 
   social: {
-    youtube: "https://youtube.com/@forwardobservations",
-    instagram: "https://instagram.com/forwardobservations",
-    spotify: "https://open.spotify.com/show/3RjQ8SnlvOiZMCt4ovSYEv",
-    x: "https://x.com/forwardobsgroup",
-    tiktok: "https://tiktok.com/@forwardobservations",
+    x: "https://x.com/BrandonDam756",
+    facebook: "https://www.facebook.com/profile.php?id=61589191467653",
+    instagram: "https://www.instagram.com/digitalhorizon.nv/",
+    nextdoor: "https://nextdoor.com/page/digital-horizon-carson-city-nv",
   },
 } as const;
 
-export type NavItem = { label: string; jp: string; href: string };
+export type NavItem = { label: string; href: string };
 
 export const nav: NavItem[] = [
-  { label: "Broadcast", jp: "放送", href: "/broadcast/" },
-  { label: "Dispatches", jp: "通信", href: "/dispatches/" },
-  { label: "Supply", jp: "補給", href: "/supply/" },
-  { label: "The Unit", jp: "部隊", href: "/about/" },
-  { label: "Contact", jp: "連絡", href: "/contact/" },
+  { label: "Services", href: "/services/" },
+  { label: "About", href: "/about/" },
+  { label: "Locations", href: "/locations/" },
+  { label: "Blog", href: "/blog/" },
+  { label: "Contact", href: "/contact/" },
 ];
 
-/** Telemetry-style stat readout. Deliberately brand-flavored, not literal metrics. */
+/** Headline stat readout. Capability-framed, not literal traffic claims. */
 export const stats = [
-  { num: "24/7", label: "Signal Status", jp: "実況" },
-  { num: "150+", label: "Transmissions Logged", jp: "放送" },
-  { num: "09", label: "Channels Rebuilt", jp: "再建" },
-  { num: "03", label: "Continents Observed", jp: "前線" },
+  { num: "95+", label: "Lighthouse, on mobile" },
+  { num: "Top 3", label: "Google Map Pack target" },
+  { num: "3", label: "Disciplines, one system" },
+  { num: "90d", label: "Project to partnership" },
 ];
 
-/** Katakana / mono ticker strings for the marquee. */
+/** Illustrative live-visibility metrics (mirrors the dashboards on DH's site). */
+export const kpis = [
+  { label: "Engaged Sessions", value: "22.4K", delta: "+6.2%", tone: "up" },
+  { label: "SEO Authority", value: "96", delta: "score", tone: "flat" },
+  { label: "Avg. Position", value: "3.2", delta: "improved", tone: "up" },
+  { label: "Organic Clicks", value: "267K", delta: "+12.4%", tone: "up" },
+];
+
+/** Marquee ticker phrases. */
 export const ticker = [
-  { en: "SIGNAL ACQUIRED", jp: "信号取得" },
-  { en: "EYES ON", jp: "監視中" },
-  { en: "FORWARD OF THE LINE", jp: "前線" },
-  { en: "TRANSMISSION LIVE", jp: "放送中" },
-  { en: "OBSERVE // REPORT // ADVANCE", jp: "観測" },
-  { en: "THEY CUT IT — WE REBUILD IT", jp: "再建" },
-  { en: "STAND BY FOR HANDOFF", jp: "待機" },
+  "WEB DESIGN",
+  "LOCAL SEO",
+  "DIGITAL MARKETING",
+  "NORTHERN NEVADA",
+  "BUILT TO RANK",
+  "BOOKED WORK",
+  "CARSON CITY · RENO · TAHOE",
+  "FAST ON MOBILE",
+  "ONE HORIZON",
 ];
 
-export type Show = {
+export type Service = {
   slug: string;
+  num: string;
   name: string;
-  jp: string;
-  format: string;
-  cadence: string;
   tagline: string;
   desc: string;
-  color: "red" | "amber" | "cyan" | "violet";
+  bullets: string[];
   icon: string;
+  color: "cyan" | "amber" | "violet";
 };
 
-export const shows: Show[] = [
+export const services: Service[] = [
   {
-    slug: "the-podcast",
-    name: "The Forward Observations Podcast",
-    jp: "放送 // MAIN CHANNEL",
-    format: "Long-form audio + video",
-    cadence: "Weekly",
-    tagline: "Unfiltered radio from the collective.",
-    desc: "The flagship. Long-form conversation with operators, journalists, artists, and assorted degenerates — recorded like a night op and edited like a fever dream.",
-    color: "red",
-    icon: "headphones",
-  },
-  {
-    slug: "observation-post",
-    name: "Observation Post",
-    jp: "観測所 // FIELD",
-    format: "Documentary video",
-    cadence: "From the line",
-    tagline: "Cameras where the map goes grey.",
-    desc: "First-person field dispatches shot in the grey zones. No script, no anchor desk — just a forward observer, a lens, and whatever the day hands over.",
-    color: "amber",
-    icon: "film",
-  },
-  {
-    slug: "the-vault",
-    name: "Vault // Archives",
-    jp: "機密 // RECOVERED",
-    format: "Recovered uploads",
-    cadence: "When they pull it down",
-    tagline: "Everything they tried to delete.",
-    desc: "Deplatformed, demonetized, nuked from orbit — then re-uploaded. The Vault is the mirror that keeps the record when the algorithm decides you never existed.",
+    slug: "web-design",
+    num: "01",
+    name: "Web Design",
+    tagline: "Web design built to rank and convert.",
+    desc: "Custom-built sites for Northern Nevada service businesses — fast on mobile, search-engine-ready from day one, and tuned to turn visits into booked work.",
+    bullets: [
+      "Custom design, not templates",
+      "SEO foundations from day one",
+      "Mobile-first, 95+ Lighthouse",
+      "CMS you can edit yourself",
+    ],
+    icon: "browser",
     color: "cyan",
-    icon: "terminal",
   },
   {
-    slug: "night-orders",
-    name: "Night Orders",
-    jp: "夜間 // LIVE",
-    format: "Late livestream",
-    cadence: "After dark",
-    tagline: "Comms open. Filter off.",
-    desc: "The after-hours livestream. Call-ins, hot takes, and the kind of conversations that only happen once the sun's down and the chat's feral.",
+    slug: "seo",
+    num: "02",
+    name: "SEO",
+    tagline: "SEO that compounds quietly.",
+    desc: "Technical foundations, content with a point of view, and the patient work that turns “where do I find a…” into your phone ringing.",
+    bullets: [
+      "Technical audits & schema",
+      "Local pack optimization",
+      "Content strategy",
+      "Citation cleanup",
+    ],
+    icon: "search",
+    color: "amber",
+  },
+  {
+    slug: "digital-marketing",
+    num: "03",
+    name: "Digital Marketing",
+    tagline: "Digital marketing that knows the neighborhood.",
+    desc: "Local-first campaigns built for Northern Nevada — paid search, Google Business Profile, and email/SMS sequences that bring the right calls in.",
+    bullets: [
+      "Brand identity & messaging",
+      "Google Business Profile",
+      "Paid search & local ads",
+      "Email & SMS sequences",
+    ],
+    icon: "megaphone",
     color: "violet",
-    icon: "radio",
   },
 ];
 
-export type Episode = {
-  ep: string;
-  show: string;
-  title: string;
-  desc: string;
-  duration: string;
-  date: string;
-  tag: string;
+export type Step = { num: string; title: string; text: string };
+
+export const process: Step[] = [
+  {
+    num: "01",
+    title: "Listen, then look.",
+    text: "A two-week discovery: we sit with your team, ride along on calls, audit what's already running, and figure out what's actually broken — usually it's not what people thought.",
+  },
+  {
+    num: "02",
+    title: "Ship the first thing.",
+    text: "A defined first project — a website, a campaign, a new landing page — delivered on a fixed scope and fixed price. No retainer, no surprises. You get something live and useful in weeks, not quarters.",
+  },
+  {
+    num: "03",
+    title: "Hold the line.",
+    text: "After launch, a flat monthly partnership covers ongoing marketing, SEO, content updates, and new builds — priced so it pays for itself by month three or we'll tell you so.",
+  },
+  {
+    num: "04",
+    title: "Be the only choice.",
+    text: "Over time, the systems we build become how you operate. The marketing brings the leads, the SEO holds the rankings, and the content keeps you top-of-mind. That's the moat.",
+  },
+];
+
+export type Testimonial = {
+  quote: string;
+  author: string;
+  company: string;
+  location?: string;
+  date?: string;
 };
 
-export const episodes: Episode[] = [
+export const testimonials: Testimonial[] = [
   {
-    ep: "157",
-    show: "The Forward Observations Podcast",
-    title: "Notes From a Dead Channel",
-    desc: "What it actually costs to get erased by a platform overnight — and why the signal keeps coming back anyway.",
-    duration: "1:48:12",
-    date: "2026-06-24",
-    tag: "MAIN",
+    quote:
+      "They didn't just throw together a website — they built it the right way from the ground up, making sure everything was optimized so I could actually rank and get real leads. What really sets them apart is the ongoing support: they consistently audit the site, make smart adjustments, and keep fresh content coming in. If you want a site that's not only clean and professional but actually performs and grows your business, I'd highly recommend them.",
+    author: "Skydog_121",
+    company: "Apollo Landscaping",
+    date: "April 2026",
   },
   {
-    ep: "OP-31",
-    show: "Observation Post",
-    title: "Static Over the Grey Zone",
-    desc: "Field notes from the edge of the map. Long silences, longer nights, and the discipline of watching.",
-    duration: "38:04",
-    date: "2026-06-17",
-    tag: "FIELD",
-  },
-  {
-    ep: "156",
-    show: "The Forward Observations Podcast",
-    title: "The Observer's Eye",
-    desc: "On seeing before you're seen — recon, patience, and the craft of calling it in.",
-    duration: "2:03:41",
-    date: "2026-06-10",
-    tag: "MAIN",
-  },
-  {
-    ep: "NO-88",
-    show: "Night Orders",
-    title: "Comms Open, Filter Off",
-    desc: "Late-night call-ins go completely sideways. You had to be there. Now you can be.",
-    duration: "2:57:19",
-    date: "2026-06-06",
-    tag: "LIVE",
-  },
-  {
-    ep: "V-012",
-    show: "Vault // Archives",
-    title: "Recovered: The Banned Cut",
-    desc: "Pulled within six hours of upload. Restored here in full. Watch it before it moves again.",
-    duration: "22:47",
-    date: "2026-05-30",
-    tag: "VAULT",
-  },
-  {
-    ep: "155",
-    show: "The Forward Observations Podcast",
-    title: "Kit, Coffee, and Catastrophe",
-    desc: "Gear philosophy, bad decisions, and the ritual of packing out before first light.",
-    duration: "1:39:55",
-    date: "2026-05-27",
-    tag: "MAIN",
+    quote:
+      "They didn't pitch us a package. They came out, walked the yard, and three months later every quote went out from a tool they built us. That's the difference.",
+    author: "Jamie R.",
+    company: "Sierra Stone & Patio",
+    location: "Minden, NV",
   },
 ];
 
-export type Dispatch = {
+/** Trades & professions Digital Horizon builds for. */
+export const industries = [
+  "Plumbing", "HVAC", "Electrical", "Roofing", "Flooring", "Painting",
+  "Drywall", "Landscaping", "Tree Service", "Concrete & Masonry",
+  "Welding & Metalwork", "Auto Body & Repair", "General Contracting",
+  "Solar & Renewables", "Pest Control", "Dispatch & Fleet",
+  "Property Management", "Cleaning & Janitorial", "Hotels & Hospitality",
+  "Medical Practices", "Dental Offices", "Legal Services",
+  "Accounting & CPA", "Real Estate", "Insurance Agencies",
+  "Financial Advisors", "Architects & Engineers", "Veterinary Clinics",
+];
+
+export type Location = { name: string; slug?: string; note: string };
+
+export const locations: Location[] = [
+  { name: "Carson City", slug: "carson-city", note: "Home base — the capital, and where we know the market best." },
+  { name: "Reno", slug: "reno", note: "The Biggest Little City's most competitive service niches." },
+  { name: "Sparks", slug: "sparks", note: "Fast-growing trades and home services along the I-80 corridor." },
+  { name: "Lake Tahoe", slug: "lake-tahoe", note: "Seasonal, tourism-driven businesses on both shores." },
+  { name: "Gardnerville / Minden", slug: "gardnerville", note: "Carson Valley contractors and family-run shops." },
+  { name: "Fallon", slug: "fallon", note: "Churchill County service businesses and ag-adjacent trades." },
+  { name: "Elko", slug: "elko", note: "Mining-country operators and the crews that support them." },
+  { name: "Las Vegas", slug: "las-vegas", note: "Statewide reach for larger campaigns and multi-location brands." },
+];
+
+export type Post = {
   slug: string;
   title: string;
-  location: string;
+  category: string;
   date: string;
   readTime: string;
-  tag: string;
-  classification: string;
   excerpt: string;
   body: string[];
 };
 
-export const dispatches: Dispatch[] = [
+export const posts: Post[] = [
   {
-    slug: "notes-from-a-dead-channel",
-    title: "Notes From a Dead Channel",
-    location: "UNDISCLOSED // THE INTERNET",
-    date: "2026-06-24",
-    readTime: "6 min",
-    tag: "SIGNAL",
-    classification: "OPEN SOURCE",
-    excerpt:
-      "They pulled the channel again. Ninety thousand hours of work, gone before breakfast. Here is what we've learned about dying on the internet and coming back.",
-    body: [
-      "The email always arrives at an ugly hour. A policy you didn't break. An appeal you can't win. And then the number — subscribers, views, years — resets to zero like it was never there.",
-      "We've been deplatformed enough times to treat it as weather now. You don't argue with a storm; you build for it. Mirrors, archives, backups of the backups. The Vault exists because we assume, every single day, that the main channel is already gone.",
-      "The lesson a forward observer learns first is that the position is temporary. You are always about to move. The signal is the same. You transmit from where you are, you assume the tower is compromised, and you keep a fallback plotted before you ever need it.",
-      "So they can cut it. They have. They will again. And somewhere on a server we control, the record keeps writing itself — because the observation was the whole point, and the observation doesn't stop just because someone flipped a switch.",
-    ],
-  },
-  {
-    slug: "the-observers-eye",
-    title: "The Observer's Eye",
-    location: "OBSERVATION POST // FORWARD",
-    date: "2026-06-17",
-    readTime: "8 min",
-    tag: "FIELD",
-    classification: "FIELD NOTE",
-    excerpt:
-      "Forward observation is not about the shot. It's about seeing clearly, first, and reporting it exactly as it is. The most tactical skill on the battlefield is honesty.",
-    body: [
-      "The oldest job on any battlefield is watching. Before the tools, before the noise, someone had to go forward of the line, find high ground, and tell the truth about what they saw. Everything downstream depends on that one honest report.",
-      "It sounds simple until you try it under pressure. The eye wants to see what it hopes for. The forward observer's entire discipline is refusing that — separating the thing that is happening from the thing you want to be happening, and calling in only the first one.",
-      "We carry that discipline into everything, including the camera. A lens can lie faster than a mouth. So we keep the frame wide, we keep the timestamp honest, and we let the viewer stand where we stood.",
-      "Observe. Report. Advance. In that order, always. The advancing is the easy part. It's the observing — clean, unflinching, without the flattering edit — that most people can't do.",
-    ],
-  },
-  {
-    slug: "static-over-the-grey-zone",
-    title: "Static Over the Grey Zone",
-    location: "GREY ZONE // EASTERN LINE",
-    date: "2026-06-10",
+    slug: "ai-written-blog-content-rankings-2026",
+    title: "AI-Written Blog Content and Your Rankings: What Actually Works in 2026",
+    category: "SEO",
+    date: "2026-06-29",
     readTime: "7 min",
-    tag: "FIELD",
-    classification: "RECOVERED",
     excerpt:
-      "Long silences, longer nights. A field note on waiting — the ninety-nine percent of forward work nobody puts in the highlight reel.",
+      "Every service business owner is wondering the same thing in 2026 — can I just have ChatGPT write my blog posts? The honest answer is more nuanced than yes or no. Here is the workflow that earns rankings and the shortcut that quietly tanks your site.",
     body: [
-      "Nobody warns you about the boredom. The reel is all motion and noise, but the reality is a cold position and a lot of nothing, and the nothing is where the actual work lives.",
-      "You learn the terrain by staring at it until it stops being scenery. A tree line becomes a set of firing positions. A silence becomes a schedule. Patience is a weapon system, and almost nobody trains it.",
-      "The radio hisses. You wait. Somewhere out past the wire, the day is deciding what it wants to be, and your only job is to still be watching when it makes up its mind.",
-      "That's the part we try to put on camera that never quite survives the edit. The waiting. The grey. The specific texture of a night where the most important thing you do is simply not look away.",
+      "The short version: AI is a fine drafting tool and a terrible publishing strategy. Google doesn't penalize \"AI content\" as a category — it penalizes unhelpful content, and unedited AI output is almost always unhelpful. The line isn't who typed it. It's whether a real expert stood behind it.",
+      "The workflow that ranks looks like this: you (the expert) dictate the outline and the hard-won details a model can't know — the actual price ranges in Carson City, the permit quirk in Douglas County, the mistake you see every week. The AI drafts around that scaffolding. Then a human edits for accuracy, cuts the filler, and adds the specifics that make it obviously written by someone who does the work.",
+      "The shortcut that tanks sites is the opposite: a prompt, a paste, and a publish button, repeated fifty times. It reads generic, it says nothing a competitor's page doesn't, and it buries your genuinely useful pages under a pile of thin ones. That's what gets you a quiet, algorithmic haircut.",
+      "Our rule at Digital Horizon: AI can help you write faster, never think for you. Every post that goes out under your name should teach a customer something true that only a local operator would know.",
     ],
   },
   {
-    slug: "supply-lines",
-    title: "Supply Lines",
-    location: "SUPPLY // HOME STATION",
-    date: "2026-05-27",
-    readTime: "5 min",
-    tag: "SUPPLY",
-    classification: "OPEN SOURCE",
+    slug: "ai-voice-agents-service-businesses-2026",
+    title: "AI Voice Agents Are Answering Service Calls Now: A 2026 Reality Check",
+    category: "Software",
+    date: "2026-06-23",
+    readTime: "8 min",
     excerpt:
-      "Why the patch on your plate carrier and the coffee in your hand are the same conversation. A short piece on kit, ritual, and belonging to something.",
+      "AI voice agents are now answering inbound service calls in Carson City and Reno for under $500/month — picking up on the first ring, booking appointments, and texting you the details. Here is what they do well, what they still can't do, and a five-day rollout plan.",
     body: [
-      "Gear culture gets mocked by people who've never depended on their gear. But every patch, every hat, every sticker on a hard case is a small flag — a way of saying I was there, I'm one of these, this is my tribe.",
-      "We make the stuff we'd actually wear. That's the whole design brief. If it wouldn't survive a real week — packed, rained on, forgotten in a truck — it doesn't ship.",
-      "The ritual matters too. Packing out before light. The coffee that tastes like a decision. The same three things always in the same three pockets. Supply isn't shopping; it's the quiet system that keeps you moving.",
-      "So yeah, it's a t-shirt. It's also a signal. You see it across a room and you already know something true about the person wearing it. That's worth more than the cotton.",
+      "The missed-call problem is real: for most service businesses, a missed call is a missed job, and the caller dials your competitor before lunch. In 2026, a well-configured AI voice agent answers on the first ring, 24/7, and never puts anyone on hold.",
+      "What they do well today: qualify the caller, answer the twenty questions you're tired of answering, book straight into your calendar, and text you a clean summary. For after-hours and overflow, they're a genuine upgrade over voicemail — which nobody leaves anymore.",
+      "What they still can't do: read a nervous customer, handle a true emergency with judgment, or close a high-trust, high-dollar job. The move isn't \"replace the front desk.\" It's \"stop losing the calls the front desk can't get to.\"",
+      "Our five-day rollout: map your top ten call types, script the agent around your real answers, wire it to your calendar and CRM, shadow it for a week, then let it own overflow and after-hours. Start there before you let it touch a primary line.",
+    ],
+  },
+  {
+    slug: "ai-agents-browsing-your-website-agentic-web-2026",
+    title: "AI Agents Are Browsing Your Website: A 2026 Playbook for the Agentic Web",
+    category: "Web",
+    date: "2026-06-16",
+    readTime: "8 min",
+    excerpt:
+      "ChatGPT, Claude, and Perplexity agents are starting to click through websites on behalf of real customers. The sites they can read, navigate, and trust will get sent traffic. The rest will be skipped. Here's the six-part playbook for being the site agents pick.",
+    body: [
+      "There's a new kind of visitor on your website, and it isn't a person — it's an agent acting for one. When someone asks an assistant to \"find a plumber in Carson City who can come out today,\" that assistant is reading sites, comparing them, and handing back a shortlist. You want to be on it.",
+      "Agents reward the same things good users do, just more literally: clean semantic HTML, obvious contact and booking paths, real answers to real questions, and structured data that states plainly who you are, where you work, and what you charge. Fancy animations they can't parse are invisible to them.",
+      "The six pillars: fast, crawlable pages; complete and accurate schema; a clear services-and-areas structure; honest, specific content; unambiguous calls-to-action; and consistent NAP everywhere. None of it is exotic. It's the fundamentals, done properly, which is exactly why most sites lose.",
+      "Build for the agent and you build for the human, too. The site that's easy for a machine to trust is easy for a customer to hire.",
+    ],
+  },
+  {
+    slug: "google-business-profile-playbook-2026",
+    title: "Your Google Business Profile Is Your Real Homepage: A 2026 Playbook",
+    category: "SEO",
+    date: "2026-06-10",
+    readTime: "8 min",
+    excerpt:
+      "For most local searches in Carson City and Reno, your Google Business Profile is the first — and often only — thing a prospective customer sees. A five-pillar playbook for getting it right, plus the 45-minute monthly rhythm that separates Map Pack winners from everyone else.",
+    body: [
+      "Here's the uncomfortable truth: for a huge share of local searches, the customer decides before they ever reach your website. They see the Map Pack, they scan three profiles, they tap the one with the most reviews and a photo that looks legit. Your Google Business Profile is your real homepage.",
+      "The five pillars: a precise primary category, complete services and attributes, a steady flow of recent reviews with owner replies, fresh photos, and regular posts. Each one is a ranking signal and a trust signal at the same time.",
+      "Reviews are the flywheel. Ask every happy customer, make it a two-tap process, and reply to every single one — good and bad. A thoughtful reply to a two-star review sells better than a wall of five-stars nobody engaged with.",
+      "The 45-minute monthly rhythm: reply to reviews, post an update, refresh a few photos, check the insights for what people actually searched, and fix anything that drifted. Winners aren't doing something exotic. They're just doing this, every month, while everyone else forgets the profile exists.",
+    ],
+  },
+  {
+    slug: "seo-vs-paid-ads-northern-nevada",
+    title: "SEO vs. Paid Ads for Northern Nevada Small Businesses: A Decision Framework",
+    category: "Marketing",
+    date: "2026-05-04",
+    readTime: "11 min",
+    excerpt:
+      "If your marketing budget can only fund one channel, which should it be? A practical framework for Carson, Reno, and Lake Tahoe businesses — when SEO is the right call, when paid ads make more sense, and when running both wastes money.",
+    body: [
+      "The honest answer is \"it depends,\" but not in the useless way consultants mean it. It depends on three things you can actually assess: how fast you need leads, how long a customer stays worth pursuing, and how competitive your niche is locally.",
+      "Paid ads are rented attention — instant, measurable, and gone the moment you stop paying. They're the right first move when you need calls this month, when you're testing a new service, or when the keyword is so competitive that ranking would take a year you don't have.",
+      "SEO is owned attention — slow to build, then durable and nearly free per lead once it compounds. It's the right call when your margins reward patience and when \"where do I find a…\" searches in your town aren't already locked up by national chains.",
+      "Running both only makes sense once you have the budget to do each properly. Half-funding two channels beats neither. For most Northern Nevada service businesses we start with ads for cash flow and SEO for the long game — and we tell you plainly when one of them isn't earning its keep.",
+    ],
+  },
+  {
+    slug: "choose-web-designer-carson-city",
+    title: "How to Choose a Web Designer in Carson City: 12 Questions to Ask",
+    category: "Web",
+    date: "2026-05-04",
+    readTime: "9 min",
+    excerpt:
+      "Hiring the wrong web designer is expensive twice — once when you pay them, again when you pay someone else to fix the result. Twelve specific questions that separate the agencies who deliver from the ones you'll regret signing with.",
+    body: [
+      "A pretty website that nobody finds and nobody books from is a very expensive brochure. Before you sign, your job is to figure out whether a designer is building you a business asset or a portfolio piece for themselves.",
+      "Ask who owns the site and the domain when you're done. Ask whether you can edit it yourself without calling them. Ask to see live sites they built that rank — not mockups — and ask to call those owners. Ask what happens after launch, and get the monthly number in writing.",
+      "Ask the technical questions too, even if the answers go over your head: What's the Lighthouse score? Is schema markup included? How's the site hosted, and what's the backup plan? A good partner will happily explain; a bad one will get cagey.",
+      "The through-line of all twelve questions is the same: does this person care whether the site actually makes you money after they cash the check? Hire the one who does, and get everything they promise in writing.",
+    ],
+  },
+  {
+    slug: "generative-engine-optimization",
+    title: "GEO: How to Be the Source AI Search Engines Cite",
+    category: "SEO",
+    date: "2026-04-30",
+    readTime: "9 min",
+    excerpt:
+      "Search is shifting from “ten blue links” to AI-generated answers — Google AI Overviews, ChatGPT, Perplexity, Gemini. The work of being one of the cited sources is different from traditional SEO. Here's what changes, and what doesn't.",
+    body: [
+      "Generative Engine Optimization is the practice of getting your business named and linked inside AI-generated answers. When someone asks an assistant a question your business could answer, GEO is the work that makes you the source it pulls from.",
+      "What changes: the goal shifts from ranking a page to being quotable. AI answers favor clear, factual, self-contained statements — the definition, the number, the direct answer — over keyword-stuffed pages that bury the point three scrolls down.",
+      "What doesn't change: authority and trust still win. The models lean on sources that are cited elsewhere, consistent across the web, and obviously written by someone who knows the subject. That's the same reputation traditional SEO has always rewarded.",
+      "Practically: answer real questions directly, structure your content so a machine can lift a clean paragraph, keep your facts consistent everywhere, and earn the mentions that teach the models to trust you. Old-school SEO and GEO are more alike than the hype admits.",
+    ],
+  },
+  {
+    slug: "structured-data-for-local-seo",
+    title: "Schema for Local SEO: How to Tie Your Site to a Specific Geography",
+    category: "SEO",
+    date: "2026-04-29",
+    readTime: "8 min",
+    excerpt:
+      "Schema markup is the cleanest way to tell Google exactly where you operate, who you are, and what you do — but most service-business sites either skip it or wire it up wrong. Here's how to do it right.",
+    body: [
+      "Schema is structured data — a hidden, machine-readable layer that states the facts of your business in a language search engines don't have to guess at. For local businesses it's one of the highest-leverage, lowest-effort wins available.",
+      "The core nodes: LocalBusiness (with your exact NAP), the areas you serve, your services, your hours, and your reviews. Get these right and consistent, and you've handed Google an unambiguous answer to \"who is this and where do they work?\"",
+      "The common mistakes are boring and fatal: NAP that doesn't match your Google Business Profile, an address that isn't really an office, area-served lists that contradict the rest of the site, or markup that throws errors nobody ever checked.",
+      "Done properly, schema quietly connects your website, your profile, and your citations into one coherent entity Google can trust — which is exactly what it takes to win the Map Pack in a specific town.",
     ],
   },
 ];
 
-export function getDispatch(slug: string): Dispatch | undefined {
-  return dispatches.find((d) => d.slug === slug);
+export function getPost(slug: string): Post | undefined {
+  return posts.find((p) => p.slug === slug);
 }
 
-export type Product = {
-  slug: string;
-  name: string;
-  type: string;
-  price: string;
-  status: "IN STOCK" | "LOW STOCK" | "SOLD OUT" | "DROP";
-  colorway: string;
-  jp: string;
-};
-
-export const products: Product[] = [
-  {
-    slug: "observer-tee",
-    name: "Observer Tee",
-    type: "T-Shirt · Heavyweight",
-    price: "$34",
-    status: "IN STOCK",
-    colorway: "Void Black / Terminal Red",
-    jp: "観測",
-  },
-  {
-    slug: "nvg-skull-hoodie",
-    name: "NVG Skull Hoodie",
-    type: "Hoodie · Midweight Fleece",
-    price: "$78",
-    status: "LOW STOCK",
-    colorway: "Void Black / Amber",
-    jp: "髑髏",
-  },
-  {
-    slug: "forward-cap",
-    name: "Forward-of-the-Line Cap",
-    type: "Structured Cap",
-    price: "$32",
-    status: "IN STOCK",
-    colorway: "OD Green / Red Stitch",
-    jp: "前進",
-  },
-  {
-    slug: "signal-death-patch",
-    name: "Signal Death Patch",
-    type: "PVC Morale Patch",
-    price: "$12",
-    status: "DROP",
-    colorway: "Glow Cyan",
-    jp: "信号",
-  },
-  {
-    slug: "grey-zone-stickers",
-    name: "Grey Zone Sticker Pack",
-    type: "Vinyl · 8-Pack",
-    price: "$8",
-    status: "IN STOCK",
-    colorway: "Mixed",
-    jp: "灰色地帯",
-  },
-  {
-    slug: "ronin-trauma-pouch",
-    name: "Ronin Trauma Pouch",
-    type: "Laser-Cut MOLLE",
-    price: "$45",
-    status: "SOLD OUT",
-    colorway: "Wolf Grey",
-    jp: "浪人",
-  },
-];
-
-export type Value = { title: string; jp: string; icon: string; text: string };
+export type Value = { title: string; icon: string; text: string };
 
 export const values: Value[] = [
   {
-    title: "Observe First",
-    jp: "観測",
-    icon: "eye",
-    text: "See it clearly before you say anything about it. The report is only worth the honesty behind it.",
-  },
-  {
-    title: "Own the Signal",
-    jp: "信号",
-    icon: "broadcast",
-    text: "Build like the tower's already down. Mirror everything, archive everything, answer to no one platform.",
-  },
-  {
-    title: "Forward, Always",
-    jp: "前進",
+    title: "One system, not channels",
     icon: "compass",
-    text: "The position is temporary; the direction isn't. When the line moves, we move with it — toward the edge, not away.",
+    text: "We don't sell you a website here and some ads there. Web, SEO, and marketing are built to work as one machine that gets better every month.",
   },
   {
-    title: "Bring the Others",
-    jp: "部隊",
-    icon: "users",
-    text: "None of this works solo. It's a unit, a tribe, a chat, a comment section that would take a bullet for each other.",
+    title: "Fixed scope, no surprises",
+    icon: "shield",
+    text: "Start with one well-scoped project at a fixed price. No retainer to sign on day one, no meter running while you decide if we're any good.",
+  },
+  {
+    title: "Built to rank, built to convert",
+    icon: "gauge",
+    text: "Fast on mobile, search-engine-ready from day one, and tuned to turn visits into booked work — every build clears a 95+ Lighthouse bar.",
+  },
+  {
+    title: "Local, and it shows",
+    icon: "pin",
+    text: "We know Carson, Reno, and Tahoe — the seasons, the competition, the search terms your customers actually type. The work is built for here.",
   },
 ];
 
@@ -373,23 +382,28 @@ export type Faq = { question: string; answer: string };
 
 export const faqs: Faq[] = [
   {
-    question: "Is Forward Observations Group real, or is this a bit?",
+    question: "How much does a website cost?",
     answer:
-      "Both, on purpose. It's a genuine veteran-run media collective and apparel brand — and it wears its gonzo self-mythology out loud. The camera is real. The attitude is a choice.",
+      "It depends on scope, but we start every relationship with one well-scoped project at a fixed price — no open-ended retainer. Most first projects fall between $5,000 and $15,000; larger builds and multi-location campaigns run higher. You'll get a clear number before any work starts.",
   },
   {
-    question: "Where can I actually watch and listen?",
+    question: "Do I have to sign a long contract?",
     answer:
-      "Everywhere that hasn't banned us this week, and the Vault for everywhere that has. The main podcast runs weekly; field dispatches and livestreams drop on their own schedule. Follow the channels and mirror what you like — you never know how long it stays up.",
+      "No. We start with a single fixed-scope, fixed-price project so you can feel how we work without committing to a long agreement. Most clients move into a flat monthly partnership within 90 days — because the cost-per-result keeps dropping, not because they're locked in.",
   },
   {
-    question: "Why do your channels keep disappearing?",
+    question: "Do you only work with Northern Nevada businesses?",
     answer:
-      "Deplatforming, demonetization, and the occasional mysterious 'community guidelines' violation. We treat it as weather. The Vault exists so the record survives the storm, and we always keep a fallback plotted before we need it.",
+      "It's our focus — Reno, Sparks, Carson City, Gardnerville/Minden, Fallon, Elko, and Lake Tahoe — because local knowledge is a real advantage in SEO and local marketing. We also take on statewide work, including Las Vegas, for larger campaigns and multi-location brands.",
   },
   {
-    question: "Do you actually ship the merch, or is it vaporware?",
+    question: "How long until I see results?",
     answer:
-      "It ships. Drops are limited by design — when a colorway sells out it's usually gone for good, so if you see something in stock, that's the signal to move.",
+      "A new website can be live and useful in weeks, not quarters. SEO compounds more slowly — meaningful ranking movement typically shows over three to six months. Paid search and Google Business Profile work can bring calls in much sooner while the SEO builds underneath it.",
+  },
+  {
+    question: "Can I edit the website myself?",
+    answer:
+      "Yes. We build on a CMS you can actually use, and you own the site and the domain. Edit your own copy and photos anytime — and when you'd rather we handle updates, that's part of the monthly partnership.",
   },
 ];

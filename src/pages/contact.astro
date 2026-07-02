@@ -5,9 +5,9 @@ import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../lib/schema";
 
-const title = `Contact — Open a Channel | ${site.short}`;
+const title = `Contact — Start a Project | ${site.brand}`;
 const description =
-  "Open a channel with Forward Observations Group. Bookings, collabs, press, tips from the field, or just comms — send a transmission.";
+  "Book a free 30-minute discovery call with Digital Horizon. Web design, SEO, and digital marketing for Northern Nevada service businesses.";
 const crumbs = [
   { name: "Home", url: "/" },
   { name: "Contact", url: "/contact/" },
@@ -15,57 +15,78 @@ const crumbs = [
 const schema = [breadcrumbSchema(crumbs)];
 
 const channels = [
-  { icon: "mail", label: "Direct Comms", value: site.email, href: `mailto:${site.email}` },
-  { icon: "youtube", label: "YouTube", value: "@forwardobservations", href: site.social.youtube },
-  { icon: "spotify", label: "Spotify", value: "The FO Podcast", href: site.social.spotify },
-  { icon: "instagram", label: "Instagram", value: "@forwardobservations", href: site.social.instagram },
-  { icon: "x", label: "X", value: "@forwardobsgroup", href: site.social.x },
-  { icon: "tiktok", label: "TikTok", value: "@forwardobservations", href: site.social.tiktok },
+  { icon: "phone", label: "Call or text", value: site.phone.display, href: site.phone.href },
+  { icon: "mail", label: "Email", value: site.email, href: `mailto:${site.email}` },
+  { icon: "pin", label: "Office", value: `${site.address.street}, ${site.address.locality}, ${site.address.region} ${site.address.postalCode}`, href: site.maps },
+  { icon: "facebook", label: "Facebook", value: "Digital Horizon", href: site.social.facebook },
+  { icon: "instagram", label: "Instagram", value: "@digitalhorizon.nv", href: site.social.instagram },
+  { icon: "nextdoor", label: "Nextdoor", value: "Digital Horizon", href: site.social.nextdoor },
 ];
 ---
 
 <BaseLayout title={title} description={description} schema={schema}>
   <PageHero
-    eyebrow="Contact" jp="連絡" variant="cyan"
-    title="Open a Channel"
-    lead="Bookings, collabs, press, a tip from the field, or just comms. Send a transmission and we'll pick it up from the post."
+    eyebrow="Contact" variant="cyan"
+    title="Ready to find your horizon?"
+    lead="Free 30-minute discovery call. We'll talk about what you're trying to grow, what's getting in the way, and whether we're the right team to help — no pitch deck."
     crumbs={crumbs}
   />
 
   <section class="section">
     <div class="container comms">
-      <!-- Terminal form -->
+      <!-- Form -->
       <div class="panel is-red comms-form">
         <div class="comms-head mono">
-          <span><span class="status-dot"></span> SECURE TERMINAL</span>
-          <span class="text-amber jp">送信</span>
+          <span><span class="status-dot"></span> START A PROJECT</span>
+          <span class="text-amber">NO OBLIGATION</span>
         </div>
         <form id="comms-form" class="form">
-          <div class="field">
-            <label for="name" class="mono">CALLSIGN / NAME</label>
-            <input id="name" name="name" type="text" required autocomplete="name" placeholder="Who's transmitting?" />
+          <div class="row2">
+            <div class="field">
+              <label for="name" class="mono">NAME</label>
+              <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="company" class="mono">COMPANY</label>
+              <input id="company" name="company" type="text" autocomplete="organization" placeholder="Business name" />
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="email" class="mono">EMAIL</label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@business.com" />
+            </div>
+            <div class="field">
+              <label for="phone" class="mono">PHONE</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(775) 000-0000" />
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="service" class="mono">SERVICE INTERESTED IN</label>
+              <select id="service" name="service">
+                <option>Web Design</option>
+                <option>SEO</option>
+                <option>Digital Marketing</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="budget" class="mono">PROJECT BUDGET</label>
+              <select id="budget" name="budget">
+                <option>Under $5,000</option>
+                <option>$5,000–$15,000</option>
+                <option>$15,000–$50,000</option>
+                <option>$50,000+</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label for="email" class="mono">RETURN FREQUENCY / EMAIL</label>
-            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@channel.net" />
-          </div>
-          <div class="field">
-            <label for="subject" class="mono">TRANSMISSION TYPE</label>
-            <select id="subject" name="subject">
-              <option>Booking / Guest</option>
-              <option>Collab / Partnership</option>
-              <option>Press / Media</option>
-              <option>Field Tip</option>
-              <option>Supply / Order</option>
-              <option>Just Comms</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="message" class="mono">MESSAGE</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Send it."></textarea>
+            <label for="message" class="mono">WHAT DO YOU NEED?</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell us what you're trying to grow."></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block">
-            <Icon name="send" size={18} /> Transmit
+            <Icon name="send" size={18} /> Send Message
           </button>
           <p id="form-status" class="form-status mono" hidden></p>
         </form>
@@ -73,11 +94,11 @@ const channels = [
 
       <!-- Channels -->
       <aside class="comms-side">
-        <h2 class="h3 display">All frequencies</h2>
-        <p class="muted mt-1">Prefer to reach us where we already live? Every channel below is monitored — some more than others.</p>
+        <h2 class="h3 display">Prefer to reach us directly?</h2>
+        <p class="muted mt-1">Call, text, or email — a real person from the team gets back to you, usually same day.</p>
         <div class="channels mt-4">
           {channels.map((c) => (
-            <a href={c.href} target={c.href.startsWith("mailto") ? undefined : "_blank"} rel="noopener" class="channel">
+            <a href={c.href} target={c.href.startsWith("mailto") || c.href.startsWith("tel") ? undefined : "_blank"} rel="noopener" class="channel">
               <span class="ch-icon"><Icon name={c.icon} size={20} /></span>
               <span class="ch-main">
                 <span class="ch-label mono">{c.label}</span>
@@ -88,8 +109,8 @@ const channels = [
           ))}
         </div>
         <div class="comms-note panel is-cyan mono mt-4">
-          <Icon name="alert" size={16} />
-          <span>Channels get pulled without warning. If one goes dark, check the Vault or try direct comms.</span>
+          <Icon name="clock" size={16} />
+          <span>Booking 2–3 weeks out. The sooner we talk, the sooner your project gets a slot.</span>
         </div>
       </aside>
     </div>
@@ -98,10 +119,8 @@ const channels = [
 
 <style>
   .comms {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: start;
+    display: grid; grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(1.5rem, 4vw, 3rem); align-items: start;
   }
   @media (max-width: 860px) { .comms { grid-template-columns: 1fr; } }
 
@@ -112,10 +131,10 @@ const channels = [
     border-bottom: 1px solid var(--line);
   }
   .form { display: grid; gap: 1rem; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
   .field { display: grid; gap: 0.4rem; }
-  .field label {
-    font-size: 0.66rem; letter-spacing: 0.16em; color: var(--amber);
-  }
+  .field label { font-size: 0.66rem; letter-spacing: 0.16em; color: var(--amber); }
   .field input, .field select, .field textarea {
     width: 100%;
     background: var(--void);
@@ -129,9 +148,7 @@ const channels = [
   .field textarea { resize: vertical; }
   .field input::placeholder, .field textarea::placeholder { color: var(--dim); }
   .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none;
-    border-color: var(--red);
-    box-shadow: 0 0 0 1px var(--red), var(--glow-red);
+    outline: none; border-color: var(--red); box-shadow: 0 0 0 1px var(--red), var(--glow-red);
   }
   .form-status {
     margin: 0; padding: 0.8rem;
@@ -154,7 +171,7 @@ const channels = [
   .ch-icon { color: var(--cyan); flex: none; }
   .ch-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
   .ch-label { font-size: 0.64rem; letter-spacing: 0.14em; color: var(--dim); text-transform: uppercase; }
-  .ch-value { color: var(--ink); font-weight: 500; }
+  .ch-value { color: var(--ink); font-weight: 500; font-size: 0.92rem; }
   .channel :global(.ch-arrow) { color: var(--muted); flex: none; }
 
   .comms-note {
@@ -170,16 +187,17 @@ const channels = [
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    const name = String(data.get("name") || "");
-    const from = String(data.get("email") || "");
-    const subject = String(data.get("subject") || "Comms");
-    const message = String(data.get("message") || "");
-    const body = `${message}\n\n— ${name} (${from})`;
-    const href = `mailto:${email}?subject=${encodeURIComponent("[FOG] " + subject)}&body=${encodeURIComponent(body)}`;
+    const get = (k) => String(data.get(k) || "");
+    const body =
+      `${get("message")}\n\n` +
+      `— ${get("name")}${get("company") ? `, ${get("company")}` : ""}\n` +
+      `Email: ${get("email")}\nPhone: ${get("phone")}\n` +
+      `Service: ${get("service")}\nBudget: ${get("budget")}`;
+    const href = `mailto:${email}?subject=${encodeURIComponent("New project inquiry — " + get("name"))}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
     if (status) {
       status.hidden = false;
-      status.textContent = "// TRANSMISSION QUEUED — your mail client should be opening. If not, reach us at " + email;
+      status.textContent = "// Thanks — your email client should be opening. If not, reach us at " + email;
     }
   });
 </script>

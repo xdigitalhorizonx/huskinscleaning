@@ -4,21 +4,20 @@ import Icon from "./Icon.astro";
 import { site, nav } from "../data/site";
 
 const path = Astro.url.pathname;
-const isActive = (href: string) => path === href || path.startsWith(href) && href !== "/";
+const isActive = (href: string) => path === href || (path.startsWith(href) && href !== "/");
 ---
 
 <header class="site-header" id="site-header">
-  <!-- HUD system bar -->
+  <!-- HUD status bar -->
   <div class="sys-bar">
     <div class="container sys-inner mono">
       <span class="sys-item">
-        <span class="status-dot"></span>
-        SYS: ONLINE <span class="sys-jp">実況</span>
+        <span class="status-dot"></span> NOW BOOKING — NORTHERN NEVADA
       </span>
-      <span class="sys-item sys-mid">SIGNAL <span class="sys-green">● GREEN</span></span>
+      <span class="sys-item sys-mid">WEB · SEO · DIGITAL MARKETING</span>
       <span class="sys-spacer"></span>
-      <span class="sys-item sys-loc">LAT 50.4°N // LON 30.5°E</span>
-      <span class="sys-item"><span class="rec">● REC</span> <time id="sys-clock" datetime="">--:--:-- UTC</time></span>
+      <a class="sys-item sys-phone" href={site.phone.href}><Icon name="phone" size={13} /> {site.phone.display}</a>
+      <span class="sys-item sys-loc">FREE 30-MIN DISCOVERY CALL</span>
     </div>
   </div>
 
@@ -33,10 +32,7 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
             <li>
               <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]}>
                 <span class="nav-idx">{String(i + 1).padStart(2, "0")}</span>
-                <span class="nav-labels">
-                  <span class="nav-jp">{item.jp}</span>
-                  <span class="nav-en">{item.label}</span>
-                </span>
+                <span class="nav-en">{item.label}</span>
               </a>
             </li>
           ))}
@@ -44,13 +40,13 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
       </nav>
 
       <div class="nav-cta">
-        <div class="nav-social" aria-label="Channels">
-          <a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener"><Icon name="youtube" size={18} /></a>
-          <a href={site.social.spotify} aria-label="Spotify" target="_blank" rel="noopener"><Icon name="spotify" size={18} /></a>
+        <div class="nav-social" aria-label="Social">
+          <a href={site.social.facebook} aria-label="Facebook" target="_blank" rel="noopener"><Icon name="facebook" size={18} /></a>
           <a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener"><Icon name="instagram" size={18} /></a>
+          <a href={site.social.x} aria-label="X" target="_blank" rel="noopener"><Icon name="x" size={16} /></a>
         </div>
-        <a href="/broadcast/" class="btn btn-primary btn-watch">
-          <Icon name="play" size={15} /> Watch Live
+        <a href="/contact/" class="btn btn-primary btn-start">
+          <Icon name="rocket" size={15} /> Start a Project
         </a>
       </div>
 
@@ -64,18 +60,16 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
   <div class="mobile-menu" id="mobile-menu" hidden>
     <nav aria-label="Mobile">
       {nav.map((item) => (
-        <a href={item.href} class="m-link">
-          <span>{item.label}</span>
-          <span class="jp m-jp">{item.jp}</span>
-        </a>
+        <a href={item.href} class="m-link">{item.label}</a>
       ))}
       <div class="m-actions">
-        <a href="/broadcast/" class="btn btn-primary btn-block"><Icon name="play" size={15} /> Watch Live</a>
+        <a href="/contact/" class="btn btn-primary btn-block"><Icon name="rocket" size={15} /> Start a Project</a>
+        <a href={site.phone.href} class="btn btn-ghost btn-block"><Icon name="phone" size={15} /> {site.phone.display}</a>
         <div class="m-social">
-          <a href={site.social.youtube} target="_blank" rel="noopener" aria-label="YouTube"><Icon name="youtube" size={22} /></a>
-          <a href={site.social.spotify} target="_blank" rel="noopener" aria-label="Spotify"><Icon name="spotify" size={22} /></a>
+          <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" size={22} /></a>
           <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" size={22} /></a>
-          <a href={site.social.x} target="_blank" rel="noopener" aria-label="X"><Icon name="x" size={22} /></a>
+          <a href={site.social.x} target="_blank" rel="noopener" aria-label="X"><Icon name="x" size={20} /></a>
+          <a href={site.social.nextdoor} target="_blank" rel="noopener" aria-label="Nextdoor"><Icon name="nextdoor" size={22} /></a>
         </div>
       </div>
     </nav>
@@ -85,7 +79,7 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
 <style>
   .site-header { position: sticky; top: 0; z-index: 100; }
 
-  /* System bar */
+  /* Status bar */
   .sys-bar {
     background: #000;
     border-bottom: 1px solid var(--line);
@@ -102,12 +96,11 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     white-space: nowrap;
   }
   .sys-item { display: inline-flex; align-items: center; gap: 0.5rem; }
-  .sys-jp { color: var(--amber); }
-  .sys-green { color: var(--lime); }
   .sys-spacer { flex: 1; }
-  .rec { color: var(--red); animation: blink 1.2s steps(1) infinite; }
-  #sys-clock { color: var(--cyan); }
-  @media (max-width: 860px) { .sys-mid, .sys-loc { display: none; } }
+  .sys-phone { color: var(--cyan); }
+  .sys-phone:hover { color: var(--cyan-bright); }
+  .sys-loc { color: var(--amber); }
+  @media (max-width: 900px) { .sys-mid, .sys-loc { display: none; } }
   @media (max-width: 520px) { .sys-bar { display: none; } }
 
   /* Nav bar */
@@ -118,8 +111,8 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   :global(.header-scrolled) .nav-bar {
-    border-bottom-color: rgba(255, 35, 64, 0.4);
-    box-shadow: 0 12px 40px -20px rgba(255, 35, 64, 0.5);
+    border-bottom-color: rgba(255, 90, 60, 0.4);
+    box-shadow: 0 12px 40px -20px rgba(255, 90, 60, 0.5);
   }
   .nav-inner {
     display: flex;
@@ -129,62 +122,39 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     height: 68px;
   }
 
-  .nav-list {
-    display: flex;
-    align-items: stretch;
-    gap: 0.1rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+  .nav-list { display: flex; align-items: stretch; gap: 0.1rem; list-style: none; margin: 0; padding: 0; }
   .nav-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.4rem 0.85rem;
+    padding: 0.4rem 0.9rem;
     height: 68px;
     color: var(--body);
     border-bottom: 2px solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   }
-  .nav-idx {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--dim);
-  }
-  .nav-labels { display: flex; flex-direction: column; line-height: 1.1; }
-  .nav-jp {
-    font-family: var(--font-jp);
-    font-size: 0.6rem;
-    color: var(--amber);
-    letter-spacing: 0.1em;
-    opacity: 0.75;
-  }
+  .nav-idx { font-family: var(--font-mono); font-size: 0.6rem; color: var(--dim); }
   .nav-en {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
   .nav-link:hover, .nav-link.active {
     color: #fff;
     border-bottom-color: var(--red);
-    background: linear-gradient(180deg, transparent, rgba(255, 35, 64, 0.08));
+    background: linear-gradient(180deg, transparent, rgba(255, 90, 60, 0.08));
   }
-  .nav-link:hover .nav-jp, .nav-link.active .nav-jp { opacity: 1; color: var(--red-bright); }
+  .nav-link:hover .nav-idx, .nav-link.active .nav-idx { color: var(--red-bright); }
 
   .nav-cta { display: flex; align-items: center; gap: 1rem; }
   .nav-social { display: flex; gap: 0.7rem; }
   .nav-social a { color: var(--muted); }
   .nav-social a:hover { color: var(--cyan); }
-  .btn-watch { padding: 0.7rem 1.1rem; font-size: 0.85rem; }
+  .btn-start { padding: 0.7rem 1.1rem; font-size: 0.85rem; }
 
-  .nav-burger {
-    display: none;
-    background: none; border: none; color: var(--ink);
-    cursor: pointer; padding: 0.3rem;
-  }
+  .nav-burger { display: none; background: none; border: none; color: var(--ink); cursor: pointer; padding: 0.3rem; }
 
   /* Mobile menu */
   .mobile-menu {
@@ -205,9 +175,8 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     color: var(--ink);
     border-bottom: 1px solid var(--line);
   }
-  .m-jp { color: var(--amber); font-size: 0.9rem; }
-  .m-actions { display: grid; gap: 1rem; margin-top: 1.2rem; }
-  .m-social { display: flex; justify-content: center; gap: 1.6rem; color: var(--muted); }
+  .m-actions { display: grid; gap: 0.8rem; margin-top: 1.2rem; }
+  .m-social { display: flex; justify-content: center; gap: 1.6rem; color: var(--muted); margin-top: 0.4rem; }
   .m-social a { color: var(--muted); }
   .m-social a:hover { color: var(--cyan); }
 
@@ -215,9 +184,7 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     .nav-desktop, .nav-cta { display: none; }
     .nav-burger { display: block; }
   }
-  @media (min-width: 941px) {
-    .mobile-menu { display: none !important; }
-  }
+  @media (min-width: 941px) { .mobile-menu { display: none !important; } }
 </style>
 
 <script>
@@ -238,22 +205,8 @@ const isActive = (href: string) => path === href || path.startsWith(href) && hre
     }
   });
 
-  // Elevate header on scroll
   const onScroll = () =>
     document.documentElement.classList.toggle("header-scrolled", window.scrollY > 8);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
-
-  // Live HUD clock (UTC)
-  const clock = document.getElementById("sys-clock") as HTMLTimeElement | null;
-  if (clock) {
-    const tick = () => {
-      const d = new Date();
-      const t = d.toISOString().slice(11, 19);
-      clock.textContent = `${t} UTC`;
-      clock.dateTime = d.toISOString();
-    };
-    tick();
-    setInterval(tick, 1000);
-  }
 </script>
