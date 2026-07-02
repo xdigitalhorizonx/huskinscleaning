@@ -1,8 +1,8 @@
 {
-  "name": "huskins-cleaning-website",
+  "name": "forward-observations-website",
   "type": "module",
   "version": "1.0.0",
-  "description": "Marketing website for Huskins Cleaning Services (Huskins Services LLC), Omaha NE.",
+  "description": "Website for Forward Observations Group — a veteran media collective. Astro static site with an Evangelion/Akira-inspired cyber design.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,7 +13,10 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource-variable/inter": "^5.1.1",
-    "@fontsource-variable/plus-jakarta-sans": "^5.1.1",
+    "@fontsource-variable/orbitron": "^5.2.8",
+    "@fontsource/chakra-petch": "^5.2.7",
+    "@fontsource/noto-sans-jp": "^5.2.9",
+    "@fontsource/share-tech-mono": "^5.2.7",
     "astro": "^5.1.1",
     "sharp": "^0.33.5"
   },

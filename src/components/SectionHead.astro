@@ -1,0 +1,25 @@
+---
+interface Props {
+  eyebrow?: string;
+  variant?: "amber" | "red" | "cyan";
+  title: string;
+  jp?: string;
+  lead?: string;
+  center?: boolean;
+}
+const { eyebrow, variant = "amber", title, jp, lead, center = false } = Astro.props;
+---
+
+<div class:list={["section-head", { "is-center": center }]}>
+  {eyebrow && (
+    <span class:list={["eyebrow", { "is-red": variant === "red", "is-cyan": variant === "cyan" }]}>
+      {eyebrow}{jp && <span class="jp">{jp}</span>}
+    </span>
+  )}
+  <h2 class="h2 display" set:html={title} />
+  {lead && <p class="lead">{lead}</p>}
+</div>
+
+<style>
+  .eyebrow .jp { margin-left: 0.6rem; opacity: 0.8; letter-spacing: 0.1em; }
+</style>

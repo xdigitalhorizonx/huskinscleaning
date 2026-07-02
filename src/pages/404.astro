@@ -1,65 +1,66 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
-import { site, services } from "../data/site";
+import { nav } from "../data/site";
 ---
 
 <BaseLayout
-  title="Page Not Found | Huskins Cleaning Omaha"
-  description="Sorry, we couldn't find that page. Explore Huskins Cleaning's services in Omaha, NE or get a free quote."
+  title="Signal Lost — 404 | Forward Observations Group"
+  description="This channel is gone. Reacquire the signal from one of the frequencies below."
   noindex={true}
 >
-  <section class="section notfound section-dark">
-    <div class="container text-center">
-      <span class="nf-mark"><Icon name="sparkles" size={40} /></span>
-      <h1 class="h-display">Well, this spot's a little too clean</h1>
-      <p class="lead mx-auto" style="max-width:46ch">
-        We couldn't find the page you were looking for. Let's get you back to
-        something useful.
+  <section class="section notfound scanlines">
+    <div class="grid-floor"></div>
+    <div class="container text-center nf-inner">
+      <p class="nf-code display glitch" data-text="404">404</p>
+      <span class="tag is-red nf-tag"><span class="status-dot"></span> SIGNAL LOST // 信号消失</span>
+      <h1 class="h1 display mt-3">This channel is gone.</h1>
+      <p class="lead mx-auto mt-2" style="max-width:48ch">
+        Deplatformed, moved, or never existed. Happens more than you'd think.
+        Reacquire the signal from one of the frequencies below.
       </p>
-      <div class="btn-group" style="justify-content:center">
-        <a href="/" class="btn btn-accent btn-lg">Back to Home</a>
-        <a href={site.phone.href} class="btn btn-outline-light btn-lg">
-          <Icon name="phone" size={20} /> {site.phone.display}
-        </a>
+      <div class="btn-group nf-cta">
+        <a href="/" class="btn btn-primary btn-lg"><Icon name="crosshair" size={18} /> Return to HQ</a>
+        <a href="/broadcast/" class="btn btn-ghost btn-lg"><Icon name="play" size={18} /> Watch Live</a>
       </div>
-      <div class="nf-links">
-        {services.map((s) => (
-          <a href={`/services/${s.slug}/`}>{s.title}</a>
+      <nav class="nf-links mono" aria-label="Site sections">
+        {nav.map((item) => (
+          <a href={item.href}>{item.label} <span class="jp">{item.jp}</span></a>
         ))}
-      </div>
+      </nav>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .notfound { padding-block: clamp(4rem, 12vw, 8rem); }
-  .nf-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--accent);
-    margin-bottom: 1.5rem;
+  .notfound {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4rem, 12vw, 8rem);
+    background: radial-gradient(700px 400px at 50% 0%, rgba(255, 35, 64, 0.14), transparent 60%), var(--void);
   }
-  .notfound .btn-group { margin-top: 2rem; }
+  .nf-inner { position: relative; z-index: 3; }
+  .nf-code {
+    font-family: var(--font-num);
+    font-size: clamp(5rem, 20vw, 12rem);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+  .nf-tag { margin-top: 1rem; }
+  .nf-cta { justify-content: center; margin-top: 2rem; }
   .nf-links {
-    margin-top: 2.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
+    margin-top: 2.6rem;
+    display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
   }
   .nf-links a {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #d6e6f7;
+    display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-pill);
-    font-size: 0.9rem;
-    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--body);
+    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
   }
-  .nf-links a:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+  .nf-links a:hover { border-color: var(--red); color: #fff; }
+  .nf-links .jp { color: var(--amber); }
 </style>

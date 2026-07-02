@@ -1,5 +1,6 @@
 /**
  * Generates PWA / apple-touch icons (full-bleed) into public/.
+ * FOG emblem: void field, amber hex frame, twin cyan NVG eyes, red chevron.
  * Run: node scripts/generate-icons.mjs
  */
 import sharp from "sharp";
@@ -9,16 +10,24 @@ import { dirname, resolve } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pub = resolve(__dirname, "../public");
 
-// Full-bleed square mark (no transparent corners) for app icons.
 const icon = (size) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2e9be6"/><stop offset="1" stop-color="#123f6f"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.55">
+      <stop stop-color="#ff2340" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ff2340" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eye" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#7af0ff"/>
+      <stop offset="1" stop-color="#22e0ff"/>
+    </radialGradient>
   </defs>
-  <rect width="512" height="512" fill="url(#g)"/>
-  <path d="M256 118c37 55 70 88 70 133a70 70 0 0 1-140 0c0-45 33-78 70-133Z" fill="#ffffff" opacity="0.97"/>
-  <path d="M356 286l11 33 33 11-33 11-11 33-11-33-33-11 33-11z" fill="#ffd48a"/>
+  <rect width="512" height="512" fill="#05060a"/>
+  <rect width="512" height="512" fill="url(#glow)"/>
+  <path d="M256 58 454 160V352L256 454 58 352V160Z" fill="none" stroke="#ff9d00" stroke-width="15"/>
+  <path d="M256 104 414 185V327L256 408 98 327V185Z" fill="none" stroke="#ff9d00" stroke-width="6" opacity="0.4"/>
+  <circle cx="198" cy="238" r="33" fill="url(#eye)"/>
+  <circle cx="314" cy="238" r="33" fill="url(#eye)"/>
+  <path d="M150 330 256 400 362 330" fill="none" stroke="#ff2340" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 
 for (const [name, size] of [

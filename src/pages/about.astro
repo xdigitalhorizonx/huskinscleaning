@@ -1,217 +1,216 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import Icon from "../components/Icon.astro";
+import SectionHead from "../components/SectionHead.astro";
+import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { trustPoints } from "../data/site";
-import { breadcrumbSchema } from "../lib/schema";
+import Icon from "../components/Icon.astro";
+import { site, values, faqs } from "../data/site";
+import { breadcrumbSchema, faqSchema } from "../lib/schema";
 
+const title = `The Unit — About Forward Observations Group`;
+const description =
+  "Forward Observations Group is a veteran media collective built on one discipline: see it first, then tell the truth about it. Meet the unit behind the signal.";
 const crumbs = [
   { name: "Home", url: "/" },
-  { name: "About", url: "/about/" },
+  { name: "The Unit", url: "/about/" },
 ];
-const title = "About Huskins Cleaning | Family-Owned in Omaha, NE";
-const description =
-  "Meet Huskins Cleaning — a family-owned, BBB A+ accredited cleaning company serving Omaha, NE since 2020. Honest people, spotless results, and a team you can trust.";
+const schema = [breadcrumbSchema(crumbs), faqSchema(faqs)];
 
-const values = [
-  {
-    icon: "shield",
-    title: "Trust above all",
-    text: "We're in your home and your business. Every team member is background-checked, and we're fully insured — because your peace of mind is the whole job.",
-  },
-  {
-    icon: "heart",
-    title: "Honest, always",
-    text: "Fair pricing, no surprise fees, and straight answers. If a service isn't right for you, we'll tell you. That's how we've earned Omaha's trust.",
-  },
-  {
-    icon: "sparkles",
-    title: "Details that matter",
-    text: "Anyone can wipe a counter. We sweat the baseboards, the corners and the things you notice — following a checklist so nothing slips.",
-  },
-  {
-    icon: "users",
-    title: "Real relationships",
-    text: "You get the same friendly crew who learns your home and your preferences. Most of our new clients come from a neighbor's referral.",
-  },
+const signalLog = [
+  { v: "1.0", state: "TERMINATED", tone: "dead" },
+  { v: "2.0", state: "TERMINATED", tone: "dead" },
+  { v: "3.0", state: "STRIKED", tone: "dead" },
+  { v: "3.6", state: "LIVE", tone: "live" },
+  { v: "VAULT", state: "PERMANENT", tone: "vault" },
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical="/about/" schema={[breadcrumbSchema(crumbs)]}>
+<BaseLayout title={title} description={description} schema={schema}>
   <PageHero
-    eyebrow="Our Story"
-    title="Family-owned, Omaha-proud, obsessed with clean"
-    text="Huskins Cleaning started with a simple belief: people deserve an honest cleaning company that actually shows up and does the job right. Years later, that's still exactly who we are."
+    eyebrow="The Unit" jp="部隊" variant="amber"
+    title="The Unit"
+    lead="A veteran media collective built on one discipline — see it first, then tell the truth about it."
     crumbs={crumbs}
   />
 
-  <!-- Story -->
+  <!-- Story + dossier -->
   <section class="section">
-    <div class="container about-grid">
-      <div class="about-copy flow">
-        <span class="eyebrow">Who We Are</span>
-        <h2 class="h2">Built on hard work and a good name</h2>
-        <p>
-          We're the Huskins family, and cleaning is our craft. What began as a
-          local, hands-on operation here in Omaha has grown into a full-service
-          cleaning company trusted by homeowners, landlords, offices and
-          contractors across the metro — but our approach hasn't changed.
-        </p>
-        <p>
-          We treat every home and workplace like it's our own. That means
-          showing up on time, respecting your space, and leaving it noticeably
-          better than we found it. It's not complicated — it's just done right.
-        </p>
-        <p>
-          Being <strong>BBB-accredited with an A+ rating since 2020</strong> means
-          a lot to us. So does hearing a customer say we "restored their faith"
-          in finding honest, affordable help. That trust is something we protect
-          with every single visit.
-        </p>
-        <div class="btn-group mt-2">
-          <a href="/contact/" class="btn btn-primary">Work With Us</a>
-          <a href="/reviews/" class="btn btn-ghost">Read Reviews <Icon name="arrow" size={18} /></a>
+    <div class="container story">
+      <div class="story-copy">
+        <SectionHead
+          eyebrow="Who's Behind the Lens" jp="観測手" variant="red"
+          title="Operators, journalists, artists, and assorted degenerates."
+        />
+        <div class="flow mt-3">
+          <p class="lead">
+            The oldest job on any battlefield is watching. Long before the tools and
+            the noise, someone had to go forward of the line, find high ground, and
+            report — honestly — exactly what they saw. Everything downstream depends
+            on that one clean observation.
+          </p>
+          <p>
+            {site.brand} carries that job into the present. We point cameras where the
+            map goes grey, run long-form radio that doesn't flinch, and keep the record
+            when the platforms decide we never existed. It's gonzo, it's granular, and
+            it's stubbornly first-person — because the observation was always the point.
+          </p>
+          <p>
+            We're not a newsroom and we're not a brand consultancy. We're a unit: a
+            loose, loyal formation of people who'd rather show you the grey zone than
+            explain it to you from a desk.
+          </p>
         </div>
       </div>
 
-      <aside class="about-stats">
-        {trustPoints.map((t) => (
-          <div class="about-stat">
-            <span class="about-stat-num">{t.stat}</span>
-            <span class="about-stat-label">{t.label}</span>
-          </div>
-        ))}
-        <div class="about-badge">
-          <Icon name="award" size={22} />
-          <div>
-            <strong>BBB Accredited Business</strong>
-            <span>A+ Rating · Since 2020</span>
-          </div>
+      <aside class="dossier panel is-cyan mono">
+        <div class="dossier-head">
+          <span><span class="status-dot"></span> UNIT DOSSIER</span>
+          <span class="text-amber jp">機密</span>
         </div>
+        <dl>
+          <div><dt>CALLSIGN</dt><dd class="text-cyan">{site.callsign}</dd></div>
+          <div><dt>ROLE</dt><dd>FORWARD OBSERVER</dd></div>
+          <div><dt>DOCTRINE</dt><dd>OBSERVE · REPORT · ADVANCE</dd></div>
+          <div><dt>CHANNELS</dt><dd>MULTIPLE / MIRRORED</dd></div>
+          <div><dt>STATUS</dt><dd class="text-lime">● TRANSMITTING</dd></div>
+          <div><dt>MOTTO</dt><dd class="jp text-amber">{site.mottoJp}</dd></div>
+        </dl>
       </aside>
     </div>
   </section>
 
+  <!-- Pull quote -->
+  <section class="section-tight quote-band scanlines">
+    <div class="grid-floor"></div>
+    <div class="container container-narrow text-center">
+      <p class="pull-quote display">
+        “The most tactical skill on the battlefield is <span class="text-red">honesty</span>.”
+      </p>
+      <p class="pull-attr mono mt-2">— FIELD DOCTRINE // {site.mottoJp}</p>
+    </div>
+  </section>
+
   <!-- Values -->
-  <section class="section values-section">
+  <section class="section">
     <div class="container">
-      <div class="section-head is-center">
-        <span class="eyebrow">What We Stand For</span>
-        <h2 class="h2">The values behind every clean</h2>
-        <p class="lead">These aren't slogans on a wall — they're how we run every job, every day.</p>
-      </div>
+      <SectionHead
+        eyebrow="Rules of Engagement" jp="交戦規則" variant="amber"
+        title="Four rules we don't break" center
+      />
       <div class="grid grid-4 mt-6">
         {values.map((v) => (
-          <div class="card value-card">
-            <span class="icon-badge"><Icon name={v.icon} /></span>
-            <h3>{v.title}</h3>
-            <p>{v.text}</p>
+          <div class="panel value-card">
+            <span class="v-icon"><Icon name={v.icon} size={22} /></span>
+            <span class="v-jp jp">{v.jp}</span>
+            <h3 class="h3">{v.title}</h3>
+            <p class="muted">{v.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Promise -->
-  <section class="section">
-    <div class="container">
-      <div class="promise card">
-        <div class="promise-mark"><Icon name="thumbs-up" size={34} /></div>
-        <div>
-          <h2 class="h3">Our promise to you</h2>
-          <p class="mt-1">
-            If any part of your cleaning isn't up to standard, let us know within
-            24 hours and we'll return to make it right — no arguments, no extra
-            charge. Your satisfaction is guaranteed, because your trust is worth
-            far more to us than any single job.
-          </p>
-          <p class="promise-sign">— The Huskins Family</p>
-        </div>
+  <!-- The signal war -->
+  <section class="section signalwar-section scanlines">
+    <div class="container signalwar">
+      <SectionHead
+        eyebrow="The Signal War" jp="信号戦" variant="red"
+        title="They keep pulling the tower. We keep rebuilding it."
+        lead="Deplatformed, demonetized, nuked from orbit — then back online by morning. Getting erased stopped being a crisis and started being a design constraint."
+      />
+      <div class="signal-log mt-6">
+        {signalLog.map((s, i) => (
+          <>
+            <div class:list={["signal-node", s.tone]}>
+              <span class="sn-v mono">CH {s.v}</span>
+              <span class="sn-state mono">{s.state}</span>
+            </div>
+            {i < signalLog.length - 1 && <span class="signal-link" aria-hidden="true"></span>}
+          </>
+        ))}
       </div>
+      <p class="mt-4 muted signalwar-note">
+        The Vault exists because we assume, every single day, that the main channel is
+        already gone. Mirror the record. Don't trust the tower.
+      </p>
     </div>
   </section>
+
+  <Faq items={faqs} />
 
   <CtaBand />
 </BaseLayout>
 
 <style>
-  .about-grid {
+  .story {
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: clamp(1.6rem, 5vw, 4rem);
+    grid-template-columns: 1.4fr 0.9fr;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
     align-items: start;
   }
-  .about-copy p { color: var(--body); }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.9rem;
-    position: sticky;
-    top: 7rem;
-  }
-  .about-stat {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.2rem;
-    text-align: center;
-  }
-  .about-stat-num {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.8rem;
-    color: var(--brand-700);
-  }
-  .about-stat-label { font-size: 0.8rem; color: var(--muted); }
-  .about-badge {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: var(--brand-ink);
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 1.1rem 1.3rem;
-  }
-  .about-badge :global(svg) { color: var(--accent); flex: none; }
-  .about-badge strong { display: block; font-family: var(--font-display); }
-  .about-badge span { font-size: 0.82rem; color: #a6c3e2; }
+  @media (max-width: 900px) { .story { grid-template-columns: 1fr; } }
 
-  .values-section { background: var(--surface-2); }
-  .value-card h3 { margin: 0.8rem 0 0.4rem; font-size: 1.1rem; }
-  .value-card p { font-size: 0.92rem; color: var(--body); }
+  .dossier { font-size: 0.78rem; }
+  .dossier-head {
+    display: flex; align-items: center; justify-content: space-between;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    padding-bottom: 0.8rem; margin-bottom: 0.8rem; border-bottom: 1px solid var(--line);
+  }
+  .dossier dl { display: grid; gap: 0.7rem; margin: 0; }
+  .dossier dl > div {
+    display: grid; grid-template-columns: 8rem 1fr; gap: 0.6rem;
+    padding-bottom: 0.6rem; border-bottom: 1px dashed var(--line);
+  }
+  .dossier dt { color: var(--dim); letter-spacing: 0.1em; }
+  .dossier dd { margin: 0; color: var(--ink); }
+  .text-lime { color: var(--lime); }
+  .text-cyan { color: var(--cyan); }
 
-  .promise {
-    display: flex;
-    gap: 1.5rem;
-    align-items: start;
-    background: linear-gradient(135deg, var(--brand-50), var(--surface));
-    border-color: var(--brand-200);
+  .quote-band {
+    position: relative; overflow: hidden;
+    border-block: 1px solid var(--line);
+    background: radial-gradient(600px 300px at 50% 0%, rgba(255, 35, 64, 0.1), transparent 60%), var(--void-2);
   }
-  .promise-mark {
-    display: grid;
-    place-items: center;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background: var(--brand-100);
-    color: var(--brand-700);
-    flex: none;
+  .quote-band > .container { position: relative; z-index: 3; }
+  .pull-quote {
+    font-size: clamp(1.6rem, 1rem + 3vw, 3rem);
+    line-height: 1.2;
+    color: var(--ink);
+    text-wrap: balance;
   }
-  .promise-sign {
-    margin-top: 1rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--brand-800);
-  }
+  .pull-attr { color: var(--muted); letter-spacing: 0.16em; font-size: 0.72rem; }
 
-  @media (max-width: 900px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .about-stats { position: static; }
+  .value-card { display: flex; flex-direction: column; gap: 0.5rem; }
+  .v-icon {
+    display: grid; place-items: center; width: 3rem; height: 3rem;
+    color: var(--amber);
+    border: 1px solid rgba(255, 157, 0, 0.35);
+    background: rgba(255, 157, 0, 0.06);
+    margin-bottom: 0.3rem;
   }
-  @media (max-width: 520px) {
-    .promise { flex-direction: column; gap: 1rem; }
+  .v-jp { color: var(--amber); font-size: 0.8rem; letter-spacing: 0.14em; }
+  .value-card .muted { font-size: 0.92rem; }
+
+  .signalwar-section { border-top: 1px solid var(--line); background: var(--void-2); }
+  .signal-log {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;
   }
+  .signal-node {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    padding: 0.9rem 1.1rem; border: 1px solid var(--line); background: var(--surface);
+    min-width: 6rem;
+  }
+  .sn-v { font-size: 0.9rem; color: var(--ink); }
+  .sn-state { font-size: 0.62rem; letter-spacing: 0.12em; }
+  .signal-node.dead { opacity: 0.55; }
+  .signal-node.dead .sn-state { color: var(--dim); }
+  .signal-node.dead .sn-v { text-decoration: line-through; text-decoration-color: var(--red); }
+  .signal-node.live { border-color: var(--lime); box-shadow: 0 0 18px -6px var(--lime); }
+  .signal-node.live .sn-state { color: var(--lime); }
+  .signal-node.vault { border-color: var(--cyan); }
+  .signal-node.vault .sn-state { color: var(--cyan); }
+  .signal-link { width: 1.4rem; height: 1px; background: var(--line-strong); }
+  .signalwar-note { max-width: 60ch; }
+  @media (max-width: 620px) { .signal-link { display: none; } }
 </style>

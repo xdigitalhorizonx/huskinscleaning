@@ -1,20 +1,26 @@
 ---
-import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/inter";
+import "@fontsource/chakra-petch/400.css";
+import "@fontsource/chakra-petch/500.css";
+import "@fontsource/chakra-petch/600.css";
+import "@fontsource/chakra-petch/700.css";
+import "@fontsource/share-tech-mono/400.css";
+import "@fontsource-variable/orbitron";
+import "@fontsource/noto-sans-jp/500.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
-import { websiteSchema, localBusinessSchema } from "../lib/schema";
+import { organizationSchema, websiteSchema } from "../lib/schema";
 
 interface Props {
   title: string;
   description: string;
-  /** Path only, e.g. "/services/deep-cleaning/". Defaults to current URL. */
+  /** Path only, e.g. "/broadcast/". Defaults to current URL. */
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
-  /** Extra JSON-LD nodes for this page (breadcrumbs, service, faq...). */
+  /** Extra JSON-LD nodes for this page (breadcrumbs, article...). */
   schema?: object[];
 }
 
@@ -30,8 +36,7 @@ const {
 const canonicalURL = new URL(canonical ?? Astro.url.pathname, site.url).href;
 const ogImageURL = new URL(ogImage, site.url).href;
 
-// WebSite + LocalBusiness graph is emitted on every page for maximum coverage.
-const graph = [websiteSchema(), localBusinessSchema(), ...schema];
+const graph = [organizationSchema(), websiteSchema(), ...schema];
 ---
 
 <!doctype html>
@@ -44,10 +49,8 @@ const graph = [websiteSchema(), localBusinessSchema(), ...schema];
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <meta name="author" content={site.legalName} />
-    <meta name="theme-color" content="#0c2340" />
-    <meta name="geo.region" content="US-NE" />
-    <meta name="geo.placename" content="Omaha, Nebraska" />
+    <meta name="author" content={site.brand} />
+    <meta name="theme-color" content="#05060a" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

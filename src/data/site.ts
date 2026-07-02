@@ -1,393 +1,395 @@
 /**
- * Central business data — the single source of truth for the whole site.
+ * Central brand data — the single source of truth for the whole site.
  *
- * Every phone number, address, service description and testimonial is defined
- * here once and imported everywhere (header, footer, schema.org JSON-LD, page
- * copy). This guarantees NAP (Name / Address / Phone) consistency, which is one
- * of the strongest local-SEO ranking signals — and one of the biggest problems
- * on the current huskinsllc.com (the business is listed as "Huskins LLC",
- * "Huskins Services LLC" and "Huskins Cleaning & Remodeling Services" with two
- * different phone numbers across the web).
+ * FORWARD OBSERVATIONS GROUP — a veteran-run media collective and apparel
+ * brand, re-imagined here through a late-80s/90s mecha & cyberpunk anime lens.
+ * All copy is an original creative rebrand; it evokes the brand's real themes
+ * (forward-observer recon, front-line documentary work, and the "they-keep-
+ * pulling-our-signal" deplatforming saga) without restating disputed or
+ * unverified claims about real people or events.
  */
 
 export const site = {
-  /** Public brand name used in copy and titles. */
-  brand: "Huskins Cleaning",
-  /** Registered legal entity. */
-  legalName: "Huskins Services LLC",
-  /** Longer descriptive name for schema.org. */
-  longName: "Huskins Cleaning Services",
-  tagline: "Spotless Homes. Honest People.",
-  domain: "huskinsllc.com",
-  url: "https://huskinsllc.com",
-
-  phone: {
-    display: "(402) 249-0449",
-    href: "tel:+14022490449",
-    e164: "+14022490449",
-  },
-
-  email: "info@huskinsllc.com",
-
-  address: {
-    locality: "Omaha",
-    region: "NE",
-    regionName: "Nebraska",
-    postalCode: "68112",
-    country: "US",
-  },
-
-  /** Approx. geo center of the Omaha service area, for LocalBusiness schema. */
-  geo: {
-    latitude: 41.2565,
-    longitude: -95.9345,
-  },
-
-  /** Open 7 days, 7:00 AM – 9:00 PM. */
-  hours: {
-    label: "Mon–Sun: 7:00 AM – 9:00 PM",
-    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    opens: "07:00",
-    closes: "21:00",
-  },
-
-  founded: "2020",
-  bbb: {
-    accreditedSince: "2020-11-30",
-    rating: "A+",
-  },
-
-  /** Aggregate rating shown in schema + review page. Conservative, honest. */
-  rating: {
-    value: "5.0",
-    count: 27,
-  },
+  brand: "Forward Observations Group",
+  short: "FOG",
+  callsign: "FORWARD//OBSERVATIONS",
+  tagline: "Eyes forward of the line.",
+  /** Japanese motto used decoratively — "front-line observation". */
+  mottoJp: "前線観測",
+  description:
+    "Forward Observations Group is a veteran media collective broadcasting from the edge of the signal — field dispatches, long-form radio, and supply for the observant.",
+  domain: "forwardobservations.com",
+  url: "https://forwardobservations.com",
+  email: "comms@forwardobservations.com",
 
   social: {
-    // Populate when handles are confirmed. Left empty to avoid dead links.
-    facebook: "",
-    instagram: "",
-    google: "",
+    youtube: "https://youtube.com/@forwardobservations",
+    instagram: "https://instagram.com/forwardobservations",
+    spotify: "https://open.spotify.com/show/3RjQ8SnlvOiZMCt4ovSYEv",
+    x: "https://x.com/forwardobsgroup",
+    tiktok: "https://tiktok.com/@forwardobservations",
   },
 } as const;
 
-export type ServiceArea = {
-  name: string;
-  note?: string;
-};
+export type NavItem = { label: string; jp: string; href: string };
 
-/** Omaha metro communities served. Drives the Service Areas page + schema. */
-export const serviceAreas: ServiceArea[] = [
-  { name: "Omaha", note: "All neighborhoods, Downtown to West Omaha" },
-  { name: "Bellevue" },
-  { name: "Papillion" },
-  { name: "La Vista" },
-  { name: "Elkhorn" },
-  { name: "Bennington" },
-  { name: "Gretna" },
-  { name: "Ralston" },
-  { name: "Boys Town" },
-  { name: "Council Bluffs, IA" },
+export const nav: NavItem[] = [
+  { label: "Broadcast", jp: "放送", href: "/broadcast/" },
+  { label: "Dispatches", jp: "通信", href: "/dispatches/" },
+  { label: "Supply", jp: "補給", href: "/supply/" },
+  { label: "The Unit", jp: "部隊", href: "/about/" },
+  { label: "Contact", jp: "連絡", href: "/contact/" },
 ];
 
-export type Service = {
-  /** URL slug under /services/. */
+/** Telemetry-style stat readout. Deliberately brand-flavored, not literal metrics. */
+export const stats = [
+  { num: "24/7", label: "Signal Status", jp: "実況" },
+  { num: "150+", label: "Transmissions Logged", jp: "放送" },
+  { num: "09", label: "Channels Rebuilt", jp: "再建" },
+  { num: "03", label: "Continents Observed", jp: "前線" },
+];
+
+/** Katakana / mono ticker strings for the marquee. */
+export const ticker = [
+  { en: "SIGNAL ACQUIRED", jp: "信号取得" },
+  { en: "EYES ON", jp: "監視中" },
+  { en: "FORWARD OF THE LINE", jp: "前線" },
+  { en: "TRANSMISSION LIVE", jp: "放送中" },
+  { en: "OBSERVE // REPORT // ADVANCE", jp: "観測" },
+  { en: "THEY CUT IT — WE REBUILD IT", jp: "再建" },
+  { en: "STAND BY FOR HANDOFF", jp: "待機" },
+];
+
+export type Show = {
   slug: string;
-  /** Short label for nav + cards. */
-  title: string;
-  /** SEO <title>. */
-  metaTitle: string;
-  /** SEO meta description (~150-160 chars). */
-  metaDescription: string;
-  /** H1 for the page. */
-  heading: string;
-  /** One-line value prop used on cards + hero. */
+  name: string;
+  jp: string;
+  format: string;
+  cadence: string;
   tagline: string;
-  /** Longer intro paragraph. */
-  intro: string;
-  /** What's included / checklist bullets. */
-  includes: string[];
-  /** Ideal-for / use-cases. */
-  bestFor: string[];
-  /** Simple emoji/glyph used as the card icon key (see Icon component). */
+  desc: string;
+  color: "red" | "amber" | "cyan" | "violet";
   icon: string;
-  /** Local keyword phrases this page targets. */
-  keywords: string[];
 };
 
-export const services: Service[] = [
+export const shows: Show[] = [
   {
-    slug: "house-cleaning",
-    title: "House Cleaning",
-    metaTitle: "House Cleaning Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Reliable recurring house cleaning in Omaha, NE. Weekly, bi-weekly & monthly maid service from a trusted, family-owned team. Same crew every visit. Free quote.",
-    heading: "House Cleaning Services in Omaha",
-    tagline: "The same trusted crew, every single visit.",
-    intro:
-      "Come home to a spotless house without lifting a finger. Our recurring house cleaning keeps your Omaha home consistently fresh — kitchens, bathrooms, bedrooms and living spaces cleaned top to bottom by a background-checked team you'll get to know by name.",
-    includes: [
-      "Kitchens: counters, sinks, stovetop, exterior of appliances, cabinet fronts",
-      "Bathrooms: toilets, tubs, showers, sinks, mirrors, floors sanitized",
-      "Dusting of surfaces, sills, baseboards, blinds and light fixtures",
-      "Vacuuming of carpets and rugs, mopping of all hard floors",
-      "Beds made and trash emptied on request",
-      "A written checklist so nothing gets missed",
-    ],
-    bestFor: [
-      "Busy families and working professionals",
-      "Weekly, bi-weekly or monthly schedules",
-      "Homeowners who want the same crew each time",
-    ],
-    icon: "home",
-    keywords: [
-      "house cleaning Omaha",
-      "maid service Omaha NE",
-      "recurring house cleaning Omaha",
-      "residential cleaning Omaha",
+    slug: "the-podcast",
+    name: "The Forward Observations Podcast",
+    jp: "放送 // MAIN CHANNEL",
+    format: "Long-form audio + video",
+    cadence: "Weekly",
+    tagline: "Unfiltered radio from the collective.",
+    desc: "The flagship. Long-form conversation with operators, journalists, artists, and assorted degenerates — recorded like a night op and edited like a fever dream.",
+    color: "red",
+    icon: "headphones",
+  },
+  {
+    slug: "observation-post",
+    name: "Observation Post",
+    jp: "観測所 // FIELD",
+    format: "Documentary video",
+    cadence: "From the line",
+    tagline: "Cameras where the map goes grey.",
+    desc: "First-person field dispatches shot in the grey zones. No script, no anchor desk — just a forward observer, a lens, and whatever the day hands over.",
+    color: "amber",
+    icon: "film",
+  },
+  {
+    slug: "the-vault",
+    name: "Vault // Archives",
+    jp: "機密 // RECOVERED",
+    format: "Recovered uploads",
+    cadence: "When they pull it down",
+    tagline: "Everything they tried to delete.",
+    desc: "Deplatformed, demonetized, nuked from orbit — then re-uploaded. The Vault is the mirror that keeps the record when the algorithm decides you never existed.",
+    color: "cyan",
+    icon: "terminal",
+  },
+  {
+    slug: "night-orders",
+    name: "Night Orders",
+    jp: "夜間 // LIVE",
+    format: "Late livestream",
+    cadence: "After dark",
+    tagline: "Comms open. Filter off.",
+    desc: "The after-hours livestream. Call-ins, hot takes, and the kind of conversations that only happen once the sun's down and the chat's feral.",
+    color: "violet",
+    icon: "radio",
+  },
+];
+
+export type Episode = {
+  ep: string;
+  show: string;
+  title: string;
+  desc: string;
+  duration: string;
+  date: string;
+  tag: string;
+};
+
+export const episodes: Episode[] = [
+  {
+    ep: "157",
+    show: "The Forward Observations Podcast",
+    title: "Notes From a Dead Channel",
+    desc: "What it actually costs to get erased by a platform overnight — and why the signal keeps coming back anyway.",
+    duration: "1:48:12",
+    date: "2026-06-24",
+    tag: "MAIN",
+  },
+  {
+    ep: "OP-31",
+    show: "Observation Post",
+    title: "Static Over the Grey Zone",
+    desc: "Field notes from the edge of the map. Long silences, longer nights, and the discipline of watching.",
+    duration: "38:04",
+    date: "2026-06-17",
+    tag: "FIELD",
+  },
+  {
+    ep: "156",
+    show: "The Forward Observations Podcast",
+    title: "The Observer's Eye",
+    desc: "On seeing before you're seen — recon, patience, and the craft of calling it in.",
+    duration: "2:03:41",
+    date: "2026-06-10",
+    tag: "MAIN",
+  },
+  {
+    ep: "NO-88",
+    show: "Night Orders",
+    title: "Comms Open, Filter Off",
+    desc: "Late-night call-ins go completely sideways. You had to be there. Now you can be.",
+    duration: "2:57:19",
+    date: "2026-06-06",
+    tag: "LIVE",
+  },
+  {
+    ep: "V-012",
+    show: "Vault // Archives",
+    title: "Recovered: The Banned Cut",
+    desc: "Pulled within six hours of upload. Restored here in full. Watch it before it moves again.",
+    duration: "22:47",
+    date: "2026-05-30",
+    tag: "VAULT",
+  },
+  {
+    ep: "155",
+    show: "The Forward Observations Podcast",
+    title: "Kit, Coffee, and Catastrophe",
+    desc: "Gear philosophy, bad decisions, and the ritual of packing out before first light.",
+    duration: "1:39:55",
+    date: "2026-05-27",
+    tag: "MAIN",
+  },
+];
+
+export type Dispatch = {
+  slug: string;
+  title: string;
+  location: string;
+  date: string;
+  readTime: string;
+  tag: string;
+  classification: string;
+  excerpt: string;
+  body: string[];
+};
+
+export const dispatches: Dispatch[] = [
+  {
+    slug: "notes-from-a-dead-channel",
+    title: "Notes From a Dead Channel",
+    location: "UNDISCLOSED // THE INTERNET",
+    date: "2026-06-24",
+    readTime: "6 min",
+    tag: "SIGNAL",
+    classification: "OPEN SOURCE",
+    excerpt:
+      "They pulled the channel again. Ninety thousand hours of work, gone before breakfast. Here is what we've learned about dying on the internet and coming back.",
+    body: [
+      "The email always arrives at an ugly hour. A policy you didn't break. An appeal you can't win. And then the number — subscribers, views, years — resets to zero like it was never there.",
+      "We've been deplatformed enough times to treat it as weather now. You don't argue with a storm; you build for it. Mirrors, archives, backups of the backups. The Vault exists because we assume, every single day, that the main channel is already gone.",
+      "The lesson a forward observer learns first is that the position is temporary. You are always about to move. The signal is the same. You transmit from where you are, you assume the tower is compromised, and you keep a fallback plotted before you ever need it.",
+      "So they can cut it. They have. They will again. And somewhere on a server we control, the record keeps writing itself — because the observation was the whole point, and the observation doesn't stop just because someone flipped a switch.",
     ],
   },
   {
-    slug: "deep-cleaning",
-    title: "Deep Cleaning",
-    metaTitle: "Deep Cleaning Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Top-to-bottom deep cleaning in Omaha, NE. We scrub the built-up grime standard cleans miss — baseboards, grout, appliances & more. Book your deep clean today.",
-    heading: "Deep Cleaning Services in Omaha",
-    tagline: "For when your home needs a true reset.",
-    intro:
-      "Our deep clean reaches the places everyday cleaning skips. It's the perfect first visit before starting a recurring plan, or a seasonal refresh that makes your whole Omaha home feel brand new. We work methodically, room by room, until every detail shines.",
-    includes: [
-      "Everything in a standard clean, done more thoroughly",
-      "Baseboards, door frames, trim and switch plates hand-wiped",
-      "Inside microwave and exterior of all appliances degreased",
-      "Bathroom grout, tile and hard-water buildup scrubbed",
-      "Detailed dusting of blinds, vents, ceiling fans and fixtures",
-      "Cabinet fronts, handles and high-touch surfaces sanitized",
-    ],
-    bestFor: [
-      "First-time cleans and seasonal refreshes",
-      "Homes that haven't been professionally cleaned recently",
-      "Before hosting guests or a special event",
-    ],
-    icon: "sparkle",
-    keywords: [
-      "deep cleaning Omaha",
-      "deep cleaning services Omaha NE",
-      "spring cleaning Omaha",
+    slug: "the-observers-eye",
+    title: "The Observer's Eye",
+    location: "OBSERVATION POST // FORWARD",
+    date: "2026-06-17",
+    readTime: "8 min",
+    tag: "FIELD",
+    classification: "FIELD NOTE",
+    excerpt:
+      "Forward observation is not about the shot. It's about seeing clearly, first, and reporting it exactly as it is. The most tactical skill on the battlefield is honesty.",
+    body: [
+      "The oldest job on any battlefield is watching. Before the tools, before the noise, someone had to go forward of the line, find high ground, and tell the truth about what they saw. Everything downstream depends on that one honest report.",
+      "It sounds simple until you try it under pressure. The eye wants to see what it hopes for. The forward observer's entire discipline is refusing that — separating the thing that is happening from the thing you want to be happening, and calling in only the first one.",
+      "We carry that discipline into everything, including the camera. A lens can lie faster than a mouth. So we keep the frame wide, we keep the timestamp honest, and we let the viewer stand where we stood.",
+      "Observe. Report. Advance. In that order, always. The advancing is the easy part. It's the observing — clean, unflinching, without the flattering edit — that most people can't do.",
     ],
   },
   {
-    slug: "move-in-move-out-cleaning",
-    title: "Move In / Move Out Cleaning",
-    metaTitle: "Move In / Move Out Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Move-out & move-in cleaning in Omaha, NE. Empty-home deep clean to help you get your deposit back or start fresh. Landlord & realtor friendly. Get a free quote.",
-    heading: "Move In / Move Out Cleaning in Omaha",
-    tagline: "Leave it spotless. Start somewhere fresh.",
-    intro:
-      "Moving is stressful enough. We clean empty homes and apartments from top to bottom so you can hand over the keys with confidence — or walk into your new Omaha place knowing it's truly clean. Popular with renters chasing a deposit, homeowners preparing to sell, and landlords turning a unit.",
-    includes: [
-      "Full interior deep clean of the empty property",
-      "Inside cabinets, drawers, closets and shelving",
-      "Inside oven and refrigerator on request",
-      "All appliances, counters and fixtures degreased and sanitized",
-      "Baseboards, doors, walls spot-cleaned, floors vacuumed and mopped",
-      "Bathrooms fully scrubbed and disinfected",
-    ],
-    bestFor: [
-      "Renters wanting their full deposit back",
-      "Homeowners preparing a house for sale",
-      "Landlords, realtors and property managers",
-    ],
-    icon: "box",
-    keywords: [
-      "move out cleaning Omaha",
-      "move in cleaning Omaha NE",
-      "apartment cleaning Omaha",
+    slug: "static-over-the-grey-zone",
+    title: "Static Over the Grey Zone",
+    location: "GREY ZONE // EASTERN LINE",
+    date: "2026-06-10",
+    readTime: "7 min",
+    tag: "FIELD",
+    classification: "RECOVERED",
+    excerpt:
+      "Long silences, longer nights. A field note on waiting — the ninety-nine percent of forward work nobody puts in the highlight reel.",
+    body: [
+      "Nobody warns you about the boredom. The reel is all motion and noise, but the reality is a cold position and a lot of nothing, and the nothing is where the actual work lives.",
+      "You learn the terrain by staring at it until it stops being scenery. A tree line becomes a set of firing positions. A silence becomes a schedule. Patience is a weapon system, and almost nobody trains it.",
+      "The radio hisses. You wait. Somewhere out past the wire, the day is deciding what it wants to be, and your only job is to still be watching when it makes up its mind.",
+      "That's the part we try to put on camera that never quite survives the edit. The waiting. The grey. The specific texture of a night where the most important thing you do is simply not look away.",
     ],
   },
   {
-    slug: "commercial-cleaning",
-    title: "Commercial & Office Cleaning",
-    metaTitle: "Commercial & Office Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Dependable commercial & office cleaning in Omaha, NE. Janitorial service for offices, clinics & retail on a schedule that fits your business. Request a quote.",
-    heading: "Commercial & Office Cleaning in Omaha",
-    tagline: "A clean workplace your team and clients will notice.",
-    intro:
-      "First impressions matter. We keep Omaha offices, clinics, retail spaces and small commercial buildings clean, sanitary and presentable — on a nightly, weekly or custom schedule that works around your business hours. Reliable janitorial service you can set and forget.",
-    includes: [
-      "Reception, offices, break rooms and common areas cleaned",
-      "Restrooms cleaned, disinfected and restocked",
-      "Trash and recycling collected and liners replaced",
-      "High-touch points — door handles, switches, counters — sanitized",
-      "Floors vacuumed, swept and mopped throughout",
-      "Flexible after-hours scheduling, 7 days a week",
-    ],
-    bestFor: [
-      "Offices, clinics and professional suites",
-      "Retail storefronts and showrooms",
-      "Property managers needing a reliable janitorial partner",
-    ],
-    icon: "building",
-    keywords: [
-      "commercial cleaning Omaha",
-      "office cleaning Omaha NE",
-      "janitorial services Omaha",
-    ],
-  },
-  {
-    slug: "post-construction-cleaning",
-    title: "Post-Construction Cleaning",
-    metaTitle: "Post-Construction Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Post-construction & renovation cleanup in Omaha, NE. We remove dust, debris & residue so your new build or remodel is move-in ready. Contractor friendly. Free quote.",
-    heading: "Post-Construction Cleaning in Omaha",
-    tagline: "From dusty job site to move-in ready.",
-    intro:
-      "New construction and remodels leave behind fine dust and debris that ordinary cleaning can't handle. Our post-construction crew clears it all — so builders, contractors and homeowners across Omaha can hand over a finished space that looks as good as the work that went into it.",
-    includes: [
-      "Removal of construction dust from every surface, including high areas",
-      "Sticker, adhesive, paint fleck and residue removal",
-      "Windows, tracks, sills and frames cleaned",
-      "Fixtures, cabinets and appliances detailed inside and out",
-      "Floors vacuumed, scrubbed and finished",
-      "Final punch-list clean so the space is truly move-in ready",
-    ],
-    bestFor: [
-      "Home builders and general contractors",
-      "Kitchen, bath and whole-home remodels",
-      "New commercial build-outs",
-    ],
-    icon: "hardhat",
-    keywords: [
-      "post construction cleaning Omaha",
-      "construction cleanup Omaha NE",
-      "renovation cleaning Omaha",
-    ],
-  },
-  {
-    slug: "pressure-washing",
-    title: "Pressure Washing",
-    metaTitle: "Pressure Washing Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Exterior pressure washing in Omaha, NE. Driveways, sidewalks, patios, siding & fences restored to like-new. Boost your curb appeal — get a free pressure washing quote.",
-    heading: "Pressure Washing Services in Omaha",
-    tagline: "Blast away years of grime in an afternoon.",
-    intro:
-      "Green algae, mud, mildew and road grime build up on every exterior surface. Our pressure washing restores your Omaha property's curb appeal — driveways, walkways, patios, siding and fences come back looking years younger, without you touching a hose.",
-    includes: [
-      "Concrete driveways, sidewalks and patios",
-      "Vinyl, wood and composite siding",
-      "Fences, decks and railings",
-      "Porches, steps and entryways",
-      "Rust, algae, mildew and mud removal",
-      "Careful, surface-appropriate pressure to avoid damage",
-    ],
-    bestFor: [
-      "Boosting curb appeal before selling",
-      "Annual spring and fall exterior refreshes",
-      "Homeowners and commercial properties alike",
-    ],
-    icon: "spray",
-    keywords: [
-      "pressure washing Omaha",
-      "power washing Omaha NE",
-      "driveway cleaning Omaha",
+    slug: "supply-lines",
+    title: "Supply Lines",
+    location: "SUPPLY // HOME STATION",
+    date: "2026-05-27",
+    readTime: "5 min",
+    tag: "SUPPLY",
+    classification: "OPEN SOURCE",
+    excerpt:
+      "Why the patch on your plate carrier and the coffee in your hand are the same conversation. A short piece on kit, ritual, and belonging to something.",
+    body: [
+      "Gear culture gets mocked by people who've never depended on their gear. But every patch, every hat, every sticker on a hard case is a small flag — a way of saying I was there, I'm one of these, this is my tribe.",
+      "We make the stuff we'd actually wear. That's the whole design brief. If it wouldn't survive a real week — packed, rained on, forgotten in a truck — it doesn't ship.",
+      "The ritual matters too. Packing out before light. The coffee that tastes like a decision. The same three things always in the same three pockets. Supply isn't shopping; it's the quiet system that keeps you moving.",
+      "So yeah, it's a t-shirt. It's also a signal. You see it across a room and you already know something true about the person wearing it. That's worth more than the cotton.",
     ],
   },
 ];
 
-export function getService(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug);
+export function getDispatch(slug: string): Dispatch | undefined {
+  return dispatches.find((d) => d.slug === slug);
 }
 
-export type Testimonial = {
-  quote: string;
-  author: string;
-  location: string;
-  service: string;
+export type Product = {
+  slug: string;
+  name: string;
+  type: string;
+  price: string;
+  status: "IN STOCK" | "LOW STOCK" | "SOLD OUT" | "DROP";
+  colorway: string;
+  jp: string;
 };
 
-/**
- * Real, lightly-formatted customer sentiment sourced from the business's public
- * reviews (BBB / directory listings). Names are shown as first name + initial
- * to match how they appear publicly.
- */
-export const testimonials: Testimonial[] = [
+export const products: Product[] = [
   {
-    quote:
-      "I use Huskins for cleaning my home and repairs — they're awesome! On time, affordable, and they do a great job every time.",
-    author: "Tanya M.",
-    location: "Omaha, NE",
-    service: "Recurring House Cleaning",
+    slug: "observer-tee",
+    name: "Observer Tee",
+    type: "T-Shirt · Heavyweight",
+    price: "$34",
+    status: "IN STOCK",
+    colorway: "Void Black / Terminal Red",
+    jp: "観測",
   },
   {
-    quote:
-      "Hired Huskins to deep clean my house and I couldn't be happier. Now my home sparkles! I highly recommend them.",
-    author: "Denise R.",
-    location: "Bellevue, NE",
-    service: "Deep Cleaning",
+    slug: "nvg-skull-hoodie",
+    name: "NVG Skull Hoodie",
+    type: "Hoodie · Midweight Fleece",
+    price: "$78",
+    status: "LOW STOCK",
+    colorway: "Void Black / Amber",
+    jp: "髑髏",
   },
   {
-    quote:
-      "These days it's hard to find affordable and honest people, but the Huskins team really restored my faith. Prompt, courteous and thorough.",
-    author: "Gary L.",
-    location: "Papillion, NE",
-    service: "Move-Out Cleaning",
+    slug: "forward-cap",
+    name: "Forward-of-the-Line Cap",
+    type: "Structured Cap",
+    price: "$32",
+    status: "IN STOCK",
+    colorway: "OD Green / Red Stitch",
+    jp: "前進",
   },
   {
-    quote:
-      "Quick to respond, very professional and incredibly thorough. Our office has never looked better and the crew is always reliable.",
-    author: "Monica T.",
-    location: "Omaha, NE",
-    service: "Office Cleaning",
+    slug: "signal-death-patch",
+    name: "Signal Death Patch",
+    type: "PVC Morale Patch",
+    price: "$12",
+    status: "DROP",
+    colorway: "Glow Cyan",
+    jp: "信号",
+  },
+  {
+    slug: "grey-zone-stickers",
+    name: "Grey Zone Sticker Pack",
+    type: "Vinyl · 8-Pack",
+    price: "$8",
+    status: "IN STOCK",
+    colorway: "Mixed",
+    jp: "灰色地帯",
+  },
+  {
+    slug: "ronin-trauma-pouch",
+    name: "Ronin Trauma Pouch",
+    type: "Laser-Cut MOLLE",
+    price: "$45",
+    status: "SOLD OUT",
+    colorway: "Wolf Grey",
+    jp: "浪人",
   },
 ];
 
-export type Faq = {
-  question: string;
-  answer: string;
-};
+export type Value = { title: string; jp: string; icon: string; text: string };
+
+export const values: Value[] = [
+  {
+    title: "Observe First",
+    jp: "観測",
+    icon: "eye",
+    text: "See it clearly before you say anything about it. The report is only worth the honesty behind it.",
+  },
+  {
+    title: "Own the Signal",
+    jp: "信号",
+    icon: "broadcast",
+    text: "Build like the tower's already down. Mirror everything, archive everything, answer to no one platform.",
+  },
+  {
+    title: "Forward, Always",
+    jp: "前進",
+    icon: "compass",
+    text: "The position is temporary; the direction isn't. When the line moves, we move with it — toward the edge, not away.",
+  },
+  {
+    title: "Bring the Others",
+    jp: "部隊",
+    icon: "users",
+    text: "None of this works solo. It's a unit, a tribe, a chat, a comment section that would take a bullet for each other.",
+  },
+];
+
+export type Faq = { question: string; answer: string };
 
 export const faqs: Faq[] = [
   {
-    question: "How much does house cleaning cost in Omaha?",
+    question: "Is Forward Observations Group real, or is this a bit?",
     answer:
-      "Every home is different, so we give you an honest, no-obligation quote based on the size of your home, its condition, and how often you'd like us to clean. Recurring plans (weekly or bi-weekly) cost less per visit than one-time cleans. Call (402) 249-0449 or request a free quote online and we'll get you a clear price fast.",
+      "Both, on purpose. It's a genuine veteran-run media collective and apparel brand — and it wears its gonzo self-mythology out loud. The camera is real. The attitude is a choice.",
   },
   {
-    question: "Are you insured, and can I trust who's in my home?",
+    question: "Where can I actually watch and listen?",
     answer:
-      "Yes. Huskins Services LLC is a fully insured, BBB-accredited business with an A+ rating, accredited since 2020. We're a local, family-owned team — you'll see the same trusted, background-checked crew, not a rotating cast of strangers.",
+      "Everywhere that hasn't banned us this week, and the Vault for everywhere that has. The main podcast runs weekly; field dispatches and livestreams drop on their own schedule. Follow the channels and mirror what you like — you never know how long it stays up.",
   },
   {
-    question: "Do I need to be home during the cleaning?",
+    question: "Why do your channels keep disappearing?",
     answer:
-      "Not at all. Many of our clients give us access instructions and go about their day. We're open 7 days a week from 7:00 AM to 9:00 PM, so we can work around your schedule — whether you're home or not.",
+      "Deplatforming, demonetization, and the occasional mysterious 'community guidelines' violation. We treat it as weather. The Vault exists so the record survives the storm, and we always keep a fallback plotted before we need it.",
   },
   {
-    question: "What areas around Omaha do you serve?",
+    question: "Do you actually ship the merch, or is it vaporware?",
     answer:
-      "We serve the entire Omaha metro, including Bellevue, Papillion, La Vista, Elkhorn, Bennington, Gretna, Ralston and Council Bluffs, Iowa. Not sure if you're in range? Just ask — we're happy to check.",
+      "It ships. Drops are limited by design — when a colorway sells out it's usually gone for good, so if you see something in stock, that's the signal to move.",
   },
-  {
-    question: "Do you bring your own cleaning supplies and equipment?",
-    answer:
-      "Yes, we arrive fully equipped with professional-grade supplies and equipment. If you prefer specific or eco-friendly products for your home, just let us know and we'll happily accommodate.",
-  },
-  {
-    question: "What if I'm not happy with the cleaning?",
-    answer:
-      "Your satisfaction is guaranteed. If something isn't right, let us know within 24 hours and we'll come back to make it right — no hassle. Getting it done right is the whole point.",
-  },
-];
-
-/** Trust signals shown in the trust bar / why-us sections. */
-export const trustPoints = [
-  { stat: "A+", label: "BBB Accredited Rating" },
-  { stat: "7 Days", label: "A Week, 7AM–9PM" },
-  { stat: "100%", label: "Satisfaction Guaranteed" },
-  { stat: "Local", label: "Family-Owned in Omaha" },
 ];

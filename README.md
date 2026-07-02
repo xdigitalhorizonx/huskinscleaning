@@ -1,113 +1,83 @@
-# Huskins Cleaning — Website Rebuild
+# Forward Observations Group — Website
 
-A complete, agency-grade rebuild of the marketing website for **Huskins Cleaning
-Services** (Huskins Services LLC) — a family-owned, BBB A+ cleaning company in
-**Omaha, NE**.
+A flashy, anime-throwback rebrand of the website for **Forward Observations Group
+(FOG)** — a veteran media collective. The design is an original homage to late-80s
+/ 90s mecha & cyberpunk anime (Evangelion-style NERV HUDs, Akira's neon Neo-Tokyo):
+void black, NERV amber, Akira red, cyan signage, scanlines, glitch text, targeting
+reticles, katakana accents, and a synthwave grid.
 
-Built as a fast, SEO-first static site with [Astro](https://astro.build) and a
-bespoke, hand-authored design system. No page builders, no bloated theme — just
-clean, conversion-focused pages that load instantly and rank well.
-
----
-
-## Why the rebuild — what the old site was doing badly
-
-The current site at `huskinsllc.com` was analyzed alongside its top Omaha
-competitors. The recurring problems:
-
-1. **Inconsistent NAP (Name / Address / Phone).** The business appears online as
-   "Huskins LLC," "Huskins Services LLC," and "Huskins Cleaning & Remodeling
-   Services," with two different phone numbers floating across directories. NAP
-   consistency is one of the strongest local-SEO signals, and inconsistency
-   actively hurts local-pack rankings.
-   → **Fixed:** a single source of truth (`src/data/site.ts`) feeds every phone
-   number, address, hour and business name across the whole site and its
-   schema.org markup.
-
-2. **Competing on "affordable," not on trust.** The old title tags led with
-   "Affordable House Cleaning" — a race to the bottom against national
-   franchises (MaidPro, The Maids, Molly Maid) that outspend a local shop on
-   ads. Small local businesses win on *trust, honesty and relationship*, which
-   is exactly what Huskins' own reviews praise ("hard to find affordable and
-   honest people… restored my faith").
-   → **Fixed:** the whole site is positioned around *trusted, local,
-   family-owned, same-crew-every-visit, BBB A+*, with price framed as
-   "honest/fair" rather than "cheapest."
-
-3. **Thin / weak on-page SEO.** Generic titles, "Omaha Ne" mis-capitalized,
-   little structured data, and no clear service-area targeting.
-   → **Fixed:** every page has a unique, keyword-targeted title + meta
-   description, canonical URLs, Open Graph/Twitter cards, breadcrumb +
-   `LocalBusiness`/`Service`/`FAQPage` JSON-LD, a generated sitemap and
-   `robots.txt`, plus a dedicated **Service Areas** page targeting each suburb.
-
-4. **No clear conversion path.** Weak calls-to-action and no obvious way to get a
-   quote.
-   → **Fixed:** a persistent phone CTA + "Free Quote" button in the header, a
-   real quote form, sticky quote cards on service pages, and CTA bands on every
-   page.
-
-5. **Dated, low-trust presentation.** Not the polished, credible look today's
-   customers expect before letting someone into their home.
-   → **Fixed:** a modern, cohesive "fresh water + trust" theme (deep teal +
-   warm amber), custom iconography, testimonials, trust bars and guarantees.
-
-### Competitive landscape (Omaha)
-
-Omaha house-cleaning search is dominated by national franchises leaning on
-"process" branding — **MaidPro** ("49-Point Checklist"), **The Maids**
-("22-Step Cleaning Process," ~50 years), plus **Molly Maid**, **Maids & More**
-and **ClearWater Clean**. Huskins' edge is the opposite of a franchise: a local,
-honest, family-run team, the *same* crew each visit, flexible 7-days-a-week
-scheduling (7am–9pm), BBB A+ accreditation, and one company for cleaning **plus**
-pressure washing and remodeling. The new site leans into every one of those
-differentiators.
+Built as a fast, static site with [Astro](https://astro.build) and a bespoke,
+hand-authored design system. Every "flashy" effect is pure CSS/SVG — no copyrighted
+artwork, no heavy JS, and fully self-contained.
 
 ---
 
-## What's included
+## Design language
 
-**13 SEO-optimized pages:**
+- **Palette** — void black `#05060a`, Akira red `#ff2340` (energy / danger),
+  NERV amber `#ff9d00` (HUD framing), cyan `#22e0ff` (signage), Eva purple, and
+  terminal lime, plus hazard yellow/black stripes.
+- **Type** — *Chakra Petch* (display / HUD), *Share Tech Mono* (terminal
+  readouts), *Orbitron* (numerals), *Noto Sans JP* (katakana / kanji accents),
+  and *Inter* (body).
+- **Motifs** — an animated radar/observation console, a live UTC HUD clock, a
+  katakana marquee ticker, targeting-reticle panels, glitch headlines, and the
+  brand's NVG-skull reimagined as an original hexagonal mecha emblem.
 
-- **Home** — hero, trust bar, services, why-us, 3-step process, testimonials,
-  service areas, FAQ, CTA.
-- **Services hub** + 6 service pages: House Cleaning, Deep Cleaning,
-  Move In / Move Out, Commercial & Office, Post-Construction, Pressure Washing.
-- **About**, **Service Areas**, **Reviews**, **Contact** (with quote form + map),
-  and a branded **404**.
+The whole system lives in `src/styles/global.css` (design tokens + utilities) and
+a set of small Astro components.
 
-**SEO & performance:**
+---
 
-- Per-page titles, meta descriptions, canonical URLs, OG/Twitter cards.
-- schema.org JSON-LD: `CleaningService`/`LocalBusiness`, `WebSite`, `Service`,
-  `BreadcrumbList`, `FAQPage`, `AggregateRating`, `OpeningHours`, `areaServed`.
-- Auto-generated `sitemap-index.xml` + `robots.txt`.
-- Ships almost zero JavaScript; self-hosted variable fonts; accessible markup
-  (skip link, semantic landmarks, focus states, reduced-motion support).
+## Content & themes
+
+The copy is an original creative rebrand that leans into FOG's real, distinctive
+themes — the *forward observer* (eyes ahead of the line, report it honestly), the
+front-line documentary work, and the "they-keep-pulling-our-channel" deplatforming
+saga — without restating disputed or unverified claims. Field locations are kept
+deliberately classified/atmospheric.
+
+**Pages (11 routes):**
+
+- **Home** — showpiece hero + radar console, stats, manifesto, shows, latest
+  transmissions, dispatches, supply preview, CTA.
+- **Broadcast** — the four channels + full transmission log.
+- **Dispatches** — index + per-article template (`/dispatches/[slug]`).
+- **Supply** — merch catalog with live-drop banner and supply doctrine.
+- **The Unit (About)** — dossier, pull quote, rules of engagement, the "signal
+  war" channel timeline, FAQ.
+- **Contact** — a secure-terminal comms form (mailto) + all frequencies.
+- **404** — "Signal Lost."
 
 ---
 
 ## Tech stack
 
 - **Astro 5** — static output, component-based, near-zero client JS.
-- **Hand-authored CSS design system** (`src/styles/global.css`) — design tokens,
-  fluid type scale, component classes. No CSS framework dependency.
+- **Hand-authored CSS design system** (`src/styles/global.css`).
 - **@astrojs/sitemap** — sitemap generation.
-- **Fontsource** — self-hosted *Plus Jakarta Sans* (display) + *Inter* (body).
+- **Fontsource** — self-hosted Chakra Petch, Share Tech Mono, Orbitron, Noto Sans
+  JP, and Inter.
 - **sharp** — build-time generation of the OG image and app icons.
+
+SEO is preserved from the original scaffold: per-page titles / meta / canonical /
+OG + Twitter cards, `Organization` + `WebSite` + `BreadcrumbList` + `Article` +
+`FAQPage` JSON-LD, an auto-generated `sitemap-index.xml`, and `robots.txt`.
+Accessibility: skip link, semantic landmarks, focus states, and full
+`prefers-reduced-motion` support (all animations collapse when requested).
 
 ## Project structure
 
 ```
 src/
-  data/site.ts          # single source of truth: NAP, services, testimonials, FAQs, areas
-  lib/schema.ts         # schema.org JSON-LD builders
-  layouts/BaseLayout.astro   # <head> SEO, header, footer wrapper
-  components/           # Header, Footer, Icon, ServiceCard, QuoteForm, CTA, FAQ, etc.
-  pages/                # index, about, contact, reviews, service-areas, services/[slug]
-  styles/global.css     # design system
-public/                 # robots.txt, favicon, og-image, app icons, manifest
-scripts/                # generate-og.mjs, generate-icons.mjs
+  data/site.ts            # single source of truth: brand, shows, episodes, dispatches, products
+  lib/schema.ts           # schema.org JSON-LD builders
+  layouts/BaseLayout.astro # <head> SEO, fonts, header/footer wrapper
+  components/             # Header, Footer, Logo, Marquee, ShowCard, DispatchCard, ProductCard, ...
+  pages/                  # index, broadcast, dispatches/[slug], supply, about, contact, 404
+  styles/global.css       # the gonzo-cyber design system
+public/                   # robots.txt, favicon, og-image, app icons, manifest
+scripts/                  # generate-og.mjs, generate-icons.mjs
 ```
 
 ## Local development
@@ -122,33 +92,25 @@ npm run preview    # serve the production build locally
 Regenerate brand images after editing the scripts:
 
 ```bash
-node scripts/generate-og.mjs
 node scripts/generate-icons.mjs
+node scripts/generate-og.mjs
 ```
 
 ## Deployment
 
-The output in `dist/` is fully static and can be hosted anywhere (Vercel,
-Netlify, Cloudflare Pages, S3, etc.). On Vercel, the Astro preset is detected
-automatically — no config needed.
+The output in `dist/` is fully static and hosts anywhere (Vercel, Netlify,
+Cloudflare Pages, S3, etc.).
 
 ---
 
-## Before go-live — please verify
+## Notes for go-live
 
-A few business details were inferred from public listings and should be
-confirmed by the owner:
-
-- [ ] **Phone number** — using `(402) 249-0449` (the number tied to
-      `huskinsllc.com`). A second number, `(402) 813-9499`, also appears on some
-      listings. Confirm the correct one in `src/data/site.ts`.
-- [ ] **Email** — `info@huskinsllc.com` is assumed from the domain. Update if
-      different.
-- [ ] **Quote form delivery** — the form validates and confirms client-side. To
-      receive submissions by email, set `ENDPOINT` in
-      `src/components/QuoteForm.astro` to a Formspree/Web3Forms URL (2-minute
-      setup). Until then, the phone number is the primary contact path.
-- [ ] **Social links** — add Facebook/Instagram/Google handles in
-      `src/data/site.ts` (`site.social`) to light up footer links.
-- [ ] **Reviews / rating** — testimonials are drawn from public review sentiment;
-      the aggregate rating is conservative. Update with verified figures.
+- **Social links & podcast URL** live in `src/data/site.ts` (`site.social`) — swap
+  in the official handles before launch.
+- **Contact form** composes a `mailto:` to `comms@forwardobservations.com`. Point
+  it at a real inbox, or wire it to a Formspree/Web3Forms endpoint in
+  `src/pages/contact.astro`.
+- **Shows, episodes, dispatches, and products** in `src/data/site.ts` are an
+  editorial rebrand concept — replace with the real catalog when ready. The
+  footer notes that transmissions are dramatized.
+- **Domain** is set to `https://forwardobservations.com` in `astro.config.mjs`.

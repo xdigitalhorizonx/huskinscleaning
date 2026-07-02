@@ -1,105 +1,46 @@
 /**
- * schema.org JSON-LD builders.
- *
- * Structured data is how Google understands a local service business:
- * name, phone, hours, area served, services and ratings. Emitting a correct
- * LocalBusiness graph is one of the highest-leverage SEO fixes for a site like
- * this — it powers rich results, the local pack and knowledge panels.
+ * schema.org JSON-LD builders for Forward Observations Group.
+ * Emits an Organization + WebSite graph site-wide, plus per-page helpers
+ * for breadcrumbs and articles (dispatches).
  */
-import { site, services, serviceAreas, faqs } from "../data/site";
+import { site } from "../data/site";
 
 const ORG_ID = `${site.url}/#organization`;
 
-/** The core LocalBusiness / CleaningService entity, referenced by other nodes. */
-export function localBusinessSchema() {
+/** Core Organization entity, referenced by other nodes. */
+export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["CleaningService", "LocalBusiness"],
+    "@type": "Organization",
     "@id": ORG_ID,
-    name: site.longName,
-    legalName: site.legalName,
-    alternateName: site.brand,
-    description:
-      "Family-owned, BBB-accredited residential and commercial cleaning company serving Omaha, NE. House cleaning, deep cleaning, move-in/out, office cleaning, post-construction cleanup and pressure washing.",
+    name: site.brand,
+    alternateName: site.short,
+    description: site.description,
     url: site.url,
-    telephone: site.phone.e164,
     email: site.email,
-    priceRange: "$$",
-    image: `${site.url}/og-image.png`,
-    logo: `${site.url}/favicon.svg`,
     slogan: site.tagline,
-    foundingDate: site.founded,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: site.address.locality,
-      addressRegion: site.address.region,
-      postalCode: site.address.postalCode,
-      addressCountry: site.address.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.geo.latitude,
-      longitude: site.geo.longitude,
-    },
-    areaServed: serviceAreas.map((a) => ({
-      "@type": "City",
-      name: a.name,
-    })),
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [...site.hours.days],
-        opens: site.hours.opens,
-        closes: site.hours.closes,
-      },
+    logo: `${site.url}/icon-512.png`,
+    image: `${site.url}/og-image.png`,
+    sameAs: [
+      site.social.youtube,
+      site.social.instagram,
+      site.social.spotify,
+      site.social.x,
+      site.social.tiktok,
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: site.rating.value,
-      reviewCount: site.rating.count,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    makesOffer: services.map((s) => ({
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: s.title,
-        url: `${site.url}/services/${s.slug}/`,
-      },
-    })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Cleaning Services",
-      itemListElement: services.map((s) => ({
-        "@type": "OfferCatalog",
-        name: s.title,
-      })),
-    },
   };
 }
 
-/** Per-service Service schema linked back to the org as provider. */
-export function serviceSchema(slug: string) {
-  const s = services.find((x) => x.slug === slug);
-  if (!s) return null;
+/** WebSite schema (helps with site name in search). */
+export function websiteSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: s.title,
-    name: `${s.title} in Omaha, NE`,
-    description: s.metaDescription,
-    url: `${site.url}/services/${s.slug}/`,
-    provider: { "@id": ORG_ID },
-    areaServed: serviceAreas.map((a) => ({ "@type": "City", name: a.name })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `${s.title} — what's included`,
-      itemListElement: s.includes.map((item) => ({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: item },
-      })),
-    },
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.brand,
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en-US",
   };
 }
 
@@ -117,8 +58,27 @@ export function breadcrumbSchema(crumbs: { name: string; url: string }[]) {
   };
 }
 
+/** Article schema for a dispatch. */
+export function articleSchema(a: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: a.title,
+    description: a.description,
+    url: a.url.startsWith("http") ? a.url : `${site.url}${a.url}`,
+    datePublished: a.datePublished,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+  };
+}
+
 /** FAQPage schema — powers the FAQ rich result. */
-export function faqSchema(items = faqs) {
+export function faqSchema(items: { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -127,18 +87,5 @@ export function faqSchema(items = faqs) {
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
-  };
-}
-
-/** WebSite schema (helps with site name in search). */
-export function websiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${site.url}/#website`,
-    url: site.url,
-    name: site.brand,
-    publisher: { "@id": ORG_ID },
-    inLanguage: "en-US",
   };
 }
