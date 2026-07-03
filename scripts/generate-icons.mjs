@@ -1,6 +1,6 @@
 /**
  * Generates PWA / apple-touch icons (full-bleed) into public/.
- * Digital Horizon emblem: a pastel sun rising over a blue horizon line.
+ * Digital Horizon mark: three tapered rounded bars (pink / blue / green).
  * Run: node scripts/generate-icons.mjs
  */
 import sharp from "sharp";
@@ -10,22 +10,16 @@ import { dirname, resolve } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pub = resolve(__dirname, "../public");
 
-const icon = (size) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
+const icon = (size) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512" fill="none" stroke-linecap="round">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
       <stop stop-color="#fdeef5"/><stop offset="1" stop-color="#eaf2fd"/>
     </linearGradient>
-    <linearGradient id="sun" x1="0" y1="150" x2="0" y2="360" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f4a3c4"/><stop offset="1" stop-color="#e85c97"/>
-    </linearGradient>
   </defs>
   <rect width="512" height="512" fill="url(#bg)"/>
-  <g stroke="#e85c97" stroke-width="20" stroke-linecap="round">
-    <path d="M256 70v56"/><path d="M118 118 158 158"/><path d="M394 118 354 158"/>
-  </g>
-  <circle cx="256" cy="262" r="104" fill="url(#sun)"/>
-  <path d="M64 322H448" stroke="#4f93da" stroke-width="30" stroke-linecap="round"/>
-  <path d="M140 384H372" stroke="#4f93da" stroke-width="20" stroke-linecap="round" opacity="0.5"/>
+  <line x1="96"  y1="176" x2="416" y2="176" stroke="#f28cb4" stroke-width="46"/>
+  <line x1="156" y1="256" x2="356" y2="256" stroke="#5ea9ea" stroke-width="46"/>
+  <line x1="216" y1="336" x2="296" y2="336" stroke="#7ecf97" stroke-width="46"/>
 </svg>`;
 
 for (const [name, size] of [
