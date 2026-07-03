@@ -90,7 +90,7 @@ export type Service = {
   desc: string;
   bullets: string[];
   icon: string;
-  color: "cyan" | "amber" | "violet";
+  color: "cyan" | "amber" | "violet" | "green" | "red";
 };
 
 export const services: Service[] = [
@@ -122,7 +122,7 @@ export const services: Service[] = [
       "Citation cleanup",
     ],
     icon: "search",
-    color: "amber",
+    color: "violet",
   },
   {
     slug: "digital-marketing",
@@ -137,7 +137,7 @@ export const services: Service[] = [
       "Email & SMS sequences",
     ],
     icon: "megaphone",
-    color: "violet",
+    color: "green",
   },
 ];
 

@@ -24,7 +24,8 @@
   --cyan: #4f93da;           /* pastel blue */
   --cyan-bright: #6fb0f0;
   --violet: #e07bb0;         /* soft pink */
-  --lime: #4f93da;           /* blue (status/positive) */
+  --green: #59c07f;          /* pastel green — logo accent */
+  --lime: #3f9e68;           /* deeper green — positive text */
   --hazard: #f6b8d2;         /* soft pink (accent stripe) */
 
   /* Text on light */
@@ -340,12 +341,12 @@ p { text-wrap: pretty; }
 .tag.is-red { color: var(--red-deep); border-color: rgba(232, 92, 151, 0.4); background: rgba(232, 92, 151, 0.09); }
 .tag.is-amber { color: var(--amber); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
 .tag.is-cyan { color: var(--cyan); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
-.tag.is-lime { color: var(--cyan); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
+.tag.is-lime { color: var(--lime); border-color: rgba(89, 192, 127, 0.45); background: rgba(89, 192, 127, 0.1); }
 
 /* Live blinking status dot */
 .status-dot {
   width: 0.55rem; height: 0.55rem; border-radius: 50%;
-  background: var(--red); box-shadow: 0 0 8px rgba(232, 92, 151, 0.6);
+  background: var(--green); box-shadow: 0 0 8px rgba(89, 192, 127, 0.7);
   animation: blink 1.4s steps(1) infinite;
 }
 @keyframes blink { 50% { opacity: 0.25; } }
