@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import CtaBand from "../../../components/CtaBand.astro";
+import Icon from "../../../components/Icon.astro";
+import { site, locations, services } from "../../../data/site";
+import { serviceCityDetails } from "../../../data/cityContent";
+import { getServiceDetail } from "../../../data/serviceDetails";
+import { breadcrumbSchema } from "../../../lib/schema";
+
+export function getStaticPaths() {
+  const combos = [
+    { city: "carson-city", service: "web-design" },
+    { city: "reno", service: "web-design" },
+    { city: "carson-city", service: "seo" },
+    { city: "reno", service: "seo" },
+  ];
+  return combos.map((c) => ({ params: { city: c.city, service: c.service }, props: c }));
+}
+
+const { city: citySlug, service: serviceSlug } = Astro.props;
+const city = locations.find((l) => l.slug === citySlug)!;
+const service = services.find((s) => s.slug === serviceSlug)!;
+const sd = getServiceDetail(serviceSlug)!;
+const detail = serviceCityDetails[`${citySlug}/${serviceSlug}`];
+const accent = service.color === "green" ? "cyan" : service.color;
+
+const heroTitle = detail?.title ?? `${service.name} for ${city.name} Businesses`;
+const heroSub = detail?.subtitle ?? `${sd.subtitle} Tuned for ${city.name} — ${city.note}`;
+const sections = detail?.sections ?? [
+  { h: `Why ${city.name}?`, p: `${city.note} ${sd.intro}` },
+  ...sd.sections.slice(0, 3),
+];
+
+const url = `/locations/${citySlug}/${serviceSlug}/`;
+const title = `${service.name} for ${city.name} Businesses | ${site.brand}`;
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Locations", url: "/locations/" },
+  { name: city.name, url: `/locations/${citySlug}/` },
+  { name: service.name, url },
+];
+const schema = [breadcrumbSchema(crumbs)];
+---
+
+<BaseLayout title={title} description={heroSub} canonical={url} schema={schema}>
+  <PageHero
+    eyebrow={`${city.name} × ${service.name}`}
+    variant={accent as any}
+    title={heroTitle}
+    lead={heroSub}
+    crumbs={crumbs}
+  />
+
+  <section class="section" style={`--accent:var(--${service.color})`}>
+    <div class="container container-narrow">
+      <div class="btn-group sc-cta">
+        <a href="/contact/" class="btn btn-primary"><Icon name="rocket" size={16} /> Start a Project</a>
+        <a href={site.phone.href} class="btn btn-ghost"><Icon name="phone" size={16} /> Call {site.phone.display}</a>
+      </div>
+
+      <div class="sc-sections mt-6">
+        {sections.map((s) => (
+          <article class="sc-item">
+            <h3 class="h3 sc-h">{s.h}</h3>
+            <p class="sc-p">{s.p}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="sc-links mt-6">
+        <a href={`/services/${serviceSlug}/`} class="link-arrow"><Icon name="arrow" size={16} class="flip" /> All about {service.name}</a>
+        <a href={`/locations/${citySlug}/`} class="link-arrow">More on {city.name} <Icon name="arrow" size={16} /></a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading={`Ready to grow in ${city.name}?`} />
+</BaseLayout>
+
+<style>
+  .sc-cta { margin-bottom: 0.5rem; }
+  .sc-sections { display: grid; gap: 1.6rem; }
+  .sc-h { font-size: 1.25rem; }
+  .sc-h::before { content: "▸ "; color: var(--accent); }
+  .sc-p { margin-top: 0.5rem; color: var(--body); line-height: 1.75; }
+  .sc-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  :global(.link-arrow .flip) { transform: rotate(180deg); }
+</style>

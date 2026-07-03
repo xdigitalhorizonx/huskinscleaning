@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
+import { site, locations, services } from "../../data/site";
+import { cityDetails } from "../../data/cityContent";
+import { breadcrumbSchema, faqSchema } from "../../lib/schema";
+
+export function getStaticPaths() {
+  return locations.map((l) => ({ params: { city: l.slug }, props: { loc: l } }));
+}
+
+const { loc } = Astro.props;
+const detail = cityDetails[loc.slug ?? ""];
+const url = `/locations/${loc.slug}/`;
+const title = `${loc.name} Web Design & Local SEO | ${site.brand}`;
+const description = `Web design, SEO, and digital marketing for ${loc.name}, Nevada. ${loc.note}`;
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Locations", url: "/locations/" },
+  { name: loc.name, url },
+];
+const intro = detail?.intro ?? [
+  loc.note,
+  `We build websites, run local SEO, and manage marketing for ${loc.name} service businesses — built around how the local market actually works, not a template dropped on your town.`,
+];
+const cityServiceLinks = ["carson-city", "reno"].includes(loc.slug ?? "");
+const schema = [breadcrumbSchema(crumbs), ...(detail?.faqs ? [faqSchema(detail.faqs)] : [])];
+---
+
+<BaseLayout title={title} description={description} canonical={url} schema={schema}>
+  <PageHero
+    eyebrow={`Locations / ${loc.name}`} variant="cyan"
+    title={loc.name}
+    lead={detail?.tagline ?? `Web design, SEO & digital marketing for ${loc.name}.`}
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="flow city-intro">
+        {intro.map((p, i) => <p class={i === 0 ? "lead" : ""}>{p}</p>)}
+      </div>
+      {detail?.sections && (
+        <div class="city-sections mt-6">
+          {detail.sections.map((s) => (
+            <article class="cs-item">
+              <h3 class="h3 cs-h">{s.h}</h3>
+              <p class="cs-p">{s.p}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section svc-section scanlines">
+    <div class="container">
+      <SectionHead eyebrow={`What we do in ${loc.name}`} variant="red" title="Three disciplines, one system" center />
+      <div class="grid grid-3 mt-6">
+        {services.map((s) => (
+          <a href={`/services/${s.slug}/`} class="panel panel-hover svc-mini" style={`--accent:var(--${s.color})`}>
+            <span class="sm-icon"><Icon name={s.icon} size={22} /></span>
+            <h3 class="h3">{s.name}</h3>
+            <p class="muted">{s.tagline}</p>
+            {cityServiceLinks && ["web-design", "seo"].includes(s.slug) && (
+              <span class="link-arrow sm-link">{s.name} in {loc.name} <Icon name="arrow" size={15} /></span>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {detail?.faqs && <Faq items={detail.faqs} heading={`${loc.name} — frequently asked`} intro={`Straight answers about web design, SEO, and marketing in ${loc.name}.`} />}
+
+  <CtaBand
+    heading={`Grow your ${loc.name} business.`}
+    text="Free 30-minute discovery call. We'll talk about what you're trying to grow, what's getting in the way, and whether we're the right team to help — no pitch deck."
+  />
+</BaseLayout>
+
+<style>
+  .city-sections { display: grid; gap: 1.6rem; }
+  .cs-h { font-size: 1.2rem; }
+  .cs-h::before { content: "▸ "; color: var(--cyan); }
+  .cs-p { margin-top: 0.5rem; color: var(--body); line-height: 1.75; }
+
+  .svc-section { background: var(--void-2); border-block: 1px solid var(--line); }
+  .svc-mini { display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; }
+  .svc-mini::before, .svc-mini::after { border-color: var(--accent); }
+  .svc-mini h3 { color: var(--ink); }
+  .sm-icon {
+    display: grid; place-items: center; width: 2.8rem; height: 2.8rem;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    margin-bottom: 0.3rem;
+  }
+  .sm-link { margin-top: 0.4rem; color: var(--accent); }
+</style>

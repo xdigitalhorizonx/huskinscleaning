@@ -38,7 +38,7 @@ const schema = [breadcrumbSchema(crumbs)];
             </div>
             <h3 class="h3 loc-name">{l.name}</h3>
             <p class="loc-note muted">{l.note}</p>
-            <a href="/contact/" class="link-arrow loc-link">Start a project here <Icon name="arrow" size={15} /></a>
+            <a href={`/locations/${l.slug}/`} class="link-arrow loc-link">Explore {l.name} <Icon name="arrow" size={15} /></a>
           </article>
         ))}
       </div>

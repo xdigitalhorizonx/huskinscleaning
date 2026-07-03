@@ -347,6 +347,36 @@ export const posts: Post[] = [
       "Done properly, schema quietly connects your website, your profile, and your citations into one coherent entity Google can trust — which is exactly what it takes to win the Map Pack in a specific town.",
     ],
   },
+  {
+    slug: "history-of-google-ranking-algorithm",
+    title: "A Short History of the Google Ranking Algorithm (and Why It Still Matters)",
+    category: "SEO",
+    date: "2026-04-22",
+    readTime: "10 min",
+    excerpt:
+      "From PageRank to Panda to the AI Overviews era — the through-line of every major Google update, and what it quietly tells you about how to rank today.",
+    body: [
+      "Google's algorithm looks like a moving target, but the direction has never really changed: reward the page that best, and most trustworthily, answers the searcher. Every famous update is just Google closing a loophole between that goal and what people were actually gaming.",
+      "PageRank treated links as votes — so people bought votes, and Penguin came for the link farms. Thin, keyword-stuffed content ranked — so Panda came for the content farms. Mobile got big — so mobile-first indexing and Core Web Vitals made speed a ranking factor. Each update punished a shortcut and rewarded the businesses doing the real thing.",
+      "The 2026 shift toward AI Overviews and generative answers is the same story again. The winners aren't gaming a new system; they're the sites that are fast, clearly structured, genuinely helpful, and consistent about who and where they are — exactly what every prior update was nudging toward.",
+      "The practical lesson for a Northern Nevada service business is boring and durable: don't chase the update, chase the thing every update rewards. Answer real questions honestly, keep the site fast and crawlable, earn real reputation, and you stay ranked through whatever they ship next.",
+    ],
+  },
+  {
+    slug: "backlinks-that-actually-work",
+    title: "Backlinks That Actually Work in 2026 (and the Kind That Get You Penalized)",
+    category: "SEO",
+    date: "2026-04-15",
+    readTime: "9 min",
+    excerpt:
+      "Links still move rankings — but the game changed. Which links are worth chasing for a local service business, and which ones are a waste of money or an active liability.",
+    body: [
+      "Backlinks are still one of the strongest ranking signals Google has, because a link is hard to fake at scale — someone else vouching for you. But the era of buying a thousand cheap links is long over; that's now a fast way to get filtered or penalized, not ranked.",
+      "For a local service business, the links that actually move the needle are unglamorous: your Chamber of Commerce, local business directories that real humans use, a supplier or trade association that lists you, the local paper that quotes you, a genuine partner who links to your site. They're relevant, local, and real — which is exactly why they count.",
+      "The links that hurt you are the ones that look like SEO: paid link packages, private blog networks, spammy directory blasts, and comment-spam. They're cheap because they're worthless — or worse, because they mark your site as one that buys links.",
+      "Our approach is to earn a handful of strong, relevant links a quarter through real relationships and genuinely useful content, and to never buy the volume. In local markets, ten trusted local links beat a thousand purchased ones, every time.",
+    ],
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {

@@ -5,11 +5,12 @@ interface Props {
   title: string;
   lead?: string;
   center?: boolean;
+  class?: string;
 }
-const { eyebrow, variant = "amber", title, lead, center = false } = Astro.props;
+const { eyebrow, variant = "amber", title, lead, center = false, class: className = "" } = Astro.props;
 ---
 
-<div class:list={["section-head", { "is-center": center }]}>
+<div class:list={["section-head", className, { "is-center": center }]}>
   {eyebrow && (
     <span class:list={["eyebrow", { "is-red": variant === "red", "is-cyan": variant === "cyan" }]}>
       {eyebrow}

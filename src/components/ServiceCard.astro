@@ -18,7 +18,7 @@ const colorVar = `var(--${s.color})`;
       <li><Icon name="check" size={14} class="sc-check" /> {b}</li>
     ))}
   </ul>
-  <a href="/contact/" class="link-arrow sc-link">Start with {s.name} <Icon name="arrow" size={16} /></a>
+  <a href={`/services/${s.slug}/`} class="link-arrow sc-link">Explore {s.name} <Icon name="arrow" size={16} /></a>
 </article>
 
 <style>

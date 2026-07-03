@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
+import { site, services } from "../../data/site";
+import { serviceDetails, getServiceDetail } from "../../data/serviceDetails";
+import { breadcrumbSchema } from "../../lib/schema";
+
+export function getStaticPaths() {
+  return serviceDetails.map((d) => ({ params: { slug: d.slug }, props: { detail: d } }));
+}
+
+const { detail: d } = Astro.props;
+const svc = services.find((s) => s.slug === d.slug);
+const accent = svc?.color ?? "cyan";
+const url = `/services/${d.slug}/`;
+const title = `${d.metaTitle} | ${site.brand}`;
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Services", url: "/services/" },
+  { name: d.name, url },
+];
+const schema = [breadcrumbSchema(crumbs)];
+// city landing pages that exist for this service
+const cities = ["web-design", "seo"].includes(d.slug)
+  ? [
+      { name: "Carson City", href: `/locations/carson-city/${d.slug}/` },
+      { name: "Reno", href: `/locations/reno/${d.slug}/` },
+    ]
+  : [];
+---
+
+<BaseLayout title={title} description={d.subtitle} canonical={url} schema={schema}>
+  <PageHero
+    eyebrow={`Services / ${d.name}`}
+    variant={accent === "green" ? "cyan" : (accent as any)}
+    title={d.name}
+    lead={d.subtitle}
+    crumbs={crumbs}
+  />
+
+  <section class="section" style={`--accent:var(--${accent})`}>
+    <div class="container svc-detail">
+      <!-- Intro + price -->
+      <div class="svc-lead">
+        <span class="price-tag mono"><Icon name={svc?.icon ?? "sparkle"} size={15} /> {d.price}</span>
+        <p class="lead mt-2">{d.intro}</p>
+      </div>
+
+      <!-- What you get -->
+      <SectionHead eyebrow="What you get" variant="amber" title="Everything in scope, on day one." />
+      <ol class="gets-grid mt-6">
+        {d.gets.map((g, i) => (
+          <li class="get-item panel">
+            <span class="get-num mono">{String(i + 1).padStart(2, "0")}</span>
+            <span>{g}</span>
+          </li>
+        ))}
+      </ol>
+
+      <!-- The full picture -->
+      <SectionHead eyebrow="The full picture" variant="red" title="How the work actually goes" class="mt-6" />
+      <div class="picture mt-6">
+        {d.sections.map((s) => (
+          <article class="pic-item">
+            <h3 class="h3 pic-h">{s.h}</h3>
+            <p class="pic-p">{s.p}</p>
+          </article>
+        ))}
+      </div>
+
+      <!-- Who it's for -->
+      <div class="whofor panel is-cyan mt-6">
+        <span class="eyebrow is-cyan">Who it's for</span>
+        <p class="lead mt-2">{d.whoFor}</p>
+      </div>
+
+      {cities.length > 0 && (
+        <div class="svc-cities mt-6">
+          <span class="eyebrow">Service areas</span>
+          <div class="grid grid-2 mt-3">
+            {cities.map((c) => (
+              <a href={c.href} class="svc-city panel panel-hover">
+                <span class="sc-city-name">{d.name} in {c.name}</span>
+                <span class="link-arrow">Local pricing & FAQ <Icon name="arrow" size={15} /></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <p class="mt-6"><a href="/services/" class="link-arrow"><Icon name="arrow" size={16} class="flip" /> Back to all services</a></p>
+    </div>
+  </section>
+
+  <CtaBand heading="Ready to scope this out?" />
+</BaseLayout>
+
+<style>
+  .svc-detail { max-width: 62rem; }
+  .svc-lead { max-width: 52rem; }
+  .price-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.8rem; border: 1px solid var(--line-strong);
+    color: var(--accent); font-size: 0.78rem; letter-spacing: 0.06em;
+  }
+  .price-tag :global(svg) { color: var(--accent); }
+
+  .gets-grid { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .get-item { display: flex; gap: 0.9rem; align-items: flex-start; font-size: 0.95rem; color: var(--body); }
+  .get-item::before, .get-item::after { border-color: var(--accent); }
+  .get-num { color: var(--accent); font-family: var(--font-num); font-weight: 700; flex: none; }
+  @media (max-width: 700px) { .gets-grid { grid-template-columns: 1fr; } }
+
+  .picture { display: grid; gap: 1.6rem; max-width: 46rem; }
+  .pic-h { font-size: 1.2rem; color: var(--ink); }
+  .pic-h::before { content: "▸ "; color: var(--accent); }
+  .pic-p { margin-top: 0.5rem; color: var(--body); line-height: 1.75; }
+
+  .whofor { max-width: 46rem; }
+  .svc-city { display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; }
+  .sc-city-name { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--ink); }
+
+  :global(.link-arrow .flip) { transform: rotate(180deg); }
+  :global(.section-head.mt-6) { margin-top: 3rem; }
+</style>
