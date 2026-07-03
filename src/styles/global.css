@@ -1,45 +1,44 @@
 /* ==========================================================================
-   DIGITAL HORIZON — DESIGN SYSTEM
-   A dark, high-tech "digital sunrise" system: void night sky, sunrise coral,
-   horizon amber, cyan signage, scanlines, glitch, and HUD/console panels.
-   All effects are CSS/SVG — fast, and fully self-contained.
+   DIGITAL HORIZON — DESIGN SYSTEM (Pastel Light)
+   A soft, bright system: white canvas, pastel pink + pastel blue accents,
+   airy panels, gentle shadows. All effects are CSS/SVG — self-contained.
    ========================================================================== */
 
 /* ----- Design tokens ----------------------------------------------------- */
 :root {
-  /* Void / surfaces */
-  --void: #05060a;           /* page background — deep space black */
-  --void-2: #080a12;         /* raised black */
-  --surface: #0c0f19;        /* cards / panels */
-  --surface-2: #11151f;      /* tinted panels */
-  --surface-3: #161b28;      /* hover */
-  --line: rgba(148, 163, 184, 0.16);
-  --line-strong: rgba(148, 163, 184, 0.3);
+  /* Surfaces — white & pastel */
+  --void: #ffffff;           /* page background */
+  --void-2: #fbf1f7;         /* soft pink-white sections */
+  --surface: #ffffff;        /* cards / panels */
+  --surface-2: #f7edf5;      /* tinted panels */
+  --surface-3: #f0e5f1;      /* hover */
+  --line: rgba(74, 45, 66, 0.10);
+  --line-strong: rgba(74, 45, 66, 0.20);
 
-  /* Signal colors — a digital sunrise over a night horizon */
-  --red: #ff5a3c;            /* sunrise coral — primary energy / CTAs */
-  --red-bright: #ff7a5e;
-  --red-deep: #c93a1e;
-  --amber: #ff9d00;          /* horizon amber — HUD framing */
-  --amber-bright: #ffb733;
-  --cyan: #22e0ff;           /* sky cyan — neon signage */
-  --cyan-bright: #7af0ff;
-  --violet: #a06bff;         /* dusk violet */
-  --lime: #4dff9e;           /* terminal green */
-  --hazard: #ffd400;         /* warning yellow */
+  /* Accents — pastel pink + pastel blue */
+  --red: #e85c97;            /* pastel pink — primary / CTAs */
+  --red-bright: #e0508c;
+  --red-deep: #c73c78;
+  --amber: #4f93da;          /* pastel blue (secondary accent) */
+  --amber-bright: #5aa0e8;
+  --cyan: #4f93da;           /* pastel blue */
+  --cyan-bright: #6fb0f0;
+  --violet: #e07bb0;         /* soft pink */
+  --lime: #4f93da;           /* blue (status/positive) */
+  --hazard: #f6b8d2;         /* soft pink (accent stripe) */
 
-  /* Text */
-  --ink: #eef1f8;            /* headings */
-  --body: #b7c0d4;           /* body text */
-  --muted: #8792a8;          /* secondary */
-  --dim: #5a6478;            /* faint / captions */
+  /* Text on light */
+  --ink: #3a2a36;            /* headings — deep plum */
+  --body: #5c5563;           /* body text */
+  --muted: #8a8090;          /* secondary */
+  --dim: #b3a8ba;            /* faint / captions */
 
   /* Typography */
   --font-display: "Chakra Petch", "Rajdhani", system-ui, sans-serif;
   --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
   --font-num: "Orbitron Variable", "Orbitron", var(--font-display);
-  --font-jp: "Noto Sans JP", var(--font-display);
+  --font-jp: var(--font-display);
 
   /* Fluid type scale */
   --step--2: clamp(0.68rem, 0.65rem + 0.14vw, 0.75rem);
@@ -58,10 +57,10 @@
   --radius: 4px;
   --radius-lg: 6px;
 
-  /* Glow shadows */
-  --glow-red: 0 0 22px rgba(255, 90, 60, 0.55), 0 0 4px rgba(255, 90, 60, 0.9);
-  --glow-amber: 0 0 20px rgba(255, 157, 0, 0.5), 0 0 3px rgba(255, 157, 0, 0.8);
-  --glow-cyan: 0 0 22px rgba(34, 224, 255, 0.5), 0 0 4px rgba(34, 224, 255, 0.85);
+  /* Soft pastel shadows (replace neon glows) */
+  --glow-red: 0 8px 20px -8px rgba(232, 92, 151, 0.5);
+  --glow-amber: 0 8px 20px -8px rgba(79, 147, 218, 0.45);
+  --glow-cyan: 0 8px 20px -8px rgba(79, 147, 218, 0.45);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -88,16 +87,16 @@ body {
   position: relative;
 }
 
-/* Global atmosphere: faint grid wash + amber/red bloom fixed behind content */
+/* Global atmosphere: faint grid wash + soft pastel blooms behind content */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(1100px 700px at 12% -5%, rgba(255, 90, 60, 0.1), transparent 60%),
-    radial-gradient(1000px 800px at 105% 8%, rgba(34, 224, 255, 0.07), transparent 55%),
-    radial-gradient(900px 900px at 50% 120%, rgba(160, 107, 255, 0.08), transparent 60%),
+    radial-gradient(1100px 700px at 12% -5%, rgba(232, 92, 151, 0.1), transparent 60%),
+    radial-gradient(1000px 800px at 105% 8%, rgba(79, 147, 218, 0.09), transparent 55%),
+    radial-gradient(900px 900px at 50% 120%, rgba(224, 123, 176, 0.08), transparent 60%),
     var(--void);
 }
 body::after {
@@ -107,8 +106,8 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(120, 90, 120, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 90, 120, 0.05) 1px, transparent 1px);
   background-size: 46px 46px;
   mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 90%);
 }
@@ -120,7 +119,7 @@ img, picture, svg, video {
 }
 
 a { color: var(--cyan); text-decoration: none; transition: color 0.2s ease; }
-a:hover { color: var(--cyan-bright); }
+a:hover { color: var(--red); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -139,11 +138,11 @@ p { text-wrap: pretty; }
   outline-offset: 3px;
 }
 
-/* Custom scrollbar for the terminal feel */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: var(--void-2); }
-::-webkit-scrollbar-thumb { background: #1e2534; border: 2px solid var(--void-2); }
-::-webkit-scrollbar-thumb:hover { background: var(--red-deep); }
+::-webkit-scrollbar-thumb { background: #e6cede; border: 3px solid var(--void-2); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--red); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -229,7 +228,6 @@ p { text-wrap: pretty; }
 .section-head .h2 { margin-top: 0.7rem; }
 .section-head .lead { margin-top: 1rem; }
 
-/* Uppercased condensed display heading with optional data-glitch layers */
 .display {
   font-family: var(--font-display);
   font-weight: 700;
@@ -243,21 +241,19 @@ p { text-wrap: pretty; }
 .text-ink { color: var(--ink); }
 .text-muted { color: var(--muted); }
 
-/* Neon outline text (Akira signage) */
-.neon-red { color: #fff; text-shadow: var(--glow-red); }
-.neon-cyan { color: #fff; text-shadow: var(--glow-cyan); }
-.neon-amber { color: #fff; text-shadow: var(--glow-amber); }
+.neon-red { color: var(--red-deep); }
+.neon-cyan { color: var(--cyan); }
+.neon-amber { color: var(--amber); }
 
-/* Stroke / outline display text */
 .outline-text {
   color: transparent;
-  -webkit-text-stroke: 1.4px rgba(255, 255, 255, 0.28);
+  -webkit-text-stroke: 1.4px rgba(58, 42, 54, 0.28);
 }
 
 /* ----- Buttons ----------------------------------------------------------- */
 .btn {
   --btn-bg: var(--red);
-  --btn-fg: #fff;
+  --btn-fg: #ffffff;
   --btn-glow: var(--glow-red);
   display: inline-flex;
   align-items: center;
@@ -284,27 +280,27 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 2px;
   box-shadow: var(--btn-glow);
-  opacity: 0.85;
+  opacity: 0.9;
   z-index: -1;
 }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.1); color: var(--btn-fg); }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.03); color: var(--btn-fg); }
 .btn:active { transform: translateY(0); }
 
-.btn-primary { --btn-bg: var(--red); --btn-fg: #fff; --btn-glow: var(--glow-red); }
-.btn-amber { --btn-bg: var(--amber); --btn-fg: #1a0f00; --btn-glow: var(--glow-amber); }
-.btn-cyan { --btn-bg: var(--cyan); --btn-fg: #001217; --btn-glow: var(--glow-cyan); }
+.btn-primary { --btn-bg: var(--red); --btn-fg: #4a1130; --btn-glow: var(--glow-red); }
+.btn-amber { --btn-bg: var(--amber); --btn-fg: #0e2338; --btn-glow: var(--glow-amber); }
+.btn-cyan { --btn-bg: var(--cyan); --btn-fg: #0e2338; --btn-glow: var(--glow-cyan); }
 
 .btn-ghost {
   --btn-bg: transparent;
   --btn-fg: var(--ink);
   --btn-glow: none;
   border: 1px solid var(--line-strong);
-  background: rgba(148, 163, 184, 0.04);
+  background: rgba(74, 45, 66, 0.02);
 }
 .btn-ghost:hover {
-  --btn-fg: #fff;
-  border-color: var(--cyan);
-  background: rgba(34, 224, 255, 0.06);
+  --btn-fg: var(--red-deep);
+  border-color: var(--red);
+  background: rgba(232, 92, 151, 0.07);
 }
 .btn-ghost::after { box-shadow: none; }
 
@@ -323,6 +319,7 @@ p { text-wrap: pretty; }
   font-size: var(--step--1);
   color: var(--cyan);
 }
+.link-arrow:hover { color: var(--red); }
 .link-arrow svg { transition: transform 0.25s var(--ease); }
 .link-arrow:hover svg { transform: translateX(5px); }
 
@@ -338,37 +335,36 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
   color: var(--muted);
   border: 1px solid var(--line);
-  background: rgba(148, 163, 184, 0.04);
+  background: rgba(74, 45, 66, 0.03);
 }
-.tag.is-red { color: var(--red-bright); border-color: rgba(255, 90, 60, 0.4); background: rgba(255, 90, 60, 0.07); }
-.tag.is-amber { color: var(--amber-bright); border-color: rgba(255, 157, 0, 0.4); background: rgba(255, 157, 0, 0.07); }
-.tag.is-cyan { color: var(--cyan); border-color: rgba(34, 224, 255, 0.4); background: rgba(34, 224, 255, 0.07); }
-.tag.is-lime { color: var(--lime); border-color: rgba(77, 255, 158, 0.4); background: rgba(77, 255, 158, 0.07); }
+.tag.is-red { color: var(--red-deep); border-color: rgba(232, 92, 151, 0.4); background: rgba(232, 92, 151, 0.09); }
+.tag.is-amber { color: var(--amber); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
+.tag.is-cyan { color: var(--cyan); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
+.tag.is-lime { color: var(--cyan); border-color: rgba(79, 147, 218, 0.4); background: rgba(79, 147, 218, 0.09); }
 
 /* Live blinking status dot */
 .status-dot {
   width: 0.55rem; height: 0.55rem; border-radius: 50%;
-  background: var(--lime); box-shadow: 0 0 8px var(--lime);
+  background: var(--red); box-shadow: 0 0 8px rgba(232, 92, 151, 0.6);
   animation: blink 1.4s steps(1) infinite;
 }
 @keyframes blink { 50% { opacity: 0.25; } }
 
-/* Hazard stripe strip */
+/* Accent stripe strip */
 .hazard-strip {
   height: 6px;
   background: repeating-linear-gradient(-45deg,
-    var(--hazard) 0 14px, #0a0a0a 14px 28px);
-  opacity: 0.85;
+    var(--hazard) 0 14px, #cfe4fb 14px 28px);
+  opacity: 0.9;
 }
 
-/* ----- Panels (targeting-reticle HUD frame) ------------------------------ */
+/* ----- Panels (soft framed cards) ---------------------------------------- */
 .panel {
   position: relative;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%),
-    var(--surface);
+  background: var(--surface);
   border: 1px solid var(--line);
   padding: clamp(1.3rem, 3vw, 1.9rem);
+  box-shadow: 0 12px 30px -20px rgba(74, 45, 66, 0.35);
 }
 /* corner reticle brackets (top-left + bottom-right) */
 .panel::before, .panel::after {
@@ -385,23 +381,22 @@ p { text-wrap: pretty; }
 .panel.is-cyan::before, .panel.is-cyan::after { border-color: var(--cyan); }
 
 .panel-hover {
-  transition: transform 0.3s var(--ease), border-color 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .panel-hover:hover {
   transform: translateY(-4px);
   border-color: var(--line-strong);
-  background:
-    linear-gradient(180deg, rgba(255, 90, 60, 0.05), transparent 45%),
-    var(--surface-2);
+  box-shadow: 0 20px 40px -22px rgba(232, 92, 151, 0.5);
 }
 
-/* Angular cut-corner card (mecha plate) */
+/* Angular cut-corner card */
 .plate {
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
   padding: clamp(1.3rem, 3vw, 1.9rem);
+  box-shadow: 0 12px 30px -20px rgba(74, 45, 66, 0.35);
 }
 
 /* ----- Grids ------------------------------------------------------------- */
@@ -431,7 +426,7 @@ p { text-wrap: pretty; }
   margin-top: 0.5rem;
 }
 
-/* ----- Scanline / CRT overlay ------------------------------------------- */
+/* ----- Scanline overlay (very subtle on light) --------------------------- */
 .scanlines { position: relative; }
 .scanlines::after {
   content: "";
@@ -439,12 +434,12 @@ p { text-wrap: pretty; }
   inset: 0;
   pointer-events: none;
   background: repeating-linear-gradient(
-    to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.22) 2px 3px);
+    to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(90, 60, 90, 0.05) 2px 3px);
   mix-blend-mode: multiply;
   z-index: 2;
 }
 
-/* ----- Synthwave perspective grid floor (hero) -------------------------- */
+/* ----- Perspective grid floor (hero) ------------------------------------- */
 .grid-floor {
   position: absolute;
   inset: auto 0 0 0;
@@ -452,7 +447,7 @@ p { text-wrap: pretty; }
   overflow: hidden;
   pointer-events: none;
   perspective: 340px;
-  opacity: 0.6;
+  opacity: 0.5;
   mask-image: linear-gradient(to top, #000 20%, transparent 92%);
 }
 .grid-floor::before {
@@ -460,8 +455,8 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: -50% -50% -2% -50%;
   background-image:
-    linear-gradient(rgba(255, 90, 60, 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 224, 255, 0.35) 1px, transparent 1px);
+    linear-gradient(rgba(232, 92, 151, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 147, 218, 0.32) 1px, transparent 1px);
   background-size: 46px 46px;
   transform: rotateX(72deg);
   transform-origin: 50% 100%;
@@ -499,7 +494,7 @@ p { text-wrap: pretty; }
   98% { clip-path: inset(5% 0 80% 0); transform: translateX(1px); }
 }
 
-/* Flicker for signage */
+/* Flicker */
 .flicker { animation: flicker 4.5s linear infinite; }
 @keyframes flicker {
   0%, 19%, 21%, 23%, 80%, 100% { opacity: 1; }
@@ -538,7 +533,7 @@ p { text-wrap: pretty; }
 .marquee-sep { color: var(--red); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* ----- Checklist / intel list ------------------------------------------- */
+/* ----- Bullet / intel list ---------------------------------------------- */
 .intel-list { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
 .intel-list li {
   position: relative;

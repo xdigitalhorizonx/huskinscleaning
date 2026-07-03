@@ -208,13 +208,13 @@ const schema = [faqSchema()];
     overflow: hidden;
     border-bottom: 1px solid var(--line);
     background:
-      radial-gradient(820px 420px at 12% -5%, rgba(255, 90, 60, 0.16), transparent 60%),
-      radial-gradient(760px 500px at 105% 10%, rgba(34, 224, 255, 0.1), transparent 55%),
+      radial-gradient(820px 420px at 12% -5%, rgba(232, 92, 151, 0.16), transparent 60%),
+      radial-gradient(760px 500px at 105% 10%, rgba(79, 147, 218, 0.1), transparent 55%),
       var(--void);
   }
   .hero-bloom {
     position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(900px 500px at 60% 120%, rgba(255, 157, 0, 0.12), transparent 60%);
+    background: radial-gradient(900px 500px at 60% 120%, rgba(79, 147, 218, 0.12), transparent 60%);
   }
   .hero-grid {
     position: relative; z-index: 3;
@@ -241,7 +241,7 @@ const schema = [faqSchema()];
   .hero-channels .sep { color: var(--red); opacity: 0.6; margin: 0 0.1rem; }
 
   /* Analytics console */
-  .console { background: rgba(8, 10, 18, 0.7); }
+  .console { background: rgba(255, 255, 255, 0.7); }
   .console-head {
     display: flex; align-items: center; justify-content: space-between;
     font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
@@ -263,7 +263,7 @@ const schema = [faqSchema()];
   .bars { display: flex; align-items: flex-end; gap: 0.4rem; height: 70px; }
   .bar {
     flex: 1; height: var(--h); align-self: flex-end;
-    background: linear-gradient(180deg, var(--cyan), rgba(34, 224, 255, 0.25));
+    background: linear-gradient(180deg, var(--cyan), rgba(79, 147, 218, 0.25));
     transform-origin: bottom; animation: bar-grow 0.7s var(--ease) both; animation-delay: var(--d);
   }
   @keyframes bar-grow { from { transform: scaleY(0); } }
@@ -327,7 +327,7 @@ const schema = [faqSchema()];
     letter-spacing: 0.04em;
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease);
   }
-  .industry-chip:hover { border-color: var(--cyan); color: #fff; transform: translateY(-2px); }
+  .industry-chip:hover { border-color: var(--cyan); color: var(--ink); transform: translateY(-2px); }
 
   .blog-preview { background: var(--void-2); border-block: 1px solid var(--line); }
 </style>

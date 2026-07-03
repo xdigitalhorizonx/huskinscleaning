@@ -81,10 +81,10 @@ const isActive = (href: string) => path === href || (path.startsWith(href) && hr
 
   /* Status bar */
   .sys-bar {
-    background: #000;
+    background: #fbe3ef;
     border-bottom: 1px solid var(--line);
     font-size: 0.68rem;
-    color: var(--muted);
+    color: var(--body);
   }
   .sys-inner {
     display: flex;
@@ -105,14 +105,14 @@ const isActive = (href: string) => path === href || (path.startsWith(href) && hr
 
   /* Nav bar */
   .nav-bar {
-    background: rgba(6, 8, 14, 0.82);
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: saturate(140%) blur(14px);
     border-bottom: 1px solid var(--line);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   :global(.header-scrolled) .nav-bar {
-    border-bottom-color: rgba(255, 90, 60, 0.4);
-    box-shadow: 0 12px 40px -20px rgba(255, 90, 60, 0.5);
+    border-bottom-color: rgba(232, 92, 151, 0.4);
+    box-shadow: 0 12px 40px -20px rgba(232, 92, 151, 0.5);
   }
   .nav-inner {
     display: flex;
@@ -142,9 +142,9 @@ const isActive = (href: string) => path === href || (path.startsWith(href) && hr
     letter-spacing: 0.03em;
   }
   .nav-link:hover, .nav-link.active {
-    color: #fff;
+    color: var(--ink);
     border-bottom-color: var(--red);
-    background: linear-gradient(180deg, transparent, rgba(255, 90, 60, 0.08));
+    background: linear-gradient(180deg, transparent, rgba(232, 92, 151, 0.08));
   }
   .nav-link:hover .nav-idx, .nav-link.active .nav-idx { color: var(--red-bright); }
 

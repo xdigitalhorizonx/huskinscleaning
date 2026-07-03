@@ -44,15 +44,15 @@
     display: grid; place-items: center; padding: 1.2rem;
   }
   .ee-alert[hidden] { display: none; }
-  .ee-backdrop { position: absolute; inset: 0; background: rgba(2, 3, 6, 0.86); backdrop-filter: blur(6px); }
+  .ee-backdrop { position: absolute; inset: 0; background: rgba(59, 47, 58, 0.86); backdrop-filter: blur(6px); }
   .ee-panel {
     position: relative;
     width: min(560px, 100%);
     background:
-      radial-gradient(120% 80% at 50% 0%, rgba(255, 90, 60, 0.14), transparent 60%),
+      radial-gradient(120% 80% at 50% 0%, rgba(232, 92, 151, 0.14), transparent 60%),
       var(--surface);
     border: 1px solid var(--red);
-    box-shadow: 0 0 60px -10px rgba(255, 90, 60, 0.6);
+    box-shadow: 0 0 60px -10px rgba(232, 92, 151, 0.6);
     padding: 0 clamp(1.3rem, 4vw, 2rem) clamp(1.3rem, 4vw, 2rem);
     overflow: hidden;
     animation: ee-in 0.35s var(--ease) both;
@@ -75,14 +75,14 @@
     background: none; border: 1px solid var(--line-strong); color: var(--muted);
     padding: 0.3rem 0.5rem; cursor: pointer; letter-spacing: 0.1em;
   }
-  .ee-x:hover { color: #fff; border-color: var(--red); }
+  .ee-x:hover { color: var(--red-deep); border-color: var(--red); }
   .ee-eyebrow { margin-top: 1rem; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--cyan); text-transform: uppercase; }
   .ee-title { font-size: clamp(2.2rem, 8vw, 3.4rem); margin-top: 0.4rem; text-transform: uppercase; }
   .ee-art { margin-top: 1rem; font-size: 0.72rem; line-height: 1.35; color: var(--lime); white-space: pre; overflow-x: auto; }
   .ee-body { margin-top: 1rem; color: var(--body); font-size: 0.95rem; }
   .ee-code {
     margin-top: 1.2rem; padding: 0.8rem 1rem;
-    border: 1px dashed var(--cyan); background: rgba(34, 224, 255, 0.06);
+    border: 1px dashed var(--cyan); background: rgba(79, 147, 218, 0.06);
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem;
     font-size: 0.75rem; letter-spacing: 0.1em;
   }
