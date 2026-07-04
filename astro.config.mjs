@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 // Canonical production origin. Update if the domain changes.
-export const SITE_URL = "https://huskinsllc.com";
+export const SITE_URL = "https://digitalhorizon.dev";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +17,7 @@ export default defineConfig({
     sitemap({
       changefreq: "weekly",
       priority: 0.7,
-      lastmod: new Date("2026-07-01"),
+      lastmod: new Date("2026-07-02"),
     }),
   ],
 });

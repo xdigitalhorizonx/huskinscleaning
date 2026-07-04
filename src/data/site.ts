@@ -1,393 +1,449 @@
 /**
- * Central business data — the single source of truth for the whole site.
+ * Central brand data — the single source of truth for the whole site.
  *
- * Every phone number, address, service description and testimonial is defined
- * here once and imported everywhere (header, footer, schema.org JSON-LD, page
- * copy). This guarantees NAP (Name / Address / Phone) consistency, which is one
- * of the strongest local-SEO ranking signals — and one of the biggest problems
- * on the current huskinsllc.com (the business is listed as "Huskins LLC",
- * "Huskins Services LLC" and "Huskins Cleaning & Remodeling Services" with two
- * different phone numbers across the web).
+ * DIGITAL HORIZON — Web design, SEO & digital marketing for Northern Nevada
+ * service and trade businesses. Content mirrors digitalhorizon.dev; the layout
+ * and visual system are reused from the prior build.
  */
 
 export const site = {
-  /** Public brand name used in copy and titles. */
-  brand: "Huskins Cleaning",
-  /** Registered legal entity. */
-  legalName: "Huskins Services LLC",
-  /** Longer descriptive name for schema.org. */
-  longName: "Huskins Cleaning Services",
-  tagline: "Spotless Homes. Honest People.",
-  domain: "huskinsllc.com",
-  url: "https://huskinsllc.com",
+  brand: "Digital Horizon",
+  short: "DH",
+  tagline: "Three disciplines. One horizon.",
+  pitch: "Web design that brings Northern Nevada customers in.",
+  description:
+    "Digital Horizon builds high-converting websites for Northern Nevada service and trade businesses, paired with local SEO and digital marketing that brings in qualified leads from Reno, Sparks, Carson City, and Lake Tahoe.",
+  domain: "digitalhorizon.dev",
+  url: "https://digitalhorizon.dev",
+  email: "hello@digitalhorizon.dev",
 
   phone: {
-    display: "(402) 249-0449",
-    href: "tel:+14022490449",
-    e164: "+14022490449",
+    display: "(775) 237-8898",
+    href: "tel:+17752378898",
+    e164: "+17752378898",
   },
-
-  email: "info@huskinsllc.com",
 
   address: {
-    locality: "Omaha",
-    region: "NE",
-    regionName: "Nebraska",
-    postalCode: "68112",
+    street: "2085 E William St, Suite 10",
+    locality: "Carson City",
+    region: "NV",
+    regionName: "Nevada",
+    postalCode: "89701",
     country: "US",
   },
-
-  /** Approx. geo center of the Omaha service area, for LocalBusiness schema. */
-  geo: {
-    latitude: 41.2565,
-    longitude: -95.9345,
-  },
-
-  /** Open 7 days, 7:00 AM – 9:00 PM. */
-  hours: {
-    label: "Mon–Sun: 7:00 AM – 9:00 PM",
-    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    opens: "07:00",
-    closes: "21:00",
-  },
-
-  founded: "2020",
-  bbb: {
-    accreditedSince: "2020-11-30",
-    rating: "A+",
-  },
-
-  /** Aggregate rating shown in schema + review page. Conservative, honest. */
-  rating: {
-    value: "5.0",
-    count: 27,
-  },
+  /** Approx. geo center for Carson City, NV — for LocalBusiness schema. */
+  geo: { latitude: 39.1638, longitude: -119.7674 },
+  maps: "https://maps.app.goo.gl/4XdSwQAXf7Xeo6vb9",
 
   social: {
-    // Populate when handles are confirmed. Left empty to avoid dead links.
-    facebook: "",
-    instagram: "",
-    google: "",
+    x: "https://x.com/BrandonDam756",
+    facebook: "https://www.facebook.com/profile.php?id=61589191467653",
+    instagram: "https://www.instagram.com/digitalhorizon.nv/",
+    nextdoor: "https://nextdoor.com/page/digital-horizon-carson-city-nv",
+  },
+
+  /** Set `name` to the real founder to enable the founder E-E-A-T Person node. */
+  founder: { name: "", jobTitle: "Founder" },
+
+  /** Confirm these match the Google Business Profile hours before launch. */
+  hours: {
+    opens: "09:00",
+    closes: "17:00",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
   },
 } as const;
 
-export type ServiceArea = {
-  name: string;
-  note?: string;
-};
+export type NavItem = { label: string; href: string };
 
-/** Omaha metro communities served. Drives the Service Areas page + schema. */
-export const serviceAreas: ServiceArea[] = [
-  { name: "Omaha", note: "All neighborhoods, Downtown to West Omaha" },
-  { name: "Bellevue" },
-  { name: "Papillion" },
-  { name: "La Vista" },
-  { name: "Elkhorn" },
-  { name: "Bennington" },
-  { name: "Gretna" },
-  { name: "Ralston" },
-  { name: "Boys Town" },
-  { name: "Council Bluffs, IA" },
+export const nav: NavItem[] = [
+  { label: "Services", href: "/services/" },
+  { label: "About", href: "/about/" },
+  { label: "Locations", href: "/locations/" },
+  { label: "Blog", href: "/blog/" },
+  { label: "Contact", href: "/contact/" },
+];
+
+/** Headline stat readout. Capability-framed, not literal traffic claims. */
+export const stats = [
+  { num: "95+", label: "Lighthouse, on mobile" },
+  { num: "Top 3", label: "Google Map Pack target" },
+  { num: "3", label: "Disciplines, one system" },
+  { num: "90d", label: "Project to partnership" },
+];
+
+/** Illustrative live-visibility metrics (mirrors the dashboards on DH's site). */
+export const kpis = [
+  { label: "Engaged Sessions", value: "22.4K", delta: "+6.2%", tone: "up" },
+  { label: "SEO Authority", value: "96", delta: "score", tone: "flat" },
+  { label: "Avg. Position", value: "3.2", delta: "improved", tone: "up" },
+  { label: "Organic Clicks", value: "267K", delta: "+12.4%", tone: "up" },
+];
+
+/** Marquee ticker phrases. */
+export const ticker = [
+  "WEB DESIGN",
+  "LOCAL SEO",
+  "DIGITAL MARKETING",
+  "NORTHERN NEVADA",
+  "BUILT TO RANK",
+  "BOOKED WORK",
+  "CARSON CITY · RENO · TAHOE",
+  "FAST ON MOBILE",
+  "ONE HORIZON",
 ];
 
 export type Service = {
-  /** URL slug under /services/. */
   slug: string;
-  /** Short label for nav + cards. */
-  title: string;
-  /** SEO <title>. */
-  metaTitle: string;
-  /** SEO meta description (~150-160 chars). */
-  metaDescription: string;
-  /** H1 for the page. */
-  heading: string;
-  /** One-line value prop used on cards + hero. */
+  num: string;
+  name: string;
   tagline: string;
-  /** Longer intro paragraph. */
-  intro: string;
-  /** What's included / checklist bullets. */
-  includes: string[];
-  /** Ideal-for / use-cases. */
-  bestFor: string[];
-  /** Simple emoji/glyph used as the card icon key (see Icon component). */
+  desc: string;
+  bullets: string[];
   icon: string;
-  /** Local keyword phrases this page targets. */
-  keywords: string[];
+  color: "cyan" | "amber" | "violet" | "green" | "red";
 };
 
 export const services: Service[] = [
   {
-    slug: "house-cleaning",
-    title: "House Cleaning",
-    metaTitle: "House Cleaning Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Reliable recurring house cleaning in Omaha, NE. Weekly, bi-weekly & monthly maid service from a trusted, family-owned team. Same crew every visit. Free quote.",
-    heading: "House Cleaning Services in Omaha",
-    tagline: "The same trusted crew, every single visit.",
-    intro:
-      "Come home to a spotless house without lifting a finger. Our recurring house cleaning keeps your Omaha home consistently fresh — kitchens, bathrooms, bedrooms and living spaces cleaned top to bottom by a background-checked team you'll get to know by name.",
-    includes: [
-      "Kitchens: counters, sinks, stovetop, exterior of appliances, cabinet fronts",
-      "Bathrooms: toilets, tubs, showers, sinks, mirrors, floors sanitized",
-      "Dusting of surfaces, sills, baseboards, blinds and light fixtures",
-      "Vacuuming of carpets and rugs, mopping of all hard floors",
-      "Beds made and trash emptied on request",
-      "A written checklist so nothing gets missed",
+    slug: "web-design",
+    num: "01",
+    name: "Web Design",
+    tagline: "Web design built to rank and convert.",
+    desc: "Custom-built sites for Northern Nevada service businesses — fast on mobile, search-engine-ready from day one, and tuned to turn visits into booked work.",
+    bullets: [
+      "Custom design, not templates",
+      "SEO foundations from day one",
+      "Mobile-first, 95+ Lighthouse",
+      "CMS you can edit yourself",
     ],
-    bestFor: [
-      "Busy families and working professionals",
-      "Weekly, bi-weekly or monthly schedules",
-      "Homeowners who want the same crew each time",
-    ],
-    icon: "home",
-    keywords: [
-      "house cleaning Omaha",
-      "maid service Omaha NE",
-      "recurring house cleaning Omaha",
-      "residential cleaning Omaha",
-    ],
+    icon: "browser",
+    color: "cyan",
   },
   {
-    slug: "deep-cleaning",
-    title: "Deep Cleaning",
-    metaTitle: "Deep Cleaning Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Top-to-bottom deep cleaning in Omaha, NE. We scrub the built-up grime standard cleans miss — baseboards, grout, appliances & more. Book your deep clean today.",
-    heading: "Deep Cleaning Services in Omaha",
-    tagline: "For when your home needs a true reset.",
-    intro:
-      "Our deep clean reaches the places everyday cleaning skips. It's the perfect first visit before starting a recurring plan, or a seasonal refresh that makes your whole Omaha home feel brand new. We work methodically, room by room, until every detail shines.",
-    includes: [
-      "Everything in a standard clean, done more thoroughly",
-      "Baseboards, door frames, trim and switch plates hand-wiped",
-      "Inside microwave and exterior of all appliances degreased",
-      "Bathroom grout, tile and hard-water buildup scrubbed",
-      "Detailed dusting of blinds, vents, ceiling fans and fixtures",
-      "Cabinet fronts, handles and high-touch surfaces sanitized",
+    slug: "seo",
+    num: "02",
+    name: "SEO",
+    tagline: "SEO that compounds quietly.",
+    desc: "Technical foundations, content with a point of view, and the patient work that turns “where do I find a…” into your phone ringing.",
+    bullets: [
+      "Technical audits & schema",
+      "Local pack optimization",
+      "Content strategy",
+      "Citation cleanup",
     ],
-    bestFor: [
-      "First-time cleans and seasonal refreshes",
-      "Homes that haven't been professionally cleaned recently",
-      "Before hosting guests or a special event",
-    ],
-    icon: "sparkle",
-    keywords: [
-      "deep cleaning Omaha",
-      "deep cleaning services Omaha NE",
-      "spring cleaning Omaha",
-    ],
+    icon: "search",
+    color: "violet",
   },
   {
-    slug: "move-in-move-out-cleaning",
-    title: "Move In / Move Out Cleaning",
-    metaTitle: "Move In / Move Out Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Move-out & move-in cleaning in Omaha, NE. Empty-home deep clean to help you get your deposit back or start fresh. Landlord & realtor friendly. Get a free quote.",
-    heading: "Move In / Move Out Cleaning in Omaha",
-    tagline: "Leave it spotless. Start somewhere fresh.",
-    intro:
-      "Moving is stressful enough. We clean empty homes and apartments from top to bottom so you can hand over the keys with confidence — or walk into your new Omaha place knowing it's truly clean. Popular with renters chasing a deposit, homeowners preparing to sell, and landlords turning a unit.",
-    includes: [
-      "Full interior deep clean of the empty property",
-      "Inside cabinets, drawers, closets and shelving",
-      "Inside oven and refrigerator on request",
-      "All appliances, counters and fixtures degreased and sanitized",
-      "Baseboards, doors, walls spot-cleaned, floors vacuumed and mopped",
-      "Bathrooms fully scrubbed and disinfected",
+    slug: "digital-marketing",
+    num: "03",
+    name: "Digital Marketing",
+    tagline: "Digital marketing that knows the neighborhood.",
+    desc: "Local-first campaigns built for Northern Nevada — paid search, Google Business Profile, and email/SMS sequences that bring the right calls in.",
+    bullets: [
+      "Brand identity & messaging",
+      "Google Business Profile",
+      "Paid search & local ads",
+      "Email & SMS sequences",
     ],
-    bestFor: [
-      "Renters wanting their full deposit back",
-      "Homeowners preparing a house for sale",
-      "Landlords, realtors and property managers",
-    ],
-    icon: "box",
-    keywords: [
-      "move out cleaning Omaha",
-      "move in cleaning Omaha NE",
-      "apartment cleaning Omaha",
-    ],
-  },
-  {
-    slug: "commercial-cleaning",
-    title: "Commercial & Office Cleaning",
-    metaTitle: "Commercial & Office Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Dependable commercial & office cleaning in Omaha, NE. Janitorial service for offices, clinics & retail on a schedule that fits your business. Request a quote.",
-    heading: "Commercial & Office Cleaning in Omaha",
-    tagline: "A clean workplace your team and clients will notice.",
-    intro:
-      "First impressions matter. We keep Omaha offices, clinics, retail spaces and small commercial buildings clean, sanitary and presentable — on a nightly, weekly or custom schedule that works around your business hours. Reliable janitorial service you can set and forget.",
-    includes: [
-      "Reception, offices, break rooms and common areas cleaned",
-      "Restrooms cleaned, disinfected and restocked",
-      "Trash and recycling collected and liners replaced",
-      "High-touch points — door handles, switches, counters — sanitized",
-      "Floors vacuumed, swept and mopped throughout",
-      "Flexible after-hours scheduling, 7 days a week",
-    ],
-    bestFor: [
-      "Offices, clinics and professional suites",
-      "Retail storefronts and showrooms",
-      "Property managers needing a reliable janitorial partner",
-    ],
-    icon: "building",
-    keywords: [
-      "commercial cleaning Omaha",
-      "office cleaning Omaha NE",
-      "janitorial services Omaha",
-    ],
-  },
-  {
-    slug: "post-construction-cleaning",
-    title: "Post-Construction Cleaning",
-    metaTitle: "Post-Construction Cleaning in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Post-construction & renovation cleanup in Omaha, NE. We remove dust, debris & residue so your new build or remodel is move-in ready. Contractor friendly. Free quote.",
-    heading: "Post-Construction Cleaning in Omaha",
-    tagline: "From dusty job site to move-in ready.",
-    intro:
-      "New construction and remodels leave behind fine dust and debris that ordinary cleaning can't handle. Our post-construction crew clears it all — so builders, contractors and homeowners across Omaha can hand over a finished space that looks as good as the work that went into it.",
-    includes: [
-      "Removal of construction dust from every surface, including high areas",
-      "Sticker, adhesive, paint fleck and residue removal",
-      "Windows, tracks, sills and frames cleaned",
-      "Fixtures, cabinets and appliances detailed inside and out",
-      "Floors vacuumed, scrubbed and finished",
-      "Final punch-list clean so the space is truly move-in ready",
-    ],
-    bestFor: [
-      "Home builders and general contractors",
-      "Kitchen, bath and whole-home remodels",
-      "New commercial build-outs",
-    ],
-    icon: "hardhat",
-    keywords: [
-      "post construction cleaning Omaha",
-      "construction cleanup Omaha NE",
-      "renovation cleaning Omaha",
-    ],
-  },
-  {
-    slug: "pressure-washing",
-    title: "Pressure Washing",
-    metaTitle: "Pressure Washing Services in Omaha, NE | Huskins Cleaning",
-    metaDescription:
-      "Exterior pressure washing in Omaha, NE. Driveways, sidewalks, patios, siding & fences restored to like-new. Boost your curb appeal — get a free pressure washing quote.",
-    heading: "Pressure Washing Services in Omaha",
-    tagline: "Blast away years of grime in an afternoon.",
-    intro:
-      "Green algae, mud, mildew and road grime build up on every exterior surface. Our pressure washing restores your Omaha property's curb appeal — driveways, walkways, patios, siding and fences come back looking years younger, without you touching a hose.",
-    includes: [
-      "Concrete driveways, sidewalks and patios",
-      "Vinyl, wood and composite siding",
-      "Fences, decks and railings",
-      "Porches, steps and entryways",
-      "Rust, algae, mildew and mud removal",
-      "Careful, surface-appropriate pressure to avoid damage",
-    ],
-    bestFor: [
-      "Boosting curb appeal before selling",
-      "Annual spring and fall exterior refreshes",
-      "Homeowners and commercial properties alike",
-    ],
-    icon: "spray",
-    keywords: [
-      "pressure washing Omaha",
-      "power washing Omaha NE",
-      "driveway cleaning Omaha",
-    ],
+    icon: "megaphone",
+    color: "green",
   },
 ];
 
-export function getService(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug);
-}
+export type Step = { num: string; title: string; text: string };
+
+export const process: Step[] = [
+  {
+    num: "01",
+    title: "Listen, then look.",
+    text: "A two-week discovery: we sit with your team, ride along on calls, audit what's already running, and figure out what's actually broken — usually it's not what people thought.",
+  },
+  {
+    num: "02",
+    title: "Ship the first thing.",
+    text: "A defined first project — a website, a campaign, a new landing page — delivered on a fixed scope and fixed price. No retainer, no surprises. You get something live and useful in weeks, not quarters.",
+  },
+  {
+    num: "03",
+    title: "Hold the line.",
+    text: "After launch, a flat monthly partnership covers ongoing marketing, SEO, content updates, and new builds — priced so it pays for itself by month three or we'll tell you so.",
+  },
+  {
+    num: "04",
+    title: "Be the only choice.",
+    text: "Over time, the systems we build become how you operate. The marketing brings the leads, the SEO holds the rankings, and the content keeps you top-of-mind. That's the moat.",
+  },
+];
 
 export type Testimonial = {
   quote: string;
   author: string;
-  location: string;
-  service: string;
+  company: string;
+  location?: string;
+  date?: string;
 };
 
-/**
- * Real, lightly-formatted customer sentiment sourced from the business's public
- * reviews (BBB / directory listings). Names are shown as first name + initial
- * to match how they appear publicly.
- */
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "I use Huskins for cleaning my home and repairs — they're awesome! On time, affordable, and they do a great job every time.",
-    author: "Tanya M.",
-    location: "Omaha, NE",
-    service: "Recurring House Cleaning",
+      "They didn't just throw together a website — they built it the right way from the ground up, making sure everything was optimized so I could actually rank and get real leads. What really sets them apart is the ongoing support: they consistently audit the site, make smart adjustments, and keep fresh content coming in. If you want a site that's not only clean and professional but actually performs and grows your business, I'd highly recommend them.",
+    author: "Skydog_121",
+    company: "Apollo Landscaping",
+    date: "April 2026",
   },
   {
     quote:
-      "Hired Huskins to deep clean my house and I couldn't be happier. Now my home sparkles! I highly recommend them.",
-    author: "Denise R.",
-    location: "Bellevue, NE",
-    service: "Deep Cleaning",
-  },
-  {
-    quote:
-      "These days it's hard to find affordable and honest people, but the Huskins team really restored my faith. Prompt, courteous and thorough.",
-    author: "Gary L.",
-    location: "Papillion, NE",
-    service: "Move-Out Cleaning",
-  },
-  {
-    quote:
-      "Quick to respond, very professional and incredibly thorough. Our office has never looked better and the crew is always reliable.",
-    author: "Monica T.",
-    location: "Omaha, NE",
-    service: "Office Cleaning",
+      "They didn't pitch us a package. They came out, walked the yard, and three months later every quote went out from a tool they built us. That's the difference.",
+    author: "Jamie R.",
+    company: "Sierra Stone & Patio",
+    location: "Minden, NV",
   },
 ];
 
-export type Faq = {
-  question: string;
-  answer: string;
+/** Trades & professions Digital Horizon builds for. */
+export const industries = [
+  "Plumbing", "HVAC", "Electrical", "Roofing", "Flooring", "Painting",
+  "Drywall", "Landscaping", "Tree Service", "Concrete & Masonry",
+  "Welding & Metalwork", "Auto Body & Repair", "General Contracting",
+  "Solar & Renewables", "Pest Control", "Dispatch & Fleet",
+  "Property Management", "Cleaning & Janitorial", "Hotels & Hospitality",
+  "Medical Practices", "Dental Offices", "Legal Services",
+  "Accounting & CPA", "Real Estate", "Insurance Agencies",
+  "Financial Advisors", "Architects & Engineers", "Veterinary Clinics",
+];
+
+export type Location = { name: string; slug?: string; note: string };
+
+export const locations: Location[] = [
+  { name: "Carson City", slug: "carson-city", note: "Home base — the capital, and where we know the market best." },
+  { name: "Reno", slug: "reno", note: "The Biggest Little City's most competitive service niches." },
+  { name: "Sparks", slug: "sparks", note: "Fast-growing trades and home services along the I-80 corridor." },
+  { name: "Lake Tahoe", slug: "lake-tahoe", note: "Seasonal, tourism-driven businesses on both shores." },
+  { name: "Gardnerville / Minden", slug: "gardnerville", note: "Carson Valley contractors and family-run shops." },
+  { name: "Fallon", slug: "fallon", note: "Churchill County service businesses and ag-adjacent trades." },
+  { name: "Elko", slug: "elko", note: "Mining-country operators and the crews that support them." },
+  { name: "Las Vegas", slug: "las-vegas", note: "Statewide reach for larger campaigns and multi-location brands." },
+];
+
+export type Post = {
+  slug: string;
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  body: string[];
 };
+
+export const posts: Post[] = [
+  {
+    slug: "ai-written-blog-content-rankings-2026",
+    title: "AI-Written Blog Content and Your Rankings: What Actually Works in 2026",
+    category: "SEO",
+    date: "2026-06-29",
+    readTime: "7 min",
+    excerpt:
+      "Every service business owner is wondering the same thing in 2026 — can I just have ChatGPT write my blog posts? The honest answer is more nuanced than yes or no. Here is the workflow that earns rankings and the shortcut that quietly tanks your site.",
+    body: [
+      "The short version: AI is a fine drafting tool and a terrible publishing strategy. Google doesn't penalize \"AI content\" as a category — it penalizes unhelpful content, and unedited AI output is almost always unhelpful. The line isn't who typed it. It's whether a real expert stood behind it.",
+      "The workflow that ranks looks like this: you (the expert) dictate the outline and the hard-won details a model can't know — the actual price ranges in Carson City, the permit quirk in Douglas County, the mistake you see every week. The AI drafts around that scaffolding. Then a human edits for accuracy, cuts the filler, and adds the specifics that make it obviously written by someone who does the work.",
+      "The shortcut that tanks sites is the opposite: a prompt, a paste, and a publish button, repeated fifty times. It reads generic, it says nothing a competitor's page doesn't, and it buries your genuinely useful pages under a pile of thin ones. That's what gets you a quiet, algorithmic haircut.",
+      "Our rule at Digital Horizon: AI can help you write faster, never think for you. Every post that goes out under your name should teach a customer something true that only a local operator would know.",
+    ],
+  },
+  {
+    slug: "ai-voice-agents-service-businesses-2026",
+    title: "AI Voice Agents Are Answering Service Calls Now: A 2026 Reality Check",
+    category: "Software",
+    date: "2026-06-23",
+    readTime: "8 min",
+    excerpt:
+      "AI voice agents are now answering inbound service calls in Carson City and Reno for under $500/month — picking up on the first ring, booking appointments, and texting you the details. Here is what they do well, what they still can't do, and a five-day rollout plan.",
+    body: [
+      "The missed-call problem is real: for most service businesses, a missed call is a missed job, and the caller dials your competitor before lunch. In 2026, a well-configured AI voice agent answers on the first ring, 24/7, and never puts anyone on hold.",
+      "What they do well today: qualify the caller, answer the twenty questions you're tired of answering, book straight into your calendar, and text you a clean summary. For after-hours and overflow, they're a genuine upgrade over voicemail — which nobody leaves anymore.",
+      "What they still can't do: read a nervous customer, handle a true emergency with judgment, or close a high-trust, high-dollar job. The move isn't \"replace the front desk.\" It's \"stop losing the calls the front desk can't get to.\"",
+      "Our five-day rollout: map your top ten call types, script the agent around your real answers, wire it to your calendar and CRM, shadow it for a week, then let it own overflow and after-hours. Start there before you let it touch a primary line.",
+    ],
+  },
+  {
+    slug: "ai-agents-browsing-your-website-agentic-web-2026",
+    title: "AI Agents Are Browsing Your Website: A 2026 Playbook for the Agentic Web",
+    category: "Web",
+    date: "2026-06-16",
+    readTime: "8 min",
+    excerpt:
+      "ChatGPT, Claude, and Perplexity agents are starting to click through websites on behalf of real customers. The sites they can read, navigate, and trust will get sent traffic. The rest will be skipped. Here's the six-part playbook for being the site agents pick.",
+    body: [
+      "There's a new kind of visitor on your website, and it isn't a person — it's an agent acting for one. When someone asks an assistant to \"find a plumber in Carson City who can come out today,\" that assistant is reading sites, comparing them, and handing back a shortlist. You want to be on it.",
+      "Agents reward the same things good users do, just more literally: clean semantic HTML, obvious contact and booking paths, real answers to real questions, and structured data that states plainly who you are, where you work, and what you charge. Fancy animations they can't parse are invisible to them.",
+      "The six pillars: fast, crawlable pages; complete and accurate schema; a clear services-and-areas structure; honest, specific content; unambiguous calls-to-action; and consistent NAP everywhere. None of it is exotic. It's the fundamentals, done properly, which is exactly why most sites lose.",
+      "Build for the agent and you build for the human, too. The site that's easy for a machine to trust is easy for a customer to hire.",
+    ],
+  },
+  {
+    slug: "google-business-profile-playbook-2026",
+    title: "Your Google Business Profile Is Your Real Homepage: A 2026 Playbook",
+    category: "SEO",
+    date: "2026-06-10",
+    readTime: "8 min",
+    excerpt:
+      "For most local searches in Carson City and Reno, your Google Business Profile is the first — and often only — thing a prospective customer sees. A five-pillar playbook for getting it right, plus the 45-minute monthly rhythm that separates Map Pack winners from everyone else.",
+    body: [
+      "Here's the uncomfortable truth: for a huge share of local searches, the customer decides before they ever reach your website. They see the Map Pack, they scan three profiles, they tap the one with the most reviews and a photo that looks legit. Your Google Business Profile is your real homepage.",
+      "The five pillars: a precise primary category, complete services and attributes, a steady flow of recent reviews with owner replies, fresh photos, and regular posts. Each one is a ranking signal and a trust signal at the same time.",
+      "Reviews are the flywheel. Ask every happy customer, make it a two-tap process, and reply to every single one — good and bad. A thoughtful reply to a two-star review sells better than a wall of five-stars nobody engaged with.",
+      "The 45-minute monthly rhythm: reply to reviews, post an update, refresh a few photos, check the insights for what people actually searched, and fix anything that drifted. Winners aren't doing something exotic. They're just doing this, every month, while everyone else forgets the profile exists.",
+    ],
+  },
+  {
+    slug: "seo-vs-paid-ads-northern-nevada",
+    title: "SEO vs. Paid Ads for Northern Nevada Small Businesses: A Decision Framework",
+    category: "Marketing",
+    date: "2026-05-04",
+    readTime: "11 min",
+    excerpt:
+      "If your marketing budget can only fund one channel, which should it be? A practical framework for Carson, Reno, and Lake Tahoe businesses — when SEO is the right call, when paid ads make more sense, and when running both wastes money.",
+    body: [
+      "The honest answer is \"it depends,\" but not in the useless way consultants mean it. It depends on three things you can actually assess: how fast you need leads, how long a customer stays worth pursuing, and how competitive your niche is locally.",
+      "Paid ads are rented attention — instant, measurable, and gone the moment you stop paying. They're the right first move when you need calls this month, when you're testing a new service, or when the keyword is so competitive that ranking would take a year you don't have.",
+      "SEO is owned attention — slow to build, then durable and nearly free per lead once it compounds. It's the right call when your margins reward patience and when \"where do I find a…\" searches in your town aren't already locked up by national chains.",
+      "Running both only makes sense once you have the budget to do each properly. Half-funding two channels beats neither. For most Northern Nevada service businesses we start with ads for cash flow and SEO for the long game — and we tell you plainly when one of them isn't earning its keep.",
+    ],
+  },
+  {
+    slug: "choose-web-designer-carson-city",
+    title: "How to Choose a Web Designer in Carson City: 12 Questions to Ask",
+    category: "Web",
+    date: "2026-05-04",
+    readTime: "9 min",
+    excerpt:
+      "Hiring the wrong web designer is expensive twice — once when you pay them, again when you pay someone else to fix the result. Twelve specific questions that separate the agencies who deliver from the ones you'll regret signing with.",
+    body: [
+      "A pretty website that nobody finds and nobody books from is a very expensive brochure. Before you sign, your job is to figure out whether a designer is building you a business asset or a portfolio piece for themselves.",
+      "Ask who owns the site and the domain when you're done. Ask whether you can edit it yourself without calling them. Ask to see live sites they built that rank — not mockups — and ask to call those owners. Ask what happens after launch, and get the monthly number in writing.",
+      "Ask the technical questions too, even if the answers go over your head: What's the Lighthouse score? Is schema markup included? How's the site hosted, and what's the backup plan? A good partner will happily explain; a bad one will get cagey.",
+      "The through-line of all twelve questions is the same: does this person care whether the site actually makes you money after they cash the check? Hire the one who does, and get everything they promise in writing.",
+    ],
+  },
+  {
+    slug: "generative-engine-optimization",
+    title: "GEO: How to Be the Source AI Search Engines Cite",
+    category: "SEO",
+    date: "2026-04-30",
+    readTime: "9 min",
+    excerpt:
+      "Search is shifting from “ten blue links” to AI-generated answers — Google AI Overviews, ChatGPT, Perplexity, Gemini. The work of being one of the cited sources is different from traditional SEO. Here's what changes, and what doesn't.",
+    body: [
+      "Generative Engine Optimization is the practice of getting your business named and linked inside AI-generated answers. When someone asks an assistant a question your business could answer, GEO is the work that makes you the source it pulls from.",
+      "What changes: the goal shifts from ranking a page to being quotable. AI answers favor clear, factual, self-contained statements — the definition, the number, the direct answer — over keyword-stuffed pages that bury the point three scrolls down.",
+      "What doesn't change: authority and trust still win. The models lean on sources that are cited elsewhere, consistent across the web, and obviously written by someone who knows the subject. That's the same reputation traditional SEO has always rewarded.",
+      "Practically: answer real questions directly, structure your content so a machine can lift a clean paragraph, keep your facts consistent everywhere, and earn the mentions that teach the models to trust you. Old-school SEO and GEO are more alike than the hype admits.",
+    ],
+  },
+  {
+    slug: "structured-data-for-local-seo",
+    title: "Schema for Local SEO: How to Tie Your Site to a Specific Geography",
+    category: "SEO",
+    date: "2026-04-29",
+    readTime: "8 min",
+    excerpt:
+      "Schema markup is the cleanest way to tell Google exactly where you operate, who you are, and what you do — but most service-business sites either skip it or wire it up wrong. Here's how to do it right.",
+    body: [
+      "Schema is structured data — a hidden, machine-readable layer that states the facts of your business in a language search engines don't have to guess at. For local businesses it's one of the highest-leverage, lowest-effort wins available.",
+      "The core nodes: LocalBusiness (with your exact NAP), the areas you serve, your services, your hours, and your reviews. Get these right and consistent, and you've handed Google an unambiguous answer to \"who is this and where do they work?\"",
+      "The common mistakes are boring and fatal: NAP that doesn't match your Google Business Profile, an address that isn't really an office, area-served lists that contradict the rest of the site, or markup that throws errors nobody ever checked.",
+      "Done properly, schema quietly connects your website, your profile, and your citations into one coherent entity Google can trust — which is exactly what it takes to win the Map Pack in a specific town.",
+    ],
+  },
+  {
+    slug: "history-of-google-ranking-algorithm",
+    title: "A Short History of the Google Ranking Algorithm (and Why It Still Matters)",
+    category: "SEO",
+    date: "2026-04-22",
+    readTime: "10 min",
+    excerpt:
+      "From PageRank to Panda to the AI Overviews era — the through-line of every major Google update, and what it quietly tells you about how to rank today.",
+    body: [
+      "Google's algorithm looks like a moving target, but the direction has never really changed: reward the page that best, and most trustworthily, answers the searcher. Every famous update is just Google closing a loophole between that goal and what people were actually gaming.",
+      "PageRank treated links as votes — so people bought votes, and Penguin came for the link farms. Thin, keyword-stuffed content ranked — so Panda came for the content farms. Mobile got big — so mobile-first indexing and Core Web Vitals made speed a ranking factor. Each update punished a shortcut and rewarded the businesses doing the real thing.",
+      "The 2026 shift toward AI Overviews and generative answers is the same story again. The winners aren't gaming a new system; they're the sites that are fast, clearly structured, genuinely helpful, and consistent about who and where they are — exactly what every prior update was nudging toward.",
+      "The practical lesson for a Northern Nevada service business is boring and durable: don't chase the update, chase the thing every update rewards. Answer real questions honestly, keep the site fast and crawlable, earn real reputation, and you stay ranked through whatever they ship next.",
+    ],
+  },
+  {
+    slug: "backlinks-that-actually-work",
+    title: "Backlinks That Actually Work in 2026 (and the Kind That Get You Penalized)",
+    category: "SEO",
+    date: "2026-04-15",
+    readTime: "9 min",
+    excerpt:
+      "Links still move rankings — but the game changed. Which links are worth chasing for a local service business, and which ones are a waste of money or an active liability.",
+    body: [
+      "Backlinks are still one of the strongest ranking signals Google has, because a link is hard to fake at scale — someone else vouching for you. But the era of buying a thousand cheap links is long over; that's now a fast way to get filtered or penalized, not ranked.",
+      "For a local service business, the links that actually move the needle are unglamorous: your Chamber of Commerce, local business directories that real humans use, a supplier or trade association that lists you, the local paper that quotes you, a genuine partner who links to your site. They're relevant, local, and real — which is exactly why they count.",
+      "The links that hurt you are the ones that look like SEO: paid link packages, private blog networks, spammy directory blasts, and comment-spam. They're cheap because they're worthless — or worse, because they mark your site as one that buys links.",
+      "Our approach is to earn a handful of strong, relevant links a quarter through real relationships and genuinely useful content, and to never buy the volume. In local markets, ten trusted local links beat a thousand purchased ones, every time.",
+    ],
+  },
+];
+
+export function getPost(slug: string): Post | undefined {
+  return posts.find((p) => p.slug === slug);
+}
+
+export type Value = { title: string; icon: string; text: string };
+
+export const values: Value[] = [
+  {
+    title: "One system, not channels",
+    icon: "compass",
+    text: "We don't sell you a website here and some ads there. Web, SEO, and marketing are built to work as one machine that gets better every month.",
+  },
+  {
+    title: "Fixed scope, no surprises",
+    icon: "shield",
+    text: "Start with one well-scoped project at a fixed price. No retainer to sign on day one, no meter running while you decide if we're any good.",
+  },
+  {
+    title: "Built to rank, built to convert",
+    icon: "gauge",
+    text: "Fast on mobile, search-engine-ready from day one, and tuned to turn visits into booked work — every build clears a 95+ Lighthouse bar.",
+  },
+  {
+    title: "Local, and it shows",
+    icon: "pin",
+    text: "We know Carson, Reno, and Tahoe — the seasons, the competition, the search terms your customers actually type. The work is built for here.",
+  },
+];
+
+export type Faq = { question: string; answer: string };
 
 export const faqs: Faq[] = [
   {
-    question: "How much does house cleaning cost in Omaha?",
+    question: "How much does a website cost?",
     answer:
-      "Every home is different, so we give you an honest, no-obligation quote based on the size of your home, its condition, and how often you'd like us to clean. Recurring plans (weekly or bi-weekly) cost less per visit than one-time cleans. Call (402) 249-0449 or request a free quote online and we'll get you a clear price fast.",
+      "It depends on scope, but we start every relationship with one well-scoped project at a fixed price — no open-ended retainer. Most first projects fall between $5,000 and $15,000; larger builds and multi-location campaigns run higher. You'll get a clear number before any work starts.",
   },
   {
-    question: "Are you insured, and can I trust who's in my home?",
+    question: "Do I have to sign a long contract?",
     answer:
-      "Yes. Huskins Services LLC is a fully insured, BBB-accredited business with an A+ rating, accredited since 2020. We're a local, family-owned team — you'll see the same trusted, background-checked crew, not a rotating cast of strangers.",
+      "No. We start with a single fixed-scope, fixed-price project so you can feel how we work without committing to a long agreement. Most clients move into a flat monthly partnership within 90 days — because the cost-per-result keeps dropping, not because they're locked in.",
   },
   {
-    question: "Do I need to be home during the cleaning?",
+    question: "Do you only work with Northern Nevada businesses?",
     answer:
-      "Not at all. Many of our clients give us access instructions and go about their day. We're open 7 days a week from 7:00 AM to 9:00 PM, so we can work around your schedule — whether you're home or not.",
+      "It's our focus — Reno, Sparks, Carson City, Gardnerville/Minden, Fallon, Elko, and Lake Tahoe — because local knowledge is a real advantage in SEO and local marketing. We also take on statewide work, including Las Vegas, for larger campaigns and multi-location brands.",
   },
   {
-    question: "What areas around Omaha do you serve?",
+    question: "How long until I see results?",
     answer:
-      "We serve the entire Omaha metro, including Bellevue, Papillion, La Vista, Elkhorn, Bennington, Gretna, Ralston and Council Bluffs, Iowa. Not sure if you're in range? Just ask — we're happy to check.",
+      "A new website can be live and useful in weeks, not quarters. SEO compounds more slowly — meaningful ranking movement typically shows over three to six months. Paid search and Google Business Profile work can bring calls in much sooner while the SEO builds underneath it.",
   },
   {
-    question: "Do you bring your own cleaning supplies and equipment?",
+    question: "Can I edit the website myself?",
     answer:
-      "Yes, we arrive fully equipped with professional-grade supplies and equipment. If you prefer specific or eco-friendly products for your home, just let us know and we'll happily accommodate.",
+      "Yes. We build on a CMS you can actually use, and you own the site and the domain. Edit your own copy and photos anytime — and when you'd rather we handle updates, that's part of the monthly partnership.",
   },
-  {
-    question: "What if I'm not happy with the cleaning?",
-    answer:
-      "Your satisfaction is guaranteed. If something isn't right, let us know within 24 hours and we'll come back to make it right — no hassle. Getting it done right is the whole point.",
-  },
-];
-
-/** Trust signals shown in the trust bar / why-us sections. */
-export const trustPoints = [
-  { stat: "A+", label: "BBB Accredited Rating" },
-  { stat: "7 Days", label: "A Week, 7AM–9PM" },
-  { stat: "100%", label: "Satisfaction Guaranteed" },
-  { stat: "Local", label: "Family-Owned in Omaha" },
 ];

@@ -1,0 +1,43 @@
+---
+import Icon from "./Icon.astro";
+import type { Post } from "../data/site";
+interface Props { post: Post; featured?: boolean; }
+const { post: p, featured = false } = Astro.props;
+const date = new Date(p.date + "T00:00:00Z").toLocaleDateString("en-US", {
+  year: "numeric", month: "short", day: "numeric", timeZone: "UTC",
+});
+---
+
+<article class:list={["post-card plate", { "is-featured": featured }]}>
+  <div class="pc-head mono">
+    <span class="tag is-cyan">{p.category}</span>
+    <span class="pc-meta">{date} · {p.readTime}</span>
+  </div>
+  <a href={`/blog/${p.slug}/`} class="pc-title-link">
+    <h3 class:list={["pc-title display", featured ? "h2" : "h3"]}>{p.title}</h3>
+  </a>
+  <p class="pc-excerpt">{p.excerpt}</p>
+  <a href={`/blog/${p.slug}/`} class="link-arrow pc-link">Read article <Icon name="arrow" size={16} /></a>
+</article>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.25s ease, transform 0.25s var(--ease);
+  }
+  .post-card:hover { border-color: rgba(79, 147, 218, 0.45); transform: translateY(-4px); }
+  .post-card.is-featured {
+    background:
+      linear-gradient(180deg, rgba(232, 92, 151, 0.06), transparent 45%),
+      var(--surface);
+  }
+  .pc-head { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+  .pc-meta { font-size: 0.66rem; letter-spacing: 0.12em; color: var(--dim); text-transform: uppercase; }
+  .pc-title-link { color: var(--ink); display: block; }
+  .pc-title { transition: color 0.2s ease; line-height: 1.15; }
+  .pc-title-link:hover .pc-title { color: var(--cyan); }
+  .pc-excerpt { color: var(--muted); font-size: 0.95rem; flex: 1; }
+  .pc-link { margin-top: 0.3rem; }
+</style>

@@ -1,5 +1,30 @@
 User-agent: *
 Allow: /
 
+# Explicitly welcome AI search crawlers (GEO / AI Overviews visibility)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 # Sitemap
-Sitemap: https://huskinsllc.com/sitemap-index.xml
+Sitemap: https://digitalhorizon.dev/sitemap-index.xml

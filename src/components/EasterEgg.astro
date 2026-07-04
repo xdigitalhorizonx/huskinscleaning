@@ -1,0 +1,151 @@
+---
+/**
+ * Hidden easter egg — a wink for the curious.
+ *  · Konami code (↑ ↑ ↓ ↓ ← → ← → B A) → a "HORIZON UNLOCKED" reveal with a
+ *    priority-audit perk.
+ *  · A styled console banner drops a cryptic hint for developers who peek.
+ * Hidden by default, keyboard-dismissable (Esc), ignores typing in form
+ * fields, and honors prefers-reduced-motion.
+ */
+---
+
+<div id="ee-alert" class="ee-alert" hidden role="dialog" aria-modal="true" aria-label="Secret perk unlocked">
+  <div class="ee-backdrop"></div>
+  <div class="ee-panel scanlines" role="document">
+    <div class="ee-sunbar"></div>
+    <div class="ee-head mono">
+      <span class="ee-warn">◆ PRIORITY ACCESS</span>
+      <button type="button" class="ee-x mono" aria-label="Close">[ ESC ]</button>
+    </div>
+    <p class="ee-eyebrow mono">SECRET CHANNEL UNLOCKED</p>
+    <h2 class="ee-title display glitch" data-text="HORIZON UNLOCKED">HORIZON UNLOCKED</h2>
+    <pre class="ee-art mono" aria-hidden="true">        \   |   /
+      .-''''''''-.       HORIZON: ACQUIRED
+  ~~~-(  sunrise  )-~~~  STATUS: RANKING
+      '-........-'
+</pre>
+    <p class="ee-body">
+      You found the old <b class="text-amber">konami code</b>. Turns out people who
+      look a little closer tend to rank a little higher, too. So here's a perk:
+      mention this and your free discovery call comes with a no-strings website
+      <b class="text-ink"> + SEO audit</b> on the house.
+    </p>
+    <div class="ee-code mono">
+      <span class="dim">PRIORITY CODE //</span>
+      <span class="ee-code-val">HORIZON-AUDIT</span>
+    </div>
+    <p class="ee-foot mono">ONE HORIZON · <span class="ee-link" data-go>CLAIM IT — START A PROJECT →</span></p>
+  </div>
+</div>
+
+<style>
+  .ee-alert {
+    position: fixed; inset: 0; z-index: 9999;
+    display: grid; place-items: center; padding: 1.2rem;
+  }
+  .ee-alert[hidden] { display: none; }
+  .ee-backdrop { position: absolute; inset: 0; background: rgba(59, 47, 58, 0.86); backdrop-filter: blur(6px); }
+  .ee-panel {
+    position: relative;
+    width: min(560px, 100%);
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(232, 92, 151, 0.14), transparent 60%),
+      var(--surface);
+    border: 1px solid var(--red);
+    box-shadow: 0 0 60px -10px rgba(232, 92, 151, 0.6);
+    padding: 0 clamp(1.3rem, 4vw, 2rem) clamp(1.3rem, 4vw, 2rem);
+    overflow: hidden;
+    animation: ee-in 0.35s var(--ease) both;
+  }
+  .ee-panel::before, .ee-panel::after {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    border: 2px solid var(--red); pointer-events: none;
+  }
+  .ee-panel::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .ee-panel::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+  @keyframes ee-in { from { opacity: 0; transform: translateY(14px) scale(0.98); } }
+
+  .ee-sunbar {
+    height: 5px; margin: 0 -2rem 1.2rem;
+    background: linear-gradient(90deg, var(--amber), var(--red), var(--violet));
+  }
+  .ee-head { display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; letter-spacing: 0.14em; }
+  .ee-warn { color: var(--amber-bright); }
+  .ee-x {
+    background: none; border: 1px solid var(--line-strong); color: var(--muted);
+    padding: 0.3rem 0.5rem; cursor: pointer; letter-spacing: 0.1em;
+  }
+  .ee-x:hover { color: var(--red-deep); border-color: var(--red); }
+  .ee-eyebrow { margin-top: 1rem; font-size: 0.66rem; letter-spacing: 0.16em; color: var(--cyan); text-transform: uppercase; }
+  .ee-title { font-size: clamp(2.2rem, 8vw, 3.4rem); margin-top: 0.4rem; text-transform: uppercase; }
+  .ee-art { margin-top: 1rem; font-size: 0.72rem; line-height: 1.35; color: var(--lime); white-space: pre; overflow-x: auto; }
+  .ee-body { margin-top: 1rem; color: var(--body); font-size: 0.95rem; }
+  .ee-code {
+    margin-top: 1.2rem; padding: 0.8rem 1rem;
+    border: 1px dashed var(--cyan); background: rgba(79, 147, 218, 0.06);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem;
+    font-size: 0.75rem; letter-spacing: 0.1em;
+  }
+  .ee-code-val { color: var(--cyan); font-size: 1.05rem; letter-spacing: 0.14em; }
+  .ee-foot { margin-top: 1.2rem; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); }
+  .ee-link { color: var(--red-bright); cursor: pointer; }
+  .ee-link:hover { text-decoration: underline; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ee-panel, .ee-title::before, .ee-title::after { animation: none !important; }
+  }
+</style>
+
+<script>
+  (() => {
+    const doc = document;
+    const alertEl = doc.getElementById("ee-alert");
+    if (!alertEl) return;
+
+    const closeBtn = alertEl.querySelector(".ee-x") as HTMLButtonElement | null;
+    const goLink = alertEl.querySelector("[data-go]") as HTMLElement | null;
+    let lastFocus: HTMLElement | null = null;
+
+    const konami = ["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];
+    let ki = 0;
+
+    const isTyping = (t: EventTarget | null) => {
+      const el = t as HTMLElement | null;
+      return !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT" || el.isContentEditable);
+    };
+
+    const open = () => {
+      lastFocus = doc.activeElement as HTMLElement | null;
+      alertEl.removeAttribute("hidden");
+      doc.documentElement.style.overflow = "hidden";
+      closeBtn?.focus();
+    };
+    const close = () => {
+      alertEl.setAttribute("hidden", "");
+      doc.documentElement.style.overflow = "";
+      lastFocus?.focus?.();
+    };
+
+    closeBtn?.addEventListener("click", close);
+    alertEl.querySelector(".ee-backdrop")?.addEventListener("click", close);
+    goLink?.addEventListener("click", () => { close(); window.location.href = "/contact/"; });
+
+    doc.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !alertEl.hasAttribute("hidden")) { close(); return; }
+      if (isTyping(e.target)) return;
+      const key = e.key.toLowerCase();
+      if (key === konami[ki]) {
+        ki++;
+        if (ki === konami.length) { ki = 0; open(); }
+      } else {
+        ki = key === konami[0] ? 1 : 0;
+      }
+    });
+
+    try {
+      console.log("%c◆ DIGITAL HORIZON", "color:#ff5a3c;font:700 20px monospace");
+      console.log("%c// Fast site, clean schema, no dark patterns. Built by people who read the source.", "color:#22e0ff;font:12px monospace");
+      console.log("%c// Some visitors look closer than others.  ↑ ↑ ↓ ↓ ← → ← → B A", "color:#ff9d00;font:12px monospace");
+    } catch (_) { /* no console */ }
+  })();
+</script>

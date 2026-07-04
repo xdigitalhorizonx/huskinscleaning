@@ -1,8 +1,8 @@
 {
-  "name": "huskins-cleaning-website",
+  "name": "digital-horizon-website",
   "type": "module",
   "version": "1.0.0",
-  "description": "Marketing website for Huskins Cleaning Services (Huskins Services LLC), Omaha NE.",
+  "description": "Website for Digital Horizon — web design, SEO & digital marketing for Northern Nevada. Astro static site on a dark, high-tech design system.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,7 +13,11 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource-variable/inter": "^5.1.1",
-    "@fontsource-variable/plus-jakarta-sans": "^5.1.1",
+    "@fontsource-variable/orbitron": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.10",
+    "@fontsource/chakra-petch": "^5.2.7",
+    "@fontsource/nunito": "^5.2.7",
+    "@fontsource/share-tech-mono": "^5.2.7",
     "astro": "^5.1.1",
     "sharp": "^0.33.5"
   },

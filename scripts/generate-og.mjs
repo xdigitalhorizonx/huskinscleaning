@@ -1,5 +1,6 @@
 /**
- * Generates public/og-image.png (1200×630) from an inline SVG using sharp.
+ * Generates public/og-image.png (1200×630) — pastel light theme.
+ * Mark: three tapered rounded bars (pink / blue / green).
  * Run: node scripts/generate-og.mjs
  */
 import sharp from "sharp";
@@ -9,62 +10,62 @@ import { dirname, resolve } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const out = resolve(__dirname, "../public/og-image.png");
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" stroke-linecap="round">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0e3a66"/>
-      <stop offset="1" stop-color="#081f3b"/>
+      <stop stop-color="#ffffff"/><stop offset="1" stop-color="#fdf3f8"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.18" cy="0.1" r="0.8">
-      <stop stop-color="#2e9be6" stop-opacity="0.50"/>
-      <stop offset="1" stop-color="#2e9be6" stop-opacity="0"/>
+    <radialGradient id="r1" cx="0.1" cy="0.05" r="0.7">
+      <stop stop-color="#f8c6dc" stop-opacity="0.6"/><stop offset="1" stop-color="#f8c6dc" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow2" cx="1" cy="1" r="0.7">
-      <stop stop-color="#ffb43a" stop-opacity="0.20"/>
-      <stop offset="1" stop-color="#ffb43a" stop-opacity="0"/>
+    <radialGradient id="r2" cx="0.9" cy="0.45" r="0.6">
+      <stop stop-color="#cfe4fb" stop-opacity="0.7"/><stop offset="1" stop-color="#cfe4fb" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2e9be6"/>
-      <stop offset="1" stop-color="#1b4e8c"/>
-    </linearGradient>
     <style>
-      .h  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffffff; }
-      .hl { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffce7a; }
-      .s  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 400; fill: #a9c6e6; }
-      .b  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #082038; }
-      .w  { font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #ffffff; }
-      .sub{ font-family: 'DejaVu Sans', Arial, sans-serif; font-weight: 700; fill: #c9e0f6; }
+      .h  { font-family: 'DejaVu Sans','Arial',sans-serif; font-weight: 700; fill: #201820; }
+      .pink { fill: #e0508c; }
+      .mono { font-family: 'DejaVu Sans Mono','monospace'; }
+      .blue { fill: #4f93da; }
+      .mut { fill: #8a8090; }
     </style>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect width="1200" height="630" fill="url(#glow2)"/>
-  <rect x="16" y="16" width="1168" height="598" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <rect width="1200" height="630" fill="url(#r1)"/>
+  <rect width="1200" height="630" fill="url(#r2)"/>
 
-  <!-- Brand row -->
-  <g transform="translate(90,90)">
-    <rect width="86" height="86" rx="24" fill="url(#mark)"/>
-    <path d="M43 18c5.8 9 11.2 14.5 11.2 22.6a11.2 11.2 0 0 1-22.4 0C31.8 32.5 37.2 27 43 18Z" fill="#ffffff" opacity="0.96"/>
-    <path d="M59 47l1.7 5.4 5.4 1.7-5.4 1.7L59 61l-1.7-5.4-5.4-1.7 5.4-1.7z" fill="#ffd48a"/>
-    <text x="108" y="40" class="w" font-size="40" letter-spacing="-1">Huskins Cleaning</text>
-    <text x="108" y="72" class="sub" font-size="21" letter-spacing="3">OMAHA, NEBRASKA</text>
+  <g stroke="#b8a8c0" stroke-opacity="0.14">
+    ${Array.from({ length: 25 }, (_, i) => `<line x1="${i * 48}" y1="0" x2="${i * 48}" y2="630"/>`).join("")}
+    ${Array.from({ length: 14 }, (_, i) => `<line x1="0" y1="${i * 48}" x2="1200" y2="${i * 48}"/>`).join("")}
   </g>
 
-  <!-- Headline -->
-  <text x="90" y="300" class="h" font-size="76" letter-spacing="-2">Omaha's Trusted</text>
-  <text x="90" y="384" class="h" font-size="76" letter-spacing="-2">Cleaning Team<tspan class="hl">.</tspan></text>
+  <rect x="18" y="18" width="1164" height="594" fill="none" stroke="#e85c97" stroke-opacity="0.25" stroke-width="2"/>
+  <rect x="18" y="18" width="8" height="594" fill="#e85c97"/>
 
-  <text x="92" y="442" class="s" font-size="29">House · Deep · Move-Out · Office · Pressure Washing</text>
-
-  <!-- Tagline pill -->
-  <g transform="translate(90,486)">
-    <rect width="524" height="58" rx="29" fill="#ffb43a"/>
-    <text x="34" y="38" class="b" font-size="26">Spotless Homes. Honest People.</text>
+  <!-- large three-bar mark, right -->
+  <g transform="translate(950,300)">
+    <line x1="-150" y1="-64" x2="150" y2="-64" stroke="#f28cb4" stroke-width="36"/>
+    <line x1="-95"  y1="0"   x2="95"  y2="0"   stroke="#5ea9ea" stroke-width="36"/>
+    <line x1="-45"  y1="64"  x2="45"  y2="64"  stroke="#7ecf97" stroke-width="36"/>
   </g>
 
-  <!-- Trust row -->
-  <text x="92" y="590" class="hl" font-size="26">★ 5.0   ·   BBB A+   ·   Family-Owned   ·   (402) 249-0449</text>
+  <!-- brand row -->
+  <g transform="translate(72,74)">
+    <line x1="0"  y1="14" x2="64" y2="14" stroke="#f28cb4" stroke-width="8"/>
+    <line x1="12" y1="31" x2="52" y2="31" stroke="#5ea9ea" stroke-width="8"/>
+    <line x1="22" y1="48" x2="42" y2="48" stroke="#7ecf97" stroke-width="8"/>
+    <text x="88" y="34" class="h" font-size="32" letter-spacing="0.5">Digital Horizon</text>
+    <text x="88" y="60" class="mono blue" font-size="15" letter-spacing="5">WEB · SEO · DIGITAL MARKETING</text>
+  </g>
+
+  <!-- headline -->
+  <text x="72" y="300" class="h" font-size="64" letter-spacing="-1.5">Web design that brings</text>
+  <text x="72" y="374" class="h pink" font-size="64" letter-spacing="-1.5">Northern Nevada</text>
+  <text x="72" y="448" class="h" font-size="64" letter-spacing="-1.5">customers in.</text>
+
+  <!-- bottom mono strip -->
+  <text x="72" y="536" class="mono blue" font-size="19" letter-spacing="3">// THREE DISCIPLINES · ONE HORIZON</text>
+  <text x="72" y="572" class="mono mut" font-size="17" letter-spacing="2">digitalhorizon.dev · Carson City, NV</text>
 </svg>`;
 
 await sharp(Buffer.from(svg)).png().toFile(out);

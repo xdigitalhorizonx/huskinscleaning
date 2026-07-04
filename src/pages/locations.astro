@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site, locations, services } from "../data/site";
+import { breadcrumbSchema } from "../lib/schema";
+
+const title = `Locations — Web Design & SEO Across Northern Nevada | ${site.brand}`;
+const description =
+  "Digital Horizon serves Reno, Sparks, Carson City, Lake Tahoe, Gardnerville/Minden, Fallon, Elko, and beyond — local web design, SEO, and digital marketing for Northern Nevada.";
+const crumbs = [
+  { name: "Home", url: "/" },
+  { name: "Locations", url: "/locations/" },
+];
+const schema = [breadcrumbSchema(crumbs)];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    eyebrow="Locations" variant="cyan"
+    title="Northern Nevada is home."
+    lead="Local knowledge is a real advantage in search. We know the towns, the seasons, and the competition — and we build for the way your customers actually search."
+    crumbs={crumbs}
+  />
+
+  <!-- Areas -->
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Where we work" variant="amber" title="Service areas" />
+      <div class="grid grid-3 mt-6 loc-grid">
+        {locations.map((l, i) => (
+          <article class="plate loc-card">
+            <div class="loc-head">
+              <span class="loc-idx mono">{String(i + 1).padStart(2, "0")}</span>
+              <Icon name="pin" size={18} class="loc-pin" />
+            </div>
+            <h3 class="h3 loc-name">{l.name}</h3>
+            <p class="loc-note muted">{l.note}</p>
+            <a href={`/locations/${l.slug}/`} class="link-arrow loc-link">Explore {l.name} <Icon name="arrow" size={15} /></a>
+          </article>
+        ))}
+      </div>
+      <p class="loc-foot mono mt-6">
+        <Icon name="globe" size={15} /> Also serving greater Nevada, including Las Vegas, for larger campaigns and multi-location brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services x location -->
+  <section class="section svc-loc-section scanlines">
+    <div class="container">
+      <SectionHead
+        eyebrow="Same system, every town" variant="red"
+        title="What we build, wherever you are"
+        lead="Every engagement combines the three disciplines — tuned to your town's search landscape and your trade's busy season."
+      />
+      <div class="grid grid-3 mt-6">
+        {services.map((s) => (
+          <div class="panel svc-mini" style={`--accent:var(--${s.color})`}>
+            <span class="sm-icon"><Icon name={s.icon} size={22} /></span>
+            <h3 class="h3">{s.name}</h3>
+            <p class="muted">{s.tagline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Not sure we cover your area?"
+    text="If you're anywhere in Northern Nevada, we probably do. Book a free 30-minute discovery call and we'll tell you straight."
+  />
+</BaseLayout>
+
+<style>
+  .loc-grid { align-items: stretch; }
+  .loc-card { display: flex; flex-direction: column; gap: 0.6rem; transition: border-color 0.2s ease, transform 0.2s var(--ease); }
+  .loc-card:hover { border-color: rgba(79, 147, 218, 0.45); transform: translateY(-4px); }
+  .loc-head { display: flex; align-items: center; justify-content: space-between; }
+  .loc-idx { color: var(--dim); font-size: 0.72rem; }
+  .loc-card :global(.loc-pin) { color: var(--red); }
+  .loc-name { font-size: 1.3rem; }
+  .loc-note { font-size: 0.92rem; flex: 1; }
+  .loc-link { margin-top: 0.4rem; }
+  .loc-foot { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; color: var(--dim); letter-spacing: 0.04em; }
+  .loc-foot :global(svg) { color: var(--cyan); }
+
+  .svc-loc-section { background: var(--void-2); border-top: 1px solid var(--line); }
+  .svc-mini { display: flex; flex-direction: column; gap: 0.5rem; }
+  .svc-mini::before, .svc-mini::after { border-color: var(--accent); }
+  .sm-icon {
+    display: grid; place-items: center; width: 2.8rem; height: 2.8rem;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    margin-bottom: 0.3rem;
+  }
+</style>

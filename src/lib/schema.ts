@@ -1,36 +1,30 @@
 /**
- * schema.org JSON-LD builders.
- *
- * Structured data is how Google understands a local service business:
- * name, phone, hours, area served, services and ratings. Emitting a correct
- * LocalBusiness graph is one of the highest-leverage SEO fixes for a site like
- * this — it powers rich results, the local pack and knowledge panels.
+ * schema.org JSON-LD builders for Digital Horizon.
+ * Emits a LocalBusiness (ProfessionalService) + WebSite graph site-wide, plus
+ * per-page helpers for breadcrumbs, services, and blog articles.
  */
-import { site, services, serviceAreas, faqs } from "../data/site";
+import { site, services, locations, faqs, testimonials } from "../data/site";
 
 const ORG_ID = `${site.url}/#organization`;
 
-/** The core LocalBusiness / CleaningService entity, referenced by other nodes. */
-export function localBusinessSchema() {
+/** Core LocalBusiness entity, referenced by other nodes. */
+export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["CleaningService", "LocalBusiness"],
+    "@type": ["ProfessionalService", "LocalBusiness"],
     "@id": ORG_ID,
-    name: site.longName,
-    legalName: site.legalName,
-    alternateName: site.brand,
-    description:
-      "Family-owned, BBB-accredited residential and commercial cleaning company serving Omaha, NE. House cleaning, deep cleaning, move-in/out, office cleaning, post-construction cleanup and pressure washing.",
+    name: site.brand,
+    description: site.description,
     url: site.url,
-    telephone: site.phone.e164,
     email: site.email,
-    priceRange: "$$",
-    image: `${site.url}/og-image.png`,
-    logo: `${site.url}/favicon.svg`,
+    telephone: site.phone.e164,
     slogan: site.tagline,
-    foundingDate: site.founded,
+    priceRange: "$$",
+    logo: `${site.url}/icon-512.png`,
+    image: `${site.url}/og-image.png`,
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.address.street,
       addressLocality: site.address.locality,
       addressRegion: site.address.region,
       postalCode: site.address.postalCode,
@@ -41,10 +35,8 @@ export function localBusinessSchema() {
       latitude: site.geo.latitude,
       longitude: site.geo.longitude,
     },
-    areaServed: serviceAreas.map((a) => ({
-      "@type": "City",
-      name: a.name,
-    })),
+    areaServed: locations.map((l) => ({ "@type": "City", name: l.name })),
+    hasMap: site.maps,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -53,53 +45,71 @@ export function localBusinessSchema() {
         closes: site.hours.closes,
       },
     ],
+    // Founder Person node — emitted only when a real name is set (E-E-A-T).
+    ...(site.founder.name
+      ? { founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.jobTitle } }
+      : {}),
+    // Ratings/reviews reflect ONLY the real testimonials shown on the site.
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: site.rating.value,
-      reviewCount: site.rating.count,
+      ratingValue: "5.0",
+      reviewCount: testimonials.length,
       bestRating: "5",
       worstRating: "1",
     },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: t.author },
+      reviewBody: t.quote,
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+    })),
     makesOffer: services.map((s) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: s.title,
+        name: s.name,
         url: `${site.url}/services/${s.slug}/`,
       },
     })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Cleaning Services",
-      itemListElement: services.map((s) => ({
-        "@type": "OfferCatalog",
-        name: s.title,
-      })),
-    },
+    sameAs: [
+      site.social.x,
+      site.social.facebook,
+      site.social.instagram,
+      site.social.nextdoor,
+    ],
   };
 }
 
-/** Per-service Service schema linked back to the org as provider. */
+/** Per-service Service node — emit on /services/[slug]. */
 export function serviceSchema(slug: string) {
   const s = services.find((x) => x.slug === slug);
   if (!s) return null;
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: s.title,
-    name: `${s.title} in Omaha, NE`,
-    description: s.metaDescription,
+    name: `${s.name} for Northern Nevada Businesses`,
+    serviceType: s.name,
+    description: s.desc,
     url: `${site.url}/services/${s.slug}/`,
     provider: { "@id": ORG_ID },
-    areaServed: serviceAreas.map((a) => ({ "@type": "City", name: a.name })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `${s.title} — what's included`,
-      itemListElement: s.includes.map((item) => ({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: item },
-      })),
+    areaServed: locations.map((l) => ({ "@type": "City", name: l.name })),
+    audience: {
+      "@type": "Audience",
+      audienceType: "Northern Nevada service and trade businesses",
     },
+  };
+}
+
+/** WebSite schema (helps with site name in search). */
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.brand,
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en-US",
   };
 }
 
@@ -117,6 +127,25 @@ export function breadcrumbSchema(crumbs: { name: string; url: string }[]) {
   };
 }
 
+/** Article schema for a blog post. */
+export function articleSchema(a: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: a.title,
+    description: a.description,
+    url: a.url.startsWith("http") ? a.url : `${site.url}${a.url}`,
+    datePublished: a.datePublished,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+  };
+}
+
 /** FAQPage schema — powers the FAQ rich result. */
 export function faqSchema(items = faqs) {
   return {
@@ -127,18 +156,5 @@ export function faqSchema(items = faqs) {
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
-  };
-}
-
-/** WebSite schema (helps with site name in search). */
-export function websiteSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${site.url}/#website`,
-    url: site.url,
-    name: site.brand,
-    publisher: { "@id": ORG_ID },
-    inLanguage: "en-US",
   };
 }

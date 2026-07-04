@@ -1,36 +1,45 @@
 ---
 import Icon from "./Icon.astro";
 import type { Service } from "../data/site";
-interface Props { service: Service; featured?: boolean; }
-const { service, featured = false } = Astro.props;
+interface Props { service: Service; }
+const { service: s } = Astro.props;
+const colorVar = `var(--${s.color})`;
 ---
-<a href={`/services/${service.slug}/`} class:list={["card card-hover service-card", { featured }]}>
-  <span class="icon-badge" aria-hidden="true"><Icon name={service.icon} /></span>
-  <h3 class="service-title">{service.title}</h3>
-  <p class="service-tag">{service.tagline}</p>
-  <p class="service-desc">{service.intro}</p>
-  <span class="link-arrow">Learn more <Icon name="arrow" size={16} /></span>
-</a>
+
+<article class="service-card panel panel-hover" id={s.slug} style={`--accent:${colorVar}`}>
+  <div class="sc-top">
+    <span class="sc-icon"><Icon name={s.icon} size={24} /></span>
+    <span class="sc-num mono">{s.num} / {s.name}</span>
+  </div>
+  <h3 class="h3 sc-name">{s.tagline}</h3>
+  <p class="sc-desc">{s.desc}</p>
+  <ul class="sc-list">
+    {s.bullets.map((b) => (
+      <li><Icon name="check" size={14} class="sc-check" /> {b}</li>
+    ))}
+  </ul>
+  <a href={`/services/${s.slug}/`} class="link-arrow sc-link">Explore {s.name} <Icon name="arrow" size={16} /></a>
+</article>
 
 <style>
-  .service-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    text-decoration: none;
+  .service-card { display: flex; flex-direction: column; gap: 0.85rem; scroll-margin-top: 7rem; }
+  .service-card::before, .service-card::after { border-color: var(--accent); }
+  .sc-top { display: flex; align-items: center; gap: 0.8rem; }
+  .sc-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem; height: 3rem;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    flex: none;
   }
-  .service-card .icon-badge { margin-bottom: 0.4rem; }
-  .service-title { font-size: 1.25rem; color: var(--ink); }
-  .service-tag { color: var(--brand-700); font-weight: 600; font-size: 0.92rem; }
-  .service-desc {
-    color: var(--body);
-    font-size: 0.95rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1;
-  }
-  .service-card .link-arrow { margin-top: 0.5rem; }
-  .service-card.featured { border-color: var(--brand-300); box-shadow: var(--shadow-md); }
+  .sc-num { color: var(--accent); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .sc-name { font-size: 1.3rem; }
+  .sc-desc { color: var(--muted); font-size: 0.95rem; }
+  .sc-list { list-style: none; padding: 0; margin: 0.2rem 0 0; display: grid; gap: 0.55rem; flex: 1; }
+  .sc-list li { display: flex; align-items: center; gap: 0.6rem; color: var(--body); font-size: 0.92rem; }
+  .sc-list :global(.sc-check) { color: var(--accent); flex: none; }
+  .sc-link { margin-top: 0.4rem; color: var(--accent); padding-top: 0.8rem; border-top: 1px solid var(--line); }
 </style>

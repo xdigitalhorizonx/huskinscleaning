@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow?: string;
+  variant?: "amber" | "red" | "cyan";
+  title: string;
+  lead?: string;
+  center?: boolean;
+  class?: string;
+}
+const { eyebrow, variant = "amber", title, lead, center = false, class: className = "" } = Astro.props;
+---
+
+<div class:list={["section-head", className, { "is-center": center }]}>
+  {eyebrow && (
+    <span class:list={["eyebrow", { "is-red": variant === "red", "is-cyan": variant === "cyan" }]}>
+      {eyebrow}
+    </span>
+  )}
+  <h2 class="h2 display" set:html={title} />
+  {lead && <p class="lead">{lead}</p>}
+</div>
