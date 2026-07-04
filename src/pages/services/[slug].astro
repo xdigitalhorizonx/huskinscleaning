@@ -6,7 +6,7 @@ import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
 import { site, services } from "../../data/site";
 import { serviceDetails, getServiceDetail } from "../../data/serviceDetails";
-import { breadcrumbSchema } from "../../lib/schema";
+import { breadcrumbSchema, serviceSchema } from "../../lib/schema";
 
 export function getStaticPaths() {
   return serviceDetails.map((d) => ({ params: { slug: d.slug }, props: { detail: d } }));
@@ -22,14 +22,17 @@ const crumbs = [
   { name: "Services", url: "/services/" },
   { name: d.name, url },
 ];
-const schema = [breadcrumbSchema(crumbs)];
-// city landing pages that exist for this service
-const cities = ["web-design", "seo"].includes(d.slug)
-  ? [
-      { name: "Carson City", href: `/locations/carson-city/${d.slug}/` },
-      { name: "Reno", href: `/locations/reno/${d.slug}/` },
-    ]
-  : [];
+const schema = [breadcrumbSchema(crumbs), serviceSchema(d.slug)].filter(Boolean);
+// city landing pages that exist for this service (data-driven)
+const cityMatrix: Record<string, string[]> = {
+  "web-design": ["carson-city", "reno", "sparks"],
+  seo: ["carson-city", "reno", "sparks"],
+  "digital-marketing": ["carson-city", "reno", "sparks"],
+};
+const cityLinks = (cityMatrix[d.slug] ?? []).map((cslug) => {
+  const name = { "carson-city": "Carson City", reno: "Reno", sparks: "Sparks" }[cslug] ?? cslug;
+  return { name, href: `/locations/${cslug}/${d.slug}/` };
+});
 ---
 
 <BaseLayout title={title} description={d.subtitle} canonical={url} schema={schema}>
@@ -77,11 +80,11 @@ const cities = ["web-design", "seo"].includes(d.slug)
         <p class="lead mt-2">{d.whoFor}</p>
       </div>
 
-      {cities.length > 0 && (
+      {cityLinks.length > 0 && (
         <div class="svc-cities mt-6">
           <span class="eyebrow">Service areas</span>
-          <div class="grid grid-2 mt-3">
-            {cities.map((c) => (
+          <div class="grid grid-3 mt-3">
+            {cityLinks.map((c) => (
               <a href={c.href} class="svc-city panel panel-hover">
                 <span class="sc-city-name">{d.name} in {c.name}</span>
                 <span class="link-arrow">Local pricing & FAQ <Icon name="arrow" size={15} /></span>

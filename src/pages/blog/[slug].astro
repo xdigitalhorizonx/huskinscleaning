@@ -14,6 +14,19 @@ const { post: p } = Astro.props;
 const idx = posts.findIndex((x) => x.slug === p.slug);
 const next = posts[(idx + 1) % posts.length];
 
+// Contextual internal links: point each post at the service it funnels to + local pages.
+const svcByCat: Record<string, { label: string; href: string }> = {
+  SEO: { label: "Local SEO services", href: "/services/seo/" },
+  Web: { label: "Web design services", href: "/services/web-design/" },
+  Marketing: { label: "Digital marketing services", href: "/services/digital-marketing/" },
+  Software: { label: "See what we do", href: "/services/" },
+};
+const related = [
+  svcByCat[p.category] ?? { label: "Our services", href: "/services/" },
+  { label: "SEO & web design in Carson City", href: "/locations/carson-city/" },
+  { label: "Serving Reno, Sparks & Northern Nevada", href: "/locations/" },
+];
+
 const title = `${p.title} | ${site.brand}`;
 const url = `/blog/${p.slug}/`;
 const date = new Date(p.date + "T00:00:00Z").toLocaleDateString("en-US", {
@@ -56,6 +69,14 @@ const schema = [
           </div>
           <a href="/contact/" class="btn btn-primary"><Icon name="rocket" size={16} /> Start a Project</a>
         </div>
+        <nav class="art-related" aria-label="Related">
+          <span class="eyebrow is-cyan">Related</span>
+          <ul class="rel-list">
+            {related.map((r) => (
+              <li><a href={r.href} class="link-arrow">{r.label} <Icon name="arrow" size={15} /></a></li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </div>
 
@@ -95,6 +116,8 @@ const schema = [
     display: flex; align-items: center; justify-content: space-between;
     gap: 1.5rem; flex-wrap: wrap;
   }
+  .art-related { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .rel-list { list-style: none; padding: 0; margin: 0.8rem 0 0; display: grid; gap: 0.6rem; }
 
   .art-foot { border-top: 1px solid var(--line); background: var(--void-2); }
   .art-foot-inner {

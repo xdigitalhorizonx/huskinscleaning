@@ -41,6 +41,16 @@ export const site = {
     instagram: "https://www.instagram.com/digitalhorizon.nv/",
     nextdoor: "https://nextdoor.com/page/digital-horizon-carson-city-nv",
   },
+
+  /** Set `name` to the real founder to enable the founder E-E-A-T Person node. */
+  founder: { name: "", jobTitle: "Founder" },
+
+  /** Confirm these match the Google Business Profile hours before launch. */
+  hours: {
+    opens: "09:00",
+    closes: "17:00",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  },
 } as const;
 
 export type NavItem = { label: string; href: string };

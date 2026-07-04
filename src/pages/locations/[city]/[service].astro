@@ -2,19 +2,19 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
 import CtaBand from "../../../components/CtaBand.astro";
+import Faq from "../../../components/Faq.astro";
 import Icon from "../../../components/Icon.astro";
 import { site, locations, services } from "../../../data/site";
 import { serviceCityDetails } from "../../../data/cityContent";
 import { getServiceDetail } from "../../../data/serviceDetails";
-import { breadcrumbSchema } from "../../../lib/schema";
+import { breadcrumbSchema, faqSchema } from "../../../lib/schema";
 
 export function getStaticPaths() {
-  const combos = [
-    { city: "carson-city", service: "web-design" },
-    { city: "reno", service: "web-design" },
-    { city: "carson-city", service: "seo" },
-    { city: "reno", service: "seo" },
-  ];
+  // Tier-1 matrix: Carson City, Reno, Sparks × all three services (9 pages),
+  // each with hand-written unique local content in cityContent.ts.
+  const cities = ["carson-city", "reno", "sparks"];
+  const svcs = ["web-design", "seo", "digital-marketing"];
+  const combos = cities.flatMap((city) => svcs.map((service) => ({ city, service })));
   return combos.map((c) => ({ params: { city: c.city, service: c.service }, props: c }));
 }
 
@@ -33,14 +33,14 @@ const sections = detail?.sections ?? [
 ];
 
 const url = `/locations/${citySlug}/${serviceSlug}/`;
-const title = `${service.name} for ${city.name} Businesses | ${site.brand}`;
+const title = `${service.name} in ${city.name}, NV | ${site.brand}`;
 const crumbs = [
   { name: "Home", url: "/" },
   { name: "Locations", url: "/locations/" },
   { name: city.name, url: `/locations/${citySlug}/` },
   { name: service.name, url },
 ];
-const schema = [breadcrumbSchema(crumbs)];
+const schema = [breadcrumbSchema(crumbs), ...(detail?.faqs ? [faqSchema(detail.faqs)] : [])];
 ---
 
 <BaseLayout title={title} description={heroSub} canonical={url} schema={schema}>
@@ -74,6 +74,14 @@ const schema = [breadcrumbSchema(crumbs)];
       </div>
     </div>
   </section>
+
+  {detail?.faqs && (
+    <Faq
+      items={detail.faqs}
+      heading={`${service.name} in ${city.name} — FAQ`}
+      intro={`Straight answers about ${service.name.toLowerCase()} for ${city.name} businesses.`}
+    />
+  )}
 
   <CtaBand heading={`Ready to grow in ${city.name}?`} />
 </BaseLayout>
